@@ -10,30 +10,23 @@
 \usepackage{comment}
 \usepackage{lipsum}
 \usepackage{ifthen}
+\usepackage{truthtable} %para las tablas de verdad
 
 \usepackage{multicol}
+\usepackage{paracol}
 \usepackage[shortlabels]{enumitem}
 \setenumerate[1]{label=\MakeLowercase{\roman*}), ref=\roman*}
 \setenumerate[2]{label=\MakeLowercase{\arabic*}), ref=\alph*}
 
 % Para escribir el "tal que" de los conjuntos
 \providecommand\st{\;|\;}
+\providecommand\tq{\;|\;}
 
 %Para el uso de \Set y \Set*
-\newcommand\SetSymbol[1][]{%
-    \nonscript\:#1\vert
-    \allowbreak
-    \nonscript\:
-    \mathopen{}}
-    \DeclarePairedDelimiterX\Set[1]\{\}{%
-    \renewcommand\st{\SetSymbol[\delimsize]}
-    #1
-}
-    \DeclarePairedDelimiterX\Class[1]\langle\rangle{%
-    \renewcommand\st{\SetSymbol[\delimsize]}
-    #1
-}
-
+\providecommand\given{}
+\newcommand\SetSymbol[1][]{\nonscript\:#1\vert\allowbreak\nonscript\:\mathopen{}}
+\DeclarePairedDelimiterX\Set[1]\{\}{\renewcommand\given{\SetSymbol[\delimsize]}#1}
+\DeclarePairedDelimiterX\Par[1](){#1}
 %Ejercicios
 %\newcommand{\pts}[1]{%
   %\ifthenelse{\equal{#1}{1}}{\hfill \textbf{(#1 pt)}}{\hfill\textbf{(#1 pts)}}
@@ -44,7 +37,8 @@
 \setcounter{Ejer}{1}
 \setcounter{Pts}{1}
 \newcommand{\pts}{}
-\newenvironment{ejercicio}[1]{\noindent\textbf{Ejercicio \theEjer.} \ifthenelse{\equal{#1}{1}}{\renewcommand{\pts}{\hfill \textbf{(#1 pt)}}}{\renewcommand{\pts}{\hfill\textbf{(#1 pts)}}}\stepcounter{Ejer}}{\pts \vspace{.3cm}}
+\newenvironment{ejercicio}[1]{\noindent
+    \ifthenelse{\equal{#1}{1}}{\renewcommand{\pts}{\textbf{(#1 pt)}}}{\renewcommand{\pts}{\textbf{(#1 pts)}}}\textbf{Ej. \theEjer} \pts\stepcounter{Ejer}}{\vspace{.3cm}}
 
 %Comandos que utilizamos
 \newcommand{\id}{\mathrm{id}}
@@ -67,22 +61,73 @@
 
     \noindent\textit{\textbf{Instrucciones.} Resuelve los siguientes ejercicios. Esta tarea es individual y deberá ser entregada presencialmente, durante la clase del \textbf{lunes 16 de junio}.}\vspace{.4cm}
 
-    \begin{ejercicio}{2}
-        Considere entonces la siguiente lista de enunciados:
+    \begin{ejercicio}{1}
+        Indica cuáles de las siguientes proposiciones son tautologías o contradicciones. Para aquellas que no sean ninguna de las dos, da una equivalencia lógica que utilicen únicamente los conectivos negación y disyunción.
+        \begin{multicols}{3}
+            \begin{enumerate}
+                \item $\lnot (Z \land Z)$.
+                \item $P \to P$.
+                \item $P \land (P \lor Q)$.
+                \item $P \lor (P \land Q)$.
+                \item $B \to (P \to B)$.
+                \item $\Par{\lnot S \land \Par{(\lnot S) \lor Q}} \leftrightarrow S$.
+                \item $\lnot W \land W$.
+                \item $(R \to A) \to (\lnot A \to \lnot R)$.
+                \item $K \land B$.
+            \end{enumerate}
+        \end{multicols}
+    \end{ejercicio}
+
+    \begin{ejercicio}{1}
+        Escribe fórmulas lógicas (de primer orden) que, a tu criterio, capturen mejor cada una de las siguientes afirmaciones.
+        \columnratio{0.35}
+        \begin{paracol}{2}
+            \begin{enumerate}
+                \item Cada persona viva respira.
+                \item $2$ es el único primo par.
+                \item Existe un hombre inmortal.
+            \end{enumerate}
+            \switchcolumn
+             \begin{enumerate}\setcounter{enumi}{3}
+                \item No existen estudiantes en Ciudad Universitaria que sean felices.
+                \item Todos los peces del acuario de la facultad se aparean con un individuo.
+            \end{enumerate}
+        \end{paracol}
+    \end{ejercicio}
+
+    \begin{ejercicio}{1}
+        Escribe la negación de las siguientes proposiciones. Si el inciso está en español, da tu respuesta también en español.
+        \columnratio{0.22,0.42}
+        \begin{paracol}{3}
+            \begin{enumerate}
+                \item $P \leftrightarrow Q$.
+                \item $\lnot P \to A$.
+                \item $B \to (P \to B)$.
+            \end{enumerate}
+
+            \switchcolumn
+             \begin{enumerate}\setcounter{enumi}{3}
+                \item $\exists x (P(x) \land (Q(x) \land S(x)))$.
+                \item $\forall a (P(a) \to \exists b (R(a,b)))$.
+                \item $\exists b \forall x (\forall y(P(y)) \leftrightarrow (Q(x,y) \land R(b)))$
+            \end{enumerate}
+
+            \switchcolumn
+             \begin{enumerate}\setcounter{enumi}{6}
+                \item Si $x$ es un número primo y es mayor que 4, $n$ es impar.
+                \item Hay cierto elemento de $A$ que es real, pero no real.
+            \end{enumerate}
+        \end{paracol}
+    \end{ejercicio}
+
+    \begin{ejercicio}{1}
+        Sea $A:=\{x \in \mathbb{R} : \text{$x > 0$} \}$. Para cada $y \in \mathbb{R}$ se define el conjunto $B(y)$ (pues depende de $y$), como $B(y):=\{x \in \mathbb{R} : |x-y|<0.15 \}$. Utilizando operaciones de conjuntos, escribe en términos de los conjuntos anteriores, la colección cuyos elementos sean:
         \begin{enumerate}
-            \item hola
-            \item adios
-            \item hola
-            \item hola
+            \item Todos los enteros menores o iguales a $0$.
+            \item Los reales negativos mayores a $-0.15$.
+            \item Todos los irracionales cuya distancia a $2$ es mayor o igual a $0.15$.
+            \item Todos los racionales que distan de algún entero en menos de $0.15$.
         \end{enumerate}
-    \end{ejercicio}
-
-    \begin{ejercicio}{2}
-        
-    \end{ejercicio}
-
-    \begin{ejercicio}{3}
-        
     \end{ejercicio}
 
 \end{document}

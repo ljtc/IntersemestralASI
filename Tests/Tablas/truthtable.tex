@@ -49,27 +49,36 @@
 
 \begin{document}
 
-    \begin{center}
-        {\fontsize{30}{60}\rmfamily \textbf{Tarea 4}} \\ \vspace{.2cm}
-        Álgebra Superior 1, 2025-4
+    Esto es una prueba del comando \texttt{truthtable}.
+
+    \begin{center}        
+        \begin{tabular}{c|c||c|c|c|c|c|c|c}
+            \truthtable{A,B}{$A$,$B$} %{variables sintácticas}{variables a imprimir}
+            {!A, A & B, A | B, ^(A; B), !&(A; B), >>(A; B), <>(A; B)} %sintaxis
+            {$ \lnot A$, $A \land B$, $A \lor B$,$A \veebar B$,$A | B$, $A \rightarrow B$, $A \leftrightarrow B$} %etiquetas
+            {$V$}{$F$} %{etiqueta verdadero}{etiqueta falso}
+        \end{tabular}
     \end{center}
-    \begin{flushright}
-        \footnotesize \hfill Profesor: Luis Jesús Trucio Cuevas.\\
-        \hfill Ayudante: Hugo Víctor García Martínez.
-    \end{flushright}
 
-    \noindent\textit{\textbf{Instrucciones.} Resuelve los siguientes ejercicios. Esta tarea es individual y deberá ser entregada (???), durante la clase del \textbf{???}.}\vspace{.4cm}
+    Con los símbolos clásicos:
 
-    \begin{ejercicio}{2}
-        
-    \end{ejercicio}
+    \begin{center}        
+        \begin{tabular}{c|c||c|c|c|c|c}
+            \truthtable{A,B}{$A$,$B$}
+            {!A, A & B, A | B, >>(A; B), <>(A; B)}
+            {$ \lnot A$, $A \land B$, $A \lor B$, $A \rightarrow B$, $A \leftrightarrow B$}
+            {$V$}{$F$}
+        \end{tabular}
+    \end{center}
 
-    \begin{ejercicio}{2}
-        
-    \end{ejercicio}
-
-    \begin{ejercicio}{3}
-        
-    \end{ejercicio}
-
+    Aquí un ejemplo diferente utilizando tres letras proposicionales:
+    \begin{center}        
+        \begin{tabular}{c|c|c||c|c|c}
+            \truthtable{A,B,C}{$A$,$B$,$C$}
+            { >>(A; >>(B; C)), >>( (A & B) ; C ), <>((>>(A; >>(B; C)));(>>( (A & B) ; C ))) }
+            {$ A \to (B \to C) $, $(A \land B) \to C$, $(A \to (B \to C)) \leftrightarrow ((A \land B) \to C)$}
+            {$1$}{$0$}
+        \end{tabular}
+    \end{center}
+    
 \end{document}

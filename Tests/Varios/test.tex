@@ -1,0 +1,24 @@
+\documentclass{article}
+\usepackage{paracol}
+\usepackage{xcolor}
+\usepackage{lipsum}
+
+\setlength{\columnsep}{1cm}
+
+
+\begin{document}
+
+\columnratio{0.2,0.2}
+\begin{paracol}{3}
+    \lipsum[1]
+
+    \switchcolumn
+    \lipsum[2]
+
+    \switchcolumn
+    \lipsum[3]
+
+    \switchcolumn* 
+\end{paracol}
+
+\end{document}
