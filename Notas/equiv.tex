@@ -33,7 +33,7 @@
 
 \thispagestyle{beginstyle}
 \begin{center}
-  {\fontsize{30}{60}\rmfamily \textbf{Equivalencias e implicaciones lógicas}}
+  {\fontsize{30}{60}\rmfamily \textbf{Equivalencias lógicas}}
   \\ \vspace{.2cm}
   Álgebra Superior 1, 2025-4
 \end{center}
@@ -46,8 +46,7 @@
 Estas no son notas como tal, la intensión es tener a la mano algunas
 equivalencias e implicaciones lógicas.
 
-\section{Equivalencias}
-\subsection{Estructurales}
+\section{Estructurales}
 La conjunción y la disyunción son conmutativas:
 \begin{tasks}(2)
   \task \(\alpha\land\beta\equiv\beta\land\alpha\)
@@ -85,7 +84,7 @@ Denotemos con \(\top\) a una tautología y con \(\bot\) a una contradicción. As
   \task \(\alpha\lor\bot\equiv\alpha\).
 \end{tasks}
 
-\subsection{Lógica clásica}
+\section{Lógica clásica}
 Leyes de De Morgan:
 \begin{tasks}(2)
   \task \(\neg(\alpha\land\beta)\equiv\neg\alpha\lor\neg\beta\)
@@ -103,11 +102,10 @@ Complementos:
   \task \(\bot\equiv\alpha\land\neg\alpha\).
 \end{tasks}
 
-\subsection{Conjuntos mínimos de conectivos}
+\section{Conjuntos mínimos de conectivos}
 Con las siguientes equivalencias es posible expresar cualquier proposición
-lógica con sólo conectivos \(\lor\) y \(\neg\) (nota que para definir \(\bot\)
-es necesario usar \(\neg\)):
-\begin{tasks}(3)
+lógica con sólo conectivos \(\lor\) y \(\neg\):
+\begin{tasks}(2)
   \task \(\alpha\to\beta\equiv\neg\alpha\lor\beta\)
   \task \(\alpha\land\beta\equiv\neg(\neg\alpha\lor\neg\beta)\)
   \task* \(\alpha\leftrightarrow\beta\equiv(\alpha\to\beta)\land(\beta\to\alpha)\).
@@ -115,7 +113,7 @@ es necesario usar \(\neg\)):
 ¿Puedes escribir las equivalencias necesarias para escribir toda proposición con
 sólo \(\land\) y \(\neg\) (o con sólo \(\lor\) y \(\neg\))?
 
-\subsection{Métodos de demostración}
+\section{Métodos de demostración}
 \begin{tasks}
   \task Contrapuesta: \(\alpha\to\beta\equiv\neg\beta\to\neg\alpha\).
   \task Contradicción: \(\alpha\to\beta\equiv(\alpha\land\neg\beta)\to\bot\).
