@@ -1,4 +1,4 @@
-\documentclass[letterpaper,DIV=14,headsepline,12pt]{scrartcl}
+	\documentclass[letterpaper,DIV=14,headsepline,12pt]{scrartcl}
 \usepackage[spanish,mexico,shorthands=off,es-lcroman]{babel}
 \usepackage{stix2}
 \pagenumbering{gobble}
@@ -27,10 +27,6 @@
 \newcommand\SetSymbol[1][]{\nonscript\:#1\vert\allowbreak\nonscript\:\mathopen{}}
 \DeclarePairedDelimiterX\Set[1]\{\}{\renewcommand\given{\SetSymbol[\delimsize]}#1}
 \DeclarePairedDelimiterX\Par[1](){#1}
-%Ejercicios
-%\newcommand{\pts}[1]{%
-  %\ifthenelse{\equal{#1}{1}}{\hfill \textbf{(#1 pt)}}{\hfill\textbf{(#1 pts)}}
-%}
 
 \newcounter{Ejer}
 \newcounter{Pts}
@@ -129,7 +125,5 @@
             \item Todos los racionales que distan de algún entero en menos de $0.15$.
         \end{enumerate}
     \end{ejercicio}
-
-    Holaa
 
 \end{document}

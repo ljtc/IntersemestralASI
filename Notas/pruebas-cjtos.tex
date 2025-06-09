@@ -33,26 +33,13 @@
 
 % Para escribir el "tal que" de los conjuntos
 \providecommand\st{\;|\;}
+\providecommand\tq{\;|\;}
 
 %Para el uso de \Set y \Set*
-\newcommand\SetSymbol[1][]{%
-    \nonscript\:#1\vert
-    \allowbreak
-    \nonscript\:
-    \mathopen{}}
-    \DeclarePairedDelimiterX\Set[1]\{\}{%
-    \renewcommand\st{\SetSymbol[\delimsize]}
-    #1
-}
-    \DeclarePairedDelimiterX\Class[1]\langle\rangle{%
-    \renewcommand\st{\SetSymbol[\delimsize]}
-    #1
-}
-
-%Ejercicios
-%\newcommand{\pts}[1]{%
-  %\ifthenelse{\equal{#1}{1}}{\hfill \textbf{(#1 pt)}}{\hfill\textbf{(#1 pts)}}
-%}
+\providecommand\given{}
+\newcommand\SetSymbol[1][]{\nonscript\:#1\vert\allowbreak\nonscript\:\mathopen{}}
+\DeclarePairedDelimiterX\Set[1]\{\}{\renewcommand\given{\SetSymbol[\delimsize]}#1}
+\DeclarePairedDelimiterX\Par[1](){#1}
 
 \newcounter{Ejer}
 \newcounter{Pts}
@@ -79,7 +66,7 @@
 \definecolor{dorado}{RGB}{196, 151, 57}
 \definecolor{morado}{RGB}{101, 43, 145}
 
-\newmdtheoremenv[backgroundcolor=azul!8]{definicion}{Definición}[section]
+\newmdtheoremenv[backgroundcolor=azul!8]{definicion}{Definición}
 \newmdtheoremenv[backgroundcolor=azul!8]{proposicion}[definicion]{Proposición}
 \newmdtheoremenv[backgroundcolor=azul!8]{lema}[definicion]{Lema}
 \newmdtheoremenv[backgroundcolor=azul!8]{teorema}[definicion]{Teorema}
@@ -105,7 +92,7 @@
 
     \thispagestyle{beginstyle}
     \begin{center}
-        {\fontsize{30}{60}\rmfamily \textbf{Ejemplo de Notas de Clase}} \\ \vspace{.2cm}
+        {\fontsize{30}{60}\rmfamily \textbf{Pruebas sencillas de igualdades entre conjuntos}} \\ \vspace{.2cm}
         Álgebra Superior 1, 2025-4
     \end{center}
     \begin{flushright}
@@ -113,6 +100,19 @@
         \hfill Ayudante: Hugo Víctor García Martínez.
     \end{flushright}
 
-    \lipsum[1-10]
+    Veamos que, utilizando equivalencias lógicas, se pueden demostrar igualdades básicas entre conjuntos. La técnica es siempre: Traducir (utilizando las definiciones de las entre de conjuntos) lo que significa que un elemento arbitrario, \(x\), sea elemento de cierto conjunto; después, utilizar equivalencias lógicas de modo que nos acerquemos al objetivo de la prueba (y demostrarlas, si es necesario), y finalmente, volver a traducir las proposiciones en notación de conjuntos; por ejemplo, ``\(x \in A \land x \in B\)'' se traduce a ``\(x \in A \cap B\)''.
+
+    Por ejemplo, recordando que
+
+    \begin{proposicion}
+        Dados \(A\) y \(X\) conjuntos, se cumple \(X \setminus (X \setminus A) = A\).
+    \end{proposicion}
+    \begin{proof}
+        \begin{align}
+            x \in X \setminus (X \setminus A) & \leftrightarrow \Par*{x \in X \land (x \notin X \setminus A)}
+        \end{align}
+    \end{proof}
+
+
 
 \end{document}
