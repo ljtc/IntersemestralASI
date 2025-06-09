@@ -25,6 +25,7 @@
 \usepackage{ifthen}
 \usepackage{truthtable} %para las tablas de verdad
 \usepackage{xcolor}
+\usepackage[colorlinks=true, allcolors=morado]{hyperref}
 
 \usepackage{multicol}
 \usepackage[shortlabels]{enumitem}
@@ -69,9 +70,9 @@
 \newmdtheoremenv[backgroundcolor=azul!8]{definicion}{Definición}
 \newmdtheoremenv[backgroundcolor=azul!8]{proposicion}[definicion]{Proposición}
 \newmdtheoremenv[backgroundcolor=azul!8]{lema}[definicion]{Lema}
-\newmdtheoremenv[backgroundcolor=azul!8]{teorema}[definicion]{Teorema}
-\newmdtheoremenv[backgroundcolor=azul!8]{corolario}[definicion]{Corolario}
-\newmdtheoremenv[backgroundcolor=azul!8]{observacion}[definicion]{Observación}
+\newmdtheoremenv[backgroundcolor=dorado!8]{teorema}[definicion]{Teorema}
+\newmdtheoremenv[backgroundcolor=dorado!8]{corolario}[definicion]{Corolario}
+\newmdtheoremenv[backgroundcolor=morado!8]{observacion}[definicion]{Observación}
 
 %Entorno de Demostración
 \renewcommand\qedsymbol{$\blacksquare$}
@@ -102,15 +103,52 @@
 
     Veamos que, utilizando equivalencias lógicas, se pueden demostrar igualdades básicas entre conjuntos. La técnica es siempre: Traducir (utilizando las definiciones de las entre de conjuntos) lo que significa que un elemento arbitrario, \(x\), sea elemento de cierto conjunto; después, utilizar equivalencias lógicas de modo que nos acerquemos al objetivo de la prueba (y demostrarlas, si es necesario), y finalmente, volver a traducir las proposiciones en notación de conjuntos; por ejemplo, ``\(x \in A \land x \in B\)'' se traduce a ``\(x \in A \cap B\)''.
 
-    Por ejemplo, recordando que
+    Veremos un ejemplo de prueba a continuacion, los \textcolor{black!70}{comentarios en gris} no forman parte de la demostración, pero ayudan a exlpicar el proceso. Queremos demostrar que:
+    \begin{equation}\label{Ej1}
+        A \setminus (A \cap B) = A \setminus B
+    \end{equation}
 
-    \begin{proposicion}
-        Dados \(A\) y \(X\) conjuntos, se cumple \(X \setminus (X \setminus A) = A\).
-    \end{proposicion}
+    Pero antes de comenzar la prueba, veamos el siguiente lema. El motivo de probar este lema será explicado más adelante, durante la demostración de (\ref{Ej1})
+    \begin{lema}
+        \(\alpha \land (\lnot \alpha \lor \lnot \beta) \equiv \alpha \land \lnot \beta\)
+    \end{lema}
     \begin{proof}
-        \begin{align}
-            x \in X \setminus (X \setminus A) & \leftrightarrow \Par*{x \in X \land (x \notin X \setminus A)}
-        \end{align}
+        Revisemos la tabla de verdad de ambas proposiciones.
+        \begin{center}        
+         \begin{tabular}{c|c||c|c|c|c|c|c|c}
+            \truthtable{A,B}{$\alpha$,$\beta$} %{variables sintácticas}{variables a imprimir}
+            {!A, A & B, A | B, ^(A; B), !&(A; B), >>(A; B), <>(A; B)} %sintaxis
+            {$\alpha$, $\land$, $(\alpha)$,$A \veebar B$,$A | B$, $A \rightarrow B$, $A \leftrightarrow B$}%etiquetas
+            {$0$}{$1$} %{etiqueta verdadero}{etiqueta falso}
+            \end{tabular}
+        \end{center}
+    \end{proof}
+
+
+
+    \begin{proof}
+        \textcolor{black!70}{Se empieza a hacer la ``cadena de equivalencias'', se sugiere empezar por el lado \textit{más complicado}.}
+        \begin{align*}
+            x \in A \setminus (A \cap B) & \Leftrightarrow x \in A \land x \notin A \cap B \tag*{Def. de \( \setminus \)} \\
+            & \Leftrightarrow x \in A \land \lnot (x \in A \cap B) \tag*{Def. de \( \notin \)} \\
+            & \Leftrightarrow x \in A \land \lnot(x \in A \land x \in B) \tag*{Def. de \( \cap \)}
+        \end{align*}
+        \textcolor{black!70}{Una vez que todo está en ``proposiciones sencillas'' (es decir, que ya no se pueden hacer más simples) como las anteriores: \(x \in A\), \(x \in B\), etcétera; aplicamos las equivalencias lógicas pertinentes (con la práctica quedará claro cuáles se deben usar).}
+        \begin{align*}
+            \phantom{x \in A \setminus (A \cap B)} & \Leftrightarrow x \in A \land (\lnot(x \in A) \lor \lnot(x \in B)) \tag*{Leyes de De Morgan}            
+        \end{align*}
+        \textcolor{black!70}{A la expresión que llegamos es una fórmula (o proposición) de la forma ``\(\alpha \land (\lnot \alpha \lor \lnot \beta) \)'' (donde \(\alpha\) se corresponde con \(x \in A\) y \(\beta\) con \(x \in B\)). Lo que queremos es hacer que la cadena de equivalencias termine en``\(x \in A \setminus B\)'', es decir, en ``\(x \in A \land \lnot(x \in B)\)'', o lo que es lo mismo, ``\(\alpha \land \lnot \beta\)''.}
+        
+        \textcolor{black!70}{Por lo tanto, suena natural demostrar que \(\alpha \land (\lnot \alpha \lor \lnot \beta) \equiv \alpha \land \lnot \beta\), por ello tal demostración se realizó previamente, para poder utilizarlo en la cadena de equivalencias. De nuevo, con la práctivca quedará claro el proceso de pensamiento para estas pruebas sencillas.}
+
+        \textcolor{black!70}{Finalizando la demostración:}
+        \begin{align*}
+            \phantom{x \in A \setminus (A \cap B)} & \Leftrightarrow x \in A \land \lnot(x \in B) \tag*{\(\alpha \land (\lnot \alpha \lor \lnot \beta) \equiv \alpha \land \lnot \beta\)} \\
+            & \Leftrightarrow x \in A \land x \notin B \tag*{Def. de \( \notin \)} \\
+            & \Leftrightarrow x \in A \setminus B \tag*{Def. de \( \setminus \)}
+        \end{align*}
+
+        Es decir, se ha probado que \(x \in A \setminus (A \cap B) \Leftrightarrow x in A \setminus B\), por lo tanto, $A \setminus (A \cap B) = A \setminus B$.
     \end{proof}
 
 
