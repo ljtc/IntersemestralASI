@@ -101,14 +101,14 @@
         \hfill Ayudante: Hugo Víctor García Martínez.
     \end{flushright}
 
-    Veamos que, utilizando equivalencias lógicas, se pueden demostrar igualdades básicas entre conjuntos. La técnica es siempre: Traducir (utilizando las definiciones de las entre de conjuntos) lo que significa que un elemento arbitrario, \(x\), sea elemento de cierto conjunto; después, utilizar equivalencias lógicas de modo que nos acerquemos al objetivo de la prueba (y demostrarlas, si es necesario), y finalmente, volver a traducir las proposiciones en notación de conjuntos; por ejemplo, ``\(x \in A \land x \in B\)'' se traduce a ``\(x \in A \cap B\)''.
+    Veamos que, utilizando equivalencias lógicas, se pueden demostrar igualdades básicas entre conjuntos. La técnica es siempre: Traducir (utilizando las definiciones de las operaciones entre de conjuntos) lo que significa que un elemento arbitrario, \(x\), sea elemento de cierto conjunto; después, utilizar equivalencias lógicas de modo que nos acerquemos al objetivo de la prueba (y demostrarlas, si es necesario), y finalmente, volver a traducir las proposiciones en notación de conjuntos; por ejemplo, ``\(x \in A \land x \in B\)'' se traduce a ``\(x \in A \cap B\)''.
 
     Veremos un ejemplo de prueba a continuacion, los \textcolor{black!67}{\itshape comentarios en gris} no forman parte de la demostración, pero ayudan a exlpicar el proceso. Queremos demostrar que:
     \begin{equation}
         A \setminus (A \cap B) = A \setminus B
     \end{equation}
 
-    Pero antes de comenzar la prueba, veamos el siguiente lema. El motivo de probar este lema será explicado más adelante, durante la demostración de .
+    Antes de comenzar la prueba, veamos el siguiente lema. El motivo de probar este lema será explicado más adelante, durante la demostración de (1).
     \begin{lema}
         \(\alpha \land (\lnot \alpha \lor \lnot \beta) \equiv \alpha \land \lnot \beta\).
     \end{lema}
@@ -118,7 +118,7 @@
          \begin{tabular}{>{\columncolor{gray!20}}c| >{\columncolor{gray!20}}c||c|>{\columncolor{dorado!35}}c|c|c|c||c|>{\columncolor{dorado!35}}c|c}
             \truthtable{A,B}{$\alpha$,$\beta$} %{variables sintácticas}{variables a imprimir}
             {A, A&(!A | !B) , !A , !A | !B , !B , A, A&(!B) , !B} %sintaxis
-            {$\alpha$, $\land$, $( \lnot \alpha $,$\lor$, $\lnot \beta)$, $(\alpha$, $\land$, $\lnot \beta)$}
+            {$\alpha$, $\land$, $( \lnot \alpha $,$\lor$, $\lnot \beta)$, $\alpha$, $\land$, $\lnot \beta$}
             {$1$}{$0$}
             \end{tabular}
         \end{center}
@@ -130,7 +130,7 @@
     \begin{proof}
         \textcolor{black!67}{\itshape Se empieza a hacer la ``cadena de equivalencias'', se sugiere empezar por el lado \textit{más complicado}.}
         \begin{align*}
-            x \in A \setminus (A \cap B) & \Leftrightarrow x \in A \land x \notin A \cap B \tag*{Def. de \( \setminus \)} \\
+            x \in A \setminus (A \cap B) & \Leftrightarrow x \in A \land x \notin (A \cap B) \tag*{Def. de \( \setminus \)} \\
             & \Leftrightarrow x \in A \land \lnot (x \in A \cap B) \tag*{Def. de \( \notin \)} \\
             & \Leftrightarrow x \in A \land \lnot(x \in A \land x \in B) \tag*{Def. de \( \cap \)}
         \end{align*}
@@ -138,9 +138,9 @@
         \begin{align*}
             \phantom{x \in A \setminus (A \cap B)} & \Leftrightarrow x \in A \land (\lnot(x \in A) \lor \lnot(x \in B)) \tag*{Leyes de De Morgan}            
         \end{align*}
-        \textcolor{black!67}{\itshape A la expresión que llegamos es una fórmula (o proposición) de la forma ``\(\alpha \land (\lnot \alpha \lor \lnot \beta) \)'' (donde \(\alpha\) se corresponde con \(x \in A\) y \(\beta\) con \(x \in B\)). Lo que queremos es hacer que la cadena de equivalencias termine en``\(x \in A \setminus B\)'', es decir, en ``\(x \in A \land \lnot(x \in B)\)'', o lo que es lo mismo, ``\(\alpha \land \lnot \beta\)''.}
+        \textcolor{black!67}{\itshape A la expresión que llegamos es una proposición de la forma ``\(\alpha \land (\lnot \alpha \lor \lnot \beta) \)'' (donde \(\alpha\) se corresponde con \(x \in A\) y \(\beta\) con \(x \in B\)). Lo que queremos es hacer que la cadena de equivalencias termine en``\(x \in A \setminus B\)'', es decir, en ``\(x \in A \land \lnot(x \in B)\)'', o lo que es lo mismo, ``\(\alpha \land \lnot \beta\)''.}
         
-        \textcolor{black!67}{\itshape Por lo tanto, suena natural demostrar que \(\alpha \land (\lnot \alpha \lor \lnot \beta) \equiv \alpha \land \lnot \beta\), por ello tal demostración se realizó en el Lema 1, para poder utilizarlo en la cadena de equivalencias. De nuevo, con la práctivca quedará claro el proceso de pensamiento para estas pruebas sencillas.}
+        \textcolor{black!67}{\itshape Así que suena natural demostrar que \(\alpha \land (\lnot \alpha \lor \lnot \beta) \equiv \alpha \land \lnot \beta\), por ello tal demostración se realizó en el Lema 1. De nuevo, con la práctica quedará claro el proceso de pensamiento para este tipo de pruebas.}
         \begin{align*}
             \phantom{x \in A \setminus (A \cap B)} & \Leftrightarrow x \in A \land \lnot(x \in B) \tag*{Por el Lema 1} \\
             & \Leftrightarrow x \in A \land x \notin B \tag*{Def. de \( \notin \)} \\
@@ -173,7 +173,7 @@
         Como ambas proposiciones (o fórmulas) tienen \textcolor{dorado!85}{\itshape los mismos valores de verdad}, se concluye que \( \alpha \lor (\beta \lor \gamma) \equiv (\alpha \lor \beta) \lor \gamma \).
     \end{proof}
 
-    Una vez demostrada la equivalencia lógica que utilizaremos, demostraremos la igualdad de conjuntos (2):
+    Una vez demostrada la equivalencia lógica que utilizaremos, demostraremos la igualdad de conjuntos que escribimos en (2):
     \begin{proof}
         \begin{align*}
             x \in A \cup (B \cup C) & \Leftrightarrow x \in A \lor x\in(B \cup C) \tag*{Def. de \(\cup\)} \\
@@ -182,10 +182,10 @@
         Como la última es una proposición de la forma ``\(\alpha \lor (\beta \lor \gamma)\)'', podemos aplicar el Lema 2:
          \begin{align*}
             \phantom{x \in A \cup (B \cup C)} & \Leftrightarrow (x \in A \lor x \in B) \lor x \in C \tag*{Por el Lema 2} \\
-            & \Leftrightarrow (x \in A \cup B) \lor x \in C \tag*{Def. de \(\cup\)} \\
-            & \Leftrightarrow (x \in A \cup B) \cup C \tag*{Def. de \(\cup\)}
+            & \Leftrightarrow x \in A \cup B \lor x \in C \tag*{Def. de \(\cup\)} \\
+            & \Leftrightarrow x \in (A \cup B) \cup C \tag*{Def. de \(\cup\)}
         \end{align*}
-        Hemos mostrado que \(x \in A \cup (B \cup C) \Leftrightarrow (x \in A \cup B) \cup C\), por lo tanto, se ha probado la igualdad \(A \cup (B \cup C) = (A \cup B) \cup C\).
+        Hemos mostrado que \(x \in A \cup (B \cup C) \Leftrightarrow x \in (A \cup B) \cup C\), por lo tanto, se ha probado la igualdad \(A \cup (B \cup C) = (A \cup B) \cup C\).
     \end{proof}
 
 
