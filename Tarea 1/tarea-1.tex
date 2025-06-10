@@ -58,18 +58,15 @@
     \noindent\textit{\textbf{Instrucciones.} Resuelve los siguientes ejercicios. Esta tarea es individual y deberá ser entregada presencialmente, durante la clase del \textbf{lunes 16 de junio}.}\vspace{.4cm}
 
     \begin{ejercicio}{1}
-        Indica cuáles de las siguientes proposiciones son tautologías o contradicciones. Para aquellas que no sean ninguna de las dos, da una equivalencia lógica que utilicen únicamente los conectivos negación y disyunción.
-        \begin{multicols}{3}
+        Demuestra las siguientes equivalencias lógicas (utilizando, por supuesto, tablas de verdad).
+        \begin{multicols}{2}
             \begin{enumerate}
-                \item $\lnot (Z \land Z)$.
-                \item $P \to P$.
-                \item $P \land (P \lor Q)$.
-                \item $P \lor (P \land Q)$.
-                \item $B \to (P \to B)$.
-                \item $\Par{\lnot S \land \Par{(\lnot S) \lor Q}} \leftrightarrow S$.
-                \item $\lnot W \land W$.
-                \item $(R \to A) \to (\lnot A \to \lnot R)$.
-                \item $K \land B$.
+                \item \(\alpha\land\alpha\equiv\alpha\).
+                \item \(\alpha\land(\alpha\lor\beta)\equiv\alpha\).
+                \item \(\alpha\lor(\alpha\land\beta)\equiv\alpha\).
+                \item \(\alpha\lor(\beta\land\gamma)\equiv(\alpha\lor\beta)\land(\alpha\lor\gamma)\).
+                \item \(\neg(\alpha\land\beta)\equiv\neg\alpha\lor\neg\beta\).
+                \item \(\neg\neg\alpha\equiv\alpha\).
             \end{enumerate}
         \end{multicols}
     \end{ejercicio}
@@ -96,9 +93,9 @@
         \columnratio{0.22,0.42}
         \begin{paracol}{3}
             \begin{enumerate}
-                \item $P \leftrightarrow Q$.
-                \item $\lnot P \to A$.
-                \item $B \to (P \to B)$.
+                \item $\alpha \leftrightarrow \beta$.
+                \item $\lnot \alpha \to \gamma$.
+                \item $\gamma \to (\delta \to \gamma)$.
             \end{enumerate}
 
             \switchcolumn
@@ -116,6 +113,38 @@
         \end{paracol}
     \end{ejercicio}
 
+    \begin{ejercicio}{1}
+        Indica cuáles de las siguientes proposiciones son tautologías o contradicciones. Para aquellas que no sean ninguna de las dos, da una equivalencia lógica que utilicen únicamente los conectivos negación y disyunción.
+        \begin{multicols}{3}
+            \begin{enumerate}
+                \item $\lnot (\gamma \land \gamma)$.
+                \item $\alpha \to \alpha$.
+                \item $\alpha \land (\alpha \lor \beta)$.
+                \item $\alpha \lor (\alpha \land \beta)$.
+                \item $\beta \to (\alpha \to \beta)$.
+                \item $\Par{\lnot \gamma \land \Par{(\lnot \gamma) \lor \beta}} \leftrightarrow S$.
+                \item $\lnot \delta \land \delta$.
+                \item $(\gamma \to \eta) \to (\lnot \eta \to \lnot \gamma)$.
+                \item $\beta \land \alpha$.
+            \end{enumerate}
+        \end{multicols}
+    \end{ejercicio}
+
+    \begin{ejercicio}{1}
+        Traduce \textit{solamente cuatro} equivalencias lógicas del \textbf{Ejercicio 1} a igualdades entre conjuntos. Posteriormente, demuestra tales igualdades.
+    \end{ejercicio}
+
+    \begin{ejercicio}{1}
+        Denotamos por $A \vartriangle B$ a la diferencia simétrica entre los conjuntos $A$ y $B$. Demuestra las siguientes propiedades de esta operación.
+        \begin{multicols}{2}
+            \begin{enumerate}
+                \item $A \vartriangle \emptyset = A$.
+                \item $A \cup B = (A \vartriangle B) \vartriangle (A \cap B)$.
+            \end{enumerate}
+        \end{multicols}
+    \end{ejercicio}
+
+    \newpage
     \begin{ejercicio}{1}
         Sea $A:=\{x \in \mathbb{R} : \text{$x > 0$} \}$. Para cada $y \in \mathbb{R}$ se define el conjunto $B(y)$ (pues depende de $y$), como $B(y):=\{x \in \mathbb{R} : |x-y|<0.15 \}$. Utilizando operaciones de conjuntos, escribe en términos de los conjuntos anteriores, la colección cuyos elementos sean:
         \begin{enumerate}
