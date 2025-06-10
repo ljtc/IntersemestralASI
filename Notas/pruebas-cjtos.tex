@@ -24,7 +24,7 @@
 \usepackage{lipsum}
 \usepackage{ifthen}
 \usepackage{truthtable} %para las tablas de verdad
-\usepackage{xcolor}
+\usepackage[table]{xcolor}
 \usepackage[colorlinks=true, allcolors=morado]{hyperref}
 
 \usepackage{multicol}
@@ -103,52 +103,89 @@
 
     Veamos que, utilizando equivalencias lógicas, se pueden demostrar igualdades básicas entre conjuntos. La técnica es siempre: Traducir (utilizando las definiciones de las entre de conjuntos) lo que significa que un elemento arbitrario, \(x\), sea elemento de cierto conjunto; después, utilizar equivalencias lógicas de modo que nos acerquemos al objetivo de la prueba (y demostrarlas, si es necesario), y finalmente, volver a traducir las proposiciones en notación de conjuntos; por ejemplo, ``\(x \in A \land x \in B\)'' se traduce a ``\(x \in A \cap B\)''.
 
-    Veremos un ejemplo de prueba a continuacion, los \textcolor{black!70}{comentarios en gris} no forman parte de la demostración, pero ayudan a exlpicar el proceso. Queremos demostrar que:
-    \begin{equation}\label{Ej1}
+    Veremos un ejemplo de prueba a continuacion, los \textcolor{black!67}{\itshape comentarios en gris} no forman parte de la demostración, pero ayudan a exlpicar el proceso. Queremos demostrar que:
+    \begin{equation}
         A \setminus (A \cap B) = A \setminus B
     \end{equation}
 
-    Pero antes de comenzar la prueba, veamos el siguiente lema. El motivo de probar este lema será explicado más adelante, durante la demostración de (\ref{Ej1})
+    Pero antes de comenzar la prueba, veamos el siguiente lema. El motivo de probar este lema será explicado más adelante, durante la demostración de .
     \begin{lema}
-        \(\alpha \land (\lnot \alpha \lor \lnot \beta) \equiv \alpha \land \lnot \beta\)
+        \(\alpha \land (\lnot \alpha \lor \lnot \beta) \equiv \alpha \land \lnot \beta\).
     \end{lema}
     \begin{proof}
         Revisemos la tabla de verdad de ambas proposiciones.
         \begin{center}        
-         \begin{tabular}{c|c||c|c|c|c|c|c|c}
+         \begin{tabular}{>{\columncolor{gray!20}}c| >{\columncolor{gray!20}}c||c|>{\columncolor{dorado!35}}c|c|c|c||c|>{\columncolor{dorado!35}}c|c}
             \truthtable{A,B}{$\alpha$,$\beta$} %{variables sintácticas}{variables a imprimir}
-            {!A, A & B, A | B, ^(A; B), !&(A; B), >>(A; B), <>(A; B)} %sintaxis
-            {$\alpha$, $\land$, $(\alpha)$,$A \veebar B$,$A | B$, $A \rightarrow B$, $A \leftrightarrow B$}%etiquetas
-            {$0$}{$1$} %{etiqueta verdadero}{etiqueta falso}
+            {A, A&(!A | !B) , !A , !A | !B , !B , A, A&(!B) , !B} %sintaxis
+            {$\alpha$, $\land$, $( \lnot \alpha $,$\lor$, $\lnot \beta)$, $(\alpha$, $\land$, $\lnot \beta)$}
+            {$1$}{$0$}
             \end{tabular}
         \end{center}
+        Como ambas proposiciones (o fórmulas) tienen \textcolor{dorado!85}{\itshape los mismos valores de verdad}, se concluye que \(\alpha \land (\lnot \alpha \lor \lnot \beta) \equiv \alpha \land \lnot \beta\).
     \end{proof}
 
-
+    Ahora sí, veamos la demostración de (1):
 
     \begin{proof}
-        \textcolor{black!70}{Se empieza a hacer la ``cadena de equivalencias'', se sugiere empezar por el lado \textit{más complicado}.}
+        \textcolor{black!67}{\itshape Se empieza a hacer la ``cadena de equivalencias'', se sugiere empezar por el lado \textit{más complicado}.}
         \begin{align*}
             x \in A \setminus (A \cap B) & \Leftrightarrow x \in A \land x \notin A \cap B \tag*{Def. de \( \setminus \)} \\
             & \Leftrightarrow x \in A \land \lnot (x \in A \cap B) \tag*{Def. de \( \notin \)} \\
             & \Leftrightarrow x \in A \land \lnot(x \in A \land x \in B) \tag*{Def. de \( \cap \)}
         \end{align*}
-        \textcolor{black!70}{Una vez que todo está en ``proposiciones sencillas'' (es decir, que ya no se pueden hacer más simples) como las anteriores: \(x \in A\), \(x \in B\), etcétera; aplicamos las equivalencias lógicas pertinentes (con la práctica quedará claro cuáles se deben usar).}
+        \textcolor{black!67}{\itshape Una vez que todo está en ``proposiciones sencillas'' (es decir, que ya no se pueden hacer más simples) como las anteriores: \(x \in A\), \(x \in B\), etcétera; aplicamos las equivalencias lógicas pertinentes (con la práctica quedará claro cuáles se deben usar).}
         \begin{align*}
             \phantom{x \in A \setminus (A \cap B)} & \Leftrightarrow x \in A \land (\lnot(x \in A) \lor \lnot(x \in B)) \tag*{Leyes de De Morgan}            
         \end{align*}
-        \textcolor{black!70}{A la expresión que llegamos es una fórmula (o proposición) de la forma ``\(\alpha \land (\lnot \alpha \lor \lnot \beta) \)'' (donde \(\alpha\) se corresponde con \(x \in A\) y \(\beta\) con \(x \in B\)). Lo que queremos es hacer que la cadena de equivalencias termine en``\(x \in A \setminus B\)'', es decir, en ``\(x \in A \land \lnot(x \in B)\)'', o lo que es lo mismo, ``\(\alpha \land \lnot \beta\)''.}
+        \textcolor{black!67}{\itshape A la expresión que llegamos es una fórmula (o proposición) de la forma ``\(\alpha \land (\lnot \alpha \lor \lnot \beta) \)'' (donde \(\alpha\) se corresponde con \(x \in A\) y \(\beta\) con \(x \in B\)). Lo que queremos es hacer que la cadena de equivalencias termine en``\(x \in A \setminus B\)'', es decir, en ``\(x \in A \land \lnot(x \in B)\)'', o lo que es lo mismo, ``\(\alpha \land \lnot \beta\)''.}
         
-        \textcolor{black!70}{Por lo tanto, suena natural demostrar que \(\alpha \land (\lnot \alpha \lor \lnot \beta) \equiv \alpha \land \lnot \beta\), por ello tal demostración se realizó previamente, para poder utilizarlo en la cadena de equivalencias. De nuevo, con la práctivca quedará claro el proceso de pensamiento para estas pruebas sencillas.}
-
-        \textcolor{black!70}{Finalizando la demostración:}
+        \textcolor{black!67}{\itshape Por lo tanto, suena natural demostrar que \(\alpha \land (\lnot \alpha \lor \lnot \beta) \equiv \alpha \land \lnot \beta\), por ello tal demostración se realizó en el Lema 1, para poder utilizarlo en la cadena de equivalencias. De nuevo, con la práctivca quedará claro el proceso de pensamiento para estas pruebas sencillas.}
         \begin{align*}
-            \phantom{x \in A \setminus (A \cap B)} & \Leftrightarrow x \in A \land \lnot(x \in B) \tag*{\(\alpha \land (\lnot \alpha \lor \lnot \beta) \equiv \alpha \land \lnot \beta\)} \\
+            \phantom{x \in A \setminus (A \cap B)} & \Leftrightarrow x \in A \land \lnot(x \in B) \tag*{Por el Lema 1} \\
             & \Leftrightarrow x \in A \land x \notin B \tag*{Def. de \( \notin \)} \\
             & \Leftrightarrow x \in A \setminus B \tag*{Def. de \( \setminus \)}
         \end{align*}
 
-        Es decir, se ha probado que \(x \in A \setminus (A \cap B) \Leftrightarrow x in A \setminus B\), por lo tanto, $A \setminus (A \cap B) = A \setminus B$.
+        Es decir, se ha probado que \(x \in A \setminus (A \cap B) \Leftrightarrow x \in A \setminus B\), por lo tanto, $A \setminus (A \cap B) = A \setminus B$.
+    \end{proof}
+
+    Veamos un ejemplo distinto, pero esta vez sin comentarios. De nuevo, la idea es ``traducir'' una equivalencia lógica en una igualdad entre conjuntos. Demostraremos la siguiente igualdad de conjuntos (asociatividad de la unión):
+    \begin{equation}
+        A \cup (B \cup C) = (A \cup B) \cup C
+    \end{equation}
+
+    Como es necesario, habrá que probar el siguiente lema (asociatividad de la disyunción).
+
+    \begin{lema}
+        \( \alpha \lor (\beta \lor \gamma) \equiv (\alpha \lor \beta) \lor \gamma \).
+    \end{lema}
+    \begin{proof}
+        Revisemos la tabla de verdad de ambas proposiciones.
+        \begin{center}        
+         \begin{tabular}{>{\columncolor{gray!20}}c| >{\columncolor{gray!20}}c|>{\columncolor{gray!20}}c||c|>{\columncolor{dorado!35}}c|c|c|c||c|c|c|>{\columncolor{dorado!35}}c|c}
+            \truthtable{A,B,C}{$\alpha$,$\beta$,$\gamma$} %{variables sintácticas}{variables a imprimir}
+            {A, A | B | C , B , B | C , C, A , A | B, B , A| B | C , C} %sintaxis
+            {$ \alpha$, $\lor$, $( \beta$, $\lor$, $\gamma )$, $(\alpha$, $\lor$, $ \beta )$,$\lor$, $\gamma$}
+            {$1$}{$0$}
+            \end{tabular}
+        \end{center}
+        Como ambas proposiciones (o fórmulas) tienen \textcolor{dorado!85}{\itshape los mismos valores de verdad}, se concluye que \( \alpha \lor (\beta \lor \gamma) \equiv (\alpha \lor \beta) \lor \gamma \).
+    \end{proof}
+
+    Una vez demostrada la equivalencia lógica que utilizaremos, demostraremos la igualdad de conjuntos (2):
+    \begin{proof}
+        \begin{align*}
+            x \in A \cup (B \cup C) & \Leftrightarrow x \in A \lor x\in(B \cup C) \tag*{Def. de \(\cup\)} \\
+            & \Leftrightarrow x \in A \lor (x \in B \lor x \in C) \tag*{Def. de \(\cup\)}
+        \end{align*}
+        Como la última es una proposición de la forma ``\(\alpha \lor (\beta \lor \gamma)\)'', podemos aplicar el Lema 2:
+         \begin{align*}
+            \phantom{x \in A \cup (B \cup C)} & \Leftrightarrow (x \in A \lor x \in B) \lor x \in C \tag*{Por el Lema 2} \\
+            & \Leftrightarrow (x \in A \cup B) \lor x \in C \tag*{Def. de \(\cup\)} \\
+            & \Leftrightarrow (x \in A \cup B) \cup C \tag*{Def. de \(\cup\)}
+        \end{align*}
+        Hemos mostrado que \(x \in A \cup (B \cup C) \Leftrightarrow (x \in A \cup B) \cup C\), por lo tanto, se ha probado la igualdad \(A \cup (B \cup C) = (A \cup B) \cup C\).
     \end{proof}
 
 

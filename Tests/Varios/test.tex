@@ -1,24 +1,21 @@
 \documentclass{article}
-\usepackage{paracol}
-\usepackage{xcolor}
-\usepackage{lipsum}
+\usepackage[table]{xcolor}  % importante: activar 'table' para color en tablas
+%\usepackage{colortbl}
+\usepackage{booktabs}
 
-\setlength{\columnsep}{1cm}
-
+% Definimos un color personalizado (opcional)
+\definecolor{myblue}{RGB}{220,230,255}
 
 \begin{document}
 
-\columnratio{0.2,0.2}
-\begin{paracol}{3}
-    \lipsum[1]
-
-    \switchcolumn
-    \lipsum[2]
-
-    \switchcolumn
-    \lipsum[3]
-
-    \switchcolumn* 
-\end{paracol}
+\begin{tabular}{l|>{\columncolor{myblue}}c|r}
+\toprule
+Nombre & Edad & Ciudad \\
+\midrule
+Ana    & 23   & Madrid \\
+Luis   & 31   & Sevilla \\
+Marta  & 27   & Valencia \\
+\bottomrule
+\end{tabular}
 
 \end{document}
