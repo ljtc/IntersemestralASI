@@ -1,0 +1,100 @@
+\documentclass[letterpaper,DIV=12,headsepline,12pt]{scrartcl}
+
+%Header and footer
+\usepackage{scrlayer-scrpage}
+    \clearpairofpagestyles
+    \ihead{\footnotesize \textit{Álgebra Superior I}}
+    \ohead{\footnotesize \textit{Intersemestral 2025-4}}
+    \cfoot{\normalfont\thepage}
+    \addtokomafont{title}{\bfseries \rmfamily}
+    \setlength{\headsep}{5pt}
+    \newpairofpagestyles{beginstyle}{
+        \clearpairofpagestyles
+        \KOMAoptions{headsepline=false}
+        \cfoot{\footnotesize \pagemark}
+        \cfoot{\normalfont\thepage}
+    }
+
+\usepackage[spanish,mexico,es-noindentfirst]{babel}
+\usepackage{mathtools}
+\usepackage{tasks}
+\settasks{style=itemize}
+\usepackage{unicode-math}
+\setmainfont{Stix Two Text}
+\setmathfont{Stix Two Math}
+\usepackage{microtype}
+
+\begin{document}
+\thispagestyle{beginstyle}
+\begin{center}
+  {\fontsize{30}{60}\rmfamily \textbf{Cuantificadores y conectivos}}
+  \\ \vspace{.2cm}
+  Álgebra Superior 1, 2025-4
+\end{center}
+\begin{flushright}
+  \footnotesize \hfill Profesor: Luis Jesús Trucio Cuevas.\\
+  \hfill Ayudante: Hugo Víctor García Martínez.
+\end{flushright}
+
+\noindent
+Este documento es sólo una lista de equivalencias e implicaciones que muestran
+cómo se comportan los cuantificadores con los conectivos lógicos.
+
+\section{Cuantificadores y negación}
+Estas equivalencias son las más usuales, así que empezamos con ellas:
+\begin{tasks}(2)
+  \task \(\neg\exists x\varphi(x)\iff\forall x\neg\varphi(x)\)
+  \task \(\neg\forall x\varphi(x)\iff\exists x\neg\varphi(x)\).
+\end{tasks}
+
+\section{Con existencial}\label{sec:excon}
+En este caso diremos que
+no se lleva bien con la conjunción y sí se lleva bien con la disyunción:
+\begin{tasks}(2)
+  \task \(\exists x(\varphi(x)\land\psi(x))\implies\exists x\varphi(x)\land\exists x\psi(x)\)
+  \task \(\exists x(\varphi(x)\lor\psi(x))\iff\exists x\varphi(x)\lor\exists x\psi(x)\).
+\end{tasks}
+En la primera implicación no se da el regreso. Para dar un ejemplo de eso,
+tomamos como contexto \(\mathbb{N}\). Consideramos \(\varphi(x)\) como \(x\) es
+par y \(\psi(x)\) como \(x\) es impar. En este caso, 
+\(\exists x(\varphi(x)\land\psi(x))\) es falso ya que no hay números que
+sean pares e impares al mismo tiempo, pero
+\(\exists x\varphi(x)\land\exists x\psi(x)\) es cierto ya que hay números pares
+e impares.
+
+\section{Con universal}\label{sec:unicon}
+En este caso diremos que se lleva bien con la conjunción y no se lleva bien con
+la disyunción:
+\begin{tasks}(2)
+  \task \(\forall x(\varphi(x)\land\psi(x))\iff\forall x\varphi(x)\land\forall x\psi(x)\)
+  \task \(\forall x\varphi(x)\lor\forall x\psi(x)\implies\forall x(\varphi(x)\lor\psi(x))\).
+\end{tasks}
+De nuevo, para ver que la implicación no es una equivalencia hay que tomar el
+ejemplo de los pares e impares en \(\mathbb{N}\). En este caso el antecedente
+dice que todo número es par o impar, lo cual es cierto. Sin embargo, el
+consecuente dice que todo número es par o todo número es impar, lo cual es
+falso.
+
+\section{Addendum}
+En las secciones \ref{sec:excon} y \ref{sec:unicon} hemos visto que el
+cuantificador existencial no se lleva bien con la conjunción y que el universal
+no se lleva bien con la disyunción. Sin embargo, hay casos en los que sí se
+llevan bien. Por ejemplo, si una fórmula no tiene nada que ver con la variable
+de cuantificación. Sea \(\psi\) una fórmula que no depende de \(x\), entonces
+\begin{tasks}(2)
+  \task \(\exists x(\varphi(x)\land\psi)\iff(\exists x\varphi(x))\land\psi\)
+  \task \(\forall x(\varphi(x)\lor\psi)\iff(\forall x\varphi(x))\lor\psi\).
+\end{tasks}
+
+\section{Universal e implicación}
+Posiblemente no sea tan común ver esta implicación, la añadimos por completud:
+\begin{tasks}
+  \task \(\forall x(\varphi(x)\to\psi(x))\implies(\forall x\varphi(x))\to(\forall x\psi(x))\).
+\end{tasks}
+¿Puedes dar un ejemplo donde \((\forall x\varphi(x))\to(\forall x\psi(x))\) sea
+verdadero y \(\forall x(\varphi(x)\to\psi(x))\) falso?
+\textit{Sigerencia:} De nuevo considera el contexto \(\mathbb{N}\). Luego,
+intenta que \((\forall x\varphi(x))\to(\forall x\psi(x))\) sea verdadero porque
+el antecedente es falso.
+
+\end{document}
