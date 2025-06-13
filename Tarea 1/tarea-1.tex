@@ -61,12 +61,10 @@
         Demuestra las siguientes equivalencias lógicas.
         \begin{multicols}{2}
             \begin{enumerate}
-                \item \(\alpha\land\alpha\equiv\alpha\).
                 \item \(\alpha\land(\alpha\lor\beta)\equiv\alpha\).
                 \item \(\alpha\lor(\alpha\land\beta)\equiv\alpha\).
                 \item \(\alpha\lor(\beta\land\gamma)\equiv(\alpha\lor\beta)\land(\alpha\lor\gamma)\).
                 \item \(\neg(\alpha\land\beta)\equiv\neg\alpha\lor\neg\beta\).
-                \item \(\neg\neg\alpha\equiv\alpha\).
             \end{enumerate}
         \end{multicols}
     \end{ejercicio}
@@ -89,8 +87,8 @@
     \end{ejercicio}
 
     \begin{ejercicio}{1}
-        Escribe la negación de las siguientes proposiciones. Si el inciso está en español, da tu respuesta también en español.
-        \columnratio{0.22,0.42}
+        Escribe la negación de las siguientes proposiciones. Si el inciso está en español, escribe tu respuesta en español.
+        \columnratio{0.21,0.42}
         \begin{paracol}{3}
             \begin{enumerate}
                 \item $\alpha \leftrightarrow \beta$.
@@ -100,21 +98,21 @@
 
             \switchcolumn
              \begin{enumerate}\setcounter{enumi}{3}
-                \item $\exists x (P(x) \land (Q(x) \land S(x)))$.
-                \item $\forall a (P(a) \to \exists b (R(a,b)))$.
-                \item $\exists b \forall x (\forall y(P(y)) \leftrightarrow (Q(x,y) \land R(b)))$
+                \item $\exists x \big( \alpha(x) \land \big( \beta(x) \land \gamma(x) \big) \big)$.
+                \item $\forall a \big(\alpha(a) \to \exists b \big( \beta(a,b) \big) \big)$.
+                \item $\exists b \forall x \big( \forall y(\alpha(y)) \leftrightarrow \big( Q(x,y) \land R(b) \big) \big)$.
             \end{enumerate}
 
             \switchcolumn
              \begin{enumerate}\setcounter{enumi}{6}
                 \item Si $x$ es un número primo y es mayor que 4, $n$ es impar.
-                \item Hay cierto elemento de $A$ que es real, pero no real.
+                \item Hay cierto elemento de $A$ que es real, pero no entero.
             \end{enumerate}
         \end{paracol}
     \end{ejercicio}
 
     \begin{ejercicio}{1}
-        Indica cuáles de las siguientes proposiciones son tautologías o contradicciones. Para aquellas que no sean ninguna de las dos, da una equivalencia lógica que utilicen únicamente los conectivos negación y disyunción.
+        Indica cuáles de las siguientes proposiciones son tautologías o contradicciones. Para aquellas que sean contingentes, da una equivalencia lógica que utilice únicamente los conectivos negación y disyunción.
         \begin{multicols}{3}
             \begin{enumerate}
                 \item $\lnot (\gamma \land \gamma)$.
@@ -122,8 +120,8 @@
                 \item $\alpha \land (\alpha \lor \beta)$.
                 \item $\alpha \lor (\alpha \land \beta)$.
                 \item $\beta \to (\alpha \to \beta)$.
-                \item $\Par{\lnot \gamma \land \Par{(\lnot \gamma) \lor \beta}} \leftrightarrow S$.
-                \item $\lnot \delta \land \delta$.
+                \item $\big( \lnot \gamma \land (\lnot \gamma \lor \beta) \big) \leftrightarrow \gamma$.
+                \item $\lnot \delta \leftrightarrow \delta$.
                 \item $(\gamma \to \eta) \to (\lnot \eta \to \lnot \gamma)$.
                 \item $\beta \land \alpha$.
             \end{enumerate}
@@ -131,7 +129,30 @@
     \end{ejercicio}
 
     \begin{ejercicio}{1}
-        Traduce \textit{solamente cuatro} equivalencias lógicas del \textbf{Ejercicio 1} a igualdades entre conjuntos. Posteriormente, demuestra tales igualdades.
+        Traduce las siguientes equivalencias lógicas a igualdades entre conjuntos. Demuestra las igualdades que propusiste.
+        \begin{multicols}{2}
+            \begin{enumerate}
+                \item \(\alpha\lor(\beta\land\gamma)\equiv(\alpha\lor\beta)\land(\alpha\lor\gamma)\).
+                \item \(\neg(\alpha\land\beta)\equiv\neg\alpha\lor\neg\beta\).
+            \end{enumerate}
+        \end{multicols}
+    \end{ejercicio}
+
+    \begin{ejercicio}{1}
+        Sean $A$ y $X$ conjuntos de modo que $A \subseteq X$. Demuestra \textit{un inciso} de cada una de las siguientes columnas (tres igualdades en total).
+        \begin{multicols}{3}
+            \begin{enumerate}
+                \item $A \cap \emptyset = \emptyset$.
+                \item $A \cup \emptyset = A$.
+                \item $A \cup A = A$.
+                \item $A \cap X = A$.
+                \item $A \cup X = X$.
+                \item $A \cap A = A$.
+                \item $A \cap (X \setminus A) = \emptyset$.
+                \item $A \cup (X \setminus A) = X$.
+                \item $X \setminus (X \setminus A) = A$.
+            \end{enumerate}
+        \end{multicols}
     \end{ejercicio}
 
     \begin{ejercicio}{1}
@@ -143,6 +164,21 @@
             \end{enumerate}
         \end{multicols}
     \end{ejercicio}
+
+    \begin{ejercicio}{1}
+        Sean $A$ y $B$ conjuntos. Demuestra que:
+        \begin{enumerate}
+            \item $A \subseteq A \cap B$ si y sólo si $A \subseteq B$.
+            \item $A \cup B \subseteq B$ si y sólo si $A \subseteq B$.
+            \item Concluye que $A \in \mathscr{P}(A \cap B)$ ocurre si y sólo si $A \cup B \in \mathscr{P}(B)$.
+        \end{enumerate}
+    \end{ejercicio}
+
+    
+
+
+
+
 
     \newpage
     \begin{ejercicio}{1}
