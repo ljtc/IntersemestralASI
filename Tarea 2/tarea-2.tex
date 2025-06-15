@@ -1,19 +1,18 @@
 \documentclass[letterpaper,DIV=14,headsepline,12pt]{scrartcl}
 \usepackage[spanish,mexico,shorthands=off,es-lcroman]{babel}
-\usepackage{stix2}
-\pagenumbering{gobble}
-%\setlength{\parindent}{0cm}
 
+%Paquetes
+\usepackage{stix2}
 \usepackage{mathtools}
-\usepackage{amsthm}
+\usepackage{amsmath,amsthm,amsfonts,amscd,amsbsy,amsxtra}
 \usepackage{tikz-cd}
 \usepackage{comment}
 \usepackage{lipsum}
 \usepackage{ifthen}
-\usepackage{truthtable} %para las tablas de verdad
-
 \usepackage{multicol}
 \usepackage{paracol}
+
+%Enumeraciones
 \usepackage[shortlabels]{enumitem}
 \setenumerate[1]{label=\MakeLowercase{\roman*}), ref=\roman*}
 \setenumerate[2]{label=\MakeLowercase{\arabic*}), ref=\alph*}
@@ -26,11 +25,8 @@
 \newcommand\SetSymbol[1][]{\nonscript\:#1\vert\allowbreak\nonscript\:\mathopen{}}
 \DeclarePairedDelimiterX\Set[1]\{\}{\renewcommand\given{\SetSymbol[\delimsize]}#1}
 \DeclarePairedDelimiterX\Par[1](){#1}
-%Ejercicios
-%\newcommand{\pts}[1]{%
-  %\ifthenelse{\equal{#1}{1}}{\hfill \textbf{(#1 pt)}}{\hfill\textbf{(#1 pts)}}
-%}
 
+%Ejercicios
 \newcounter{Ejer}
 \newcounter{Pts}
 \setcounter{Ejer}{1}
@@ -48,6 +44,7 @@
 \DeclareMathOperator{\dom}{dom}
 
 \begin{document}
+    \pagenumbering{gobble}
 
     \begin{center}
         {\fontsize{30}{60}\rmfamily \textbf{Tarea 2}} \\ \vspace{.2cm}
@@ -60,16 +57,45 @@
 
     \noindent\textit{\textbf{Instrucciones.} Resuelve los siguientes ejercicios. Esta tarea es individual y deberá ser entregada presencialmente, durante la clase del \textbf{martes 24 de junio}.}\vspace{.4cm}
 
-    \begin{ejercicio}{2}
-
+    \begin{ejercicio}{1}
+        Sean $I,J,K$ conjuntos no vacíos y supongamos que $J \cup K = I$. Si $\{X_i \st i \in I\}$ es una familia indexada de conjuntos, demuestra que:
+        \[ \bigcap_{i \in I} X_i = \Big( \bigcap_{i \in J} X_i \Big) \cap \Big( \bigcap_{i \in K} X_i \Big) \]
     \end{ejercicio}
 
-    \begin{ejercicio}{2}
-        
+    \begin{ejercicio}{1}
+        Sean $A,B,X$ y $Y$ conjuntos no vacíos. Demuestra:
+        \begin{enumerate}
+            \item $A \times B \subseteq X \times Y$ si y sólo si $A \subseteq X$ y $B \subseteq Y$.
+            \item $A \times B = X \times Y$ si y sólo si $A=X$ y $B=Y$.
+            \item $(A \setminus X) \times B = (A \times B) \setminus (X \times B) $.
+        \end{enumerate}
+        \textit{Sugerencia: Para (ii), utiliza el inciso (i) y el hecho de que dos conjuntos son iguales si y sólo si, uno está contenido en el otro}.
     \end{ejercicio}
 
     \begin{ejercicio}{3}
-        
+        Sean $A$ un conjunto y $R,S \subseteq A \times A$ relaciones sobre $A$. Demuestra que:
+        \begin{enumerate}
+            \item $R \cap S$ es reflexiva si y solamente si $R$ y $S$ son reflexivas.
+            \item $R$ es simétrica si y sólo si $R=R^{-1}$.
+        \end{enumerate}
+    \end{ejercicio}
+
+    \begin{ejercicio}{1}
+        Sea $R$ una relación cualquiera. Prueba que, si $\dom(R) \cap \ima(R) = \emptyset$, entonces $R$ es antisimétrica. ¿Qué ocurre con el recíproco de lo anterior?, es decir, ¿Si $R$ es antisimétrica, entonces $\dom(R) \cap \ima(R) = \emptyset$?
+    \end{ejercicio}
+
+    \begin{ejercicio}{1}
+        En cada inciso $R$ es una relación sobre un conjunto $A$. Indica en cada caso, si $R$ es: reflexiva, simétrica, transitiva, antireflexiva o antisimétrica. Si en algún caso $R$ es relación de orden parcial, o de equivalencia, indícalo. No es necesario justificar.
+        \begin{enumerate}
+            \item $A$ es el conjunto $\{\text{Piedra, Papel, Tijeras}\}$ y $R \subseteq A \times A$ la relación:
+            \[ R := \Set*{(\text{Piedra}, \text{Tijeras}), (\text{Tijeras}, \text{Papel}), (\text{Papel}, \text{Piedra})} \]
+
+            \item $A$ es el conjunto de todas las posibles rectas en el plano (digamos, $\mathbb{R}^2$) y $R \subseteq A \times A$ es la relación $R:=\{(x,y) \in A \times A \st x \text{ es paralela a } y\}$.
+            
+            \item $A=\mathbb{Z}$ y $R \subseteq A \times A$ está dada por $n \mathrel{R} m$ si y sólo si $n ^2 \leq m^2$.
+
+            \item 
+        \end{enumerate}
     \end{ejercicio}
 
 \end{document}
