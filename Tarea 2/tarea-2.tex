@@ -42,6 +42,7 @@
 \renewcommand{\emptyset}{\varnothing}
 \DeclareMathOperator{\ima}{ima}
 \DeclareMathOperator{\dom}{dom}
+\newcommand{\quot}[2]{{\raisebox{.2em}{$#1$}\left/\raisebox{-.2em}{$#2$}\right.}}
 
 \begin{document}
     \pagenumbering{gobble}
@@ -87,15 +88,56 @@
     \begin{ejercicio}{1}
         En cada inciso $R$ es una relación sobre un conjunto $A$. Indica en cada caso, si $R$ es: reflexiva, simétrica, transitiva, antireflexiva o antisimétrica. Si en algún caso $R$ es relación de orden parcial, o de equivalencia, indícalo. No es necesario justificar.
         \begin{enumerate}
+            \item $A$ es el conjunto $\{0,1,2\}$ y $R:=\{(1,1),(2,2),(0,1),(1,0)\}$.
+
             \item $A$ es el conjunto $\{\text{Piedra, Papel, Tijeras}\}$ y $R \subseteq A \times A$ la relación:
             \[ R := \Set*{(\text{Piedra}, \text{Tijeras}), (\text{Tijeras}, \text{Papel}), (\text{Papel}, \text{Piedra})} \]
 
-            \item $A$ es el conjunto de todas las posibles rectas en el plano (digamos, $\mathbb{R}^2$) y $R \subseteq A \times A$ es la relación $R:=\{(x,y) \in A \times A \st x \text{ es paralela a } y\}$.
-            
-            \item $A=\mathbb{Z}$ y $R \subseteq A \times A$ está dada por $n \mathrel{R} m$ si y sólo si $n ^2 \leq m^2$.
+            \item $A$ es cualquier conjunto y $R=\id_A$.
 
-            \item 
+            \item $A$ es el conjunto de todas las rectas del plano (digamos, $\mathbb{R}^2$) y $R \subseteq A \times A$ es la relación $R:=\{(x,y) \in A \times A \st x \text{ es paralela a } y\}$.
+            
+            \item $A=\mathbb{Z}$ y $R \subseteq A \times A$ está dada por: $n \mathrel{R} m$ si y sólo si $n ^2 \leq m^2$.
+
+            \item $A=\mathscr{P}(\{0,1,2,.....,1534\})$ y $R$ está dada por: $a \mathrel{R} b$ si y sólo si $a$ tiene (estrictamente) menos elementos que $b$.
         \end{enumerate}
+    \end{ejercicio}
+
+    \begin{ejercicio}{1}
+        Sea $R$ una relación de equivalencia sobre un conjunto $A$. Demuestra que $R$ es la diganal de $A$ si y sólo si para cualesquiera $a,b \in A$ se tiene que $[a]=[b]$ implica $a=b$.
+    \end{ejercicio}
+
+    \begin{ejercicio}{1}
+        Sean $A,B$ conjuntos y $\{f_i \st i\in I\}$ una familia indexada de funciones tal que para cada $i \in I$, $f_i$ es una función de $A$ en $B$. Demuestra que la relación $R$ sobre $A$ definida por:
+        \[ x \mathrel{R} y \: \text{si y sólo si} \: \forall i \in I \big( f_i(x)=f_i(y) \big) \]
+        es de equivalencia.
+    \end{ejercicio}
+
+    \begin{ejercicio}{1}
+        Sean $A,B,C$ cualesquiera conjuntos y $f:A \to B$, $g:B \to C$ funciones arbitrarias. Entre las siguientes implicaciones, hay una que es falsa, demuestra las dos verdaderas y da un contraejemplo para la falsa.
+        \begin{enumerate}
+            \item Si $g \circ f$ es sobreyectiva, entonces $g$ es sobreyectiva.
+            \item Si $f$ es biyectiva, entonces $g \circ f$ es biyectiva.
+            \item Si $g \circ f$ es inyectiva, entonces $f$ es inyectiva.
+        \end{enumerate}
+    \end{ejercicio}
+
+    \begin{ejercicio}{1}
+        En cada inciso $f$ es una función de $A$ en $B$. Indica en cada caso, si $f$ es: inyectiva, sobreyectiva o biyectiva. No es necesario justificar.
+        \begin{enumerate}
+            \item $A=\mathbb{N}$, $B=\mathbb{N}$ y, para cada $a \in A$, $f(a)=a$.
+            \item $A=\mathscr{P}(\{0,2,4,6,...,30\})$, $B=A$ y, para cada $a \in A$, $f(a)$ es el mínimo de $a$.
+            \item $A=\mathbb{N}$, $B=\mathbb{Z}$ y, para cada $a \in A$, $f(a)=a$.
+            \item $A=\mathbb{R}$, $B=\mathbb{R}^+ \cup \{0\}$ y, para cada $a \in A$, $f(a)=a^2$.
+            \item $A=\mathbb{R}^+\cup\{0\}$, $B=\mathbb{R}^+ \cup \{0\}$ y, para cada $a \in A$, $f(a)=a^2$.
+            \item $A=\mathbb{N} \times \mathbb{N}$, $B=\mathbb{N}$ y, para cada $(a,b)\in A$, $f(a,b)=2^a \cdot 3^b$.
+            \item $A=\{0,1,2,3,...,10\}$, $B=\mathscr{P}(\mathbb{R}^2)$ y, para cada $a \in A$, $f(a)=\{(x,y) \in \mathbb{R}^2 \st x-y=2\}$.
+            \item $A=\mathbb{R}$, $B=\{0,1\}$ y, para cada $a \in A$; si $a \in \mathbb{Q}$, $f(a)=1$; y, si $a \notin \mathbb{Q}$, $f(a)=0$.
+        \end{enumerate}
+    \end{ejercicio}
+
+    \begin{ejercicio}{1}
+        Sean $A,B$ conjuntos y $f:A \to B$ una función. La relación $\sim \subseteq A \times A$ definida por $x \sim y \; \Leftrightarrow \; f(x)=f(y)$ es de equivalencia (\textit{¿por qué?}). Sea $\pi:A \to \quot{A}{\sim}$ definida por $f(x) = [x]$. Demuestre que $\pi$ es biyectiva si y sólo si $R=\id_A$.
     \end{ejercicio}
 
 \end{document}
