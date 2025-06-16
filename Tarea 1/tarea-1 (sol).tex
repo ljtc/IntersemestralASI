@@ -1,0 +1,498 @@
+	\documentclass[letterpaper,DIV=14,headsepline,12pt]{scrartcl}
+\usepackage[spanish,mexico,shorthands=off,es-lcroman]{babel}
+\usepackage{stix2}
+\pagenumbering{gobble}
+%\setlength{\parindent}{0cm}
+\usepackage{mathtools}
+\usepackage{amsthm}
+\usepackage{tikz-cd}
+\usepackage{comment}
+\usepackage{lipsum}
+\usepackage{ifthen}
+\usepackage{truthtable} %para las tablas de verdad
+\usepackage[table]{xcolor}
+
+\usepackage{multicol}
+\usepackage{paracol}
+\usepackage[shortlabels]{enumitem}
+\setenumerate[1]{label=\MakeLowercase{\roman*}), ref=\roman*}
+\setenumerate[2]{label=\MakeLowercase{\arabic*}), ref=\alph*}
+
+% Para escribir el "tal que" de los conjuntos
+\providecommand\st{\;|\;}
+\providecommand\tq{\;|\;}
+
+%Para el uso de \Set y \Set*
+\providecommand\given{}
+\newcommand\SetSymbol[1][]{\nonscript\:#1\vert\allowbreak\nonscript\:\mathopen{}}
+\DeclarePairedDelimiterX\Set[1]\{\}{\renewcommand\given{\SetSymbol[\delimsize]}#1}
+\DeclarePairedDelimiterX\Par[1](){#1}
+
+\newcounter{Ejer}
+\newcounter{Pts}
+\setcounter{Ejer}{1}
+\setcounter{Pts}{1}
+\newcommand{\pts}{}
+\newenvironment{ejercicio}[1]{\noindent
+    \ifthenelse{\equal{#1}{1} \OR \equal{#1}{+1}}{\renewcommand{\pts}{\textbf{(#1 pt)}}}{\renewcommand{\pts}{\textbf{(#1 pts)}}}\textbf{Ej. \theEjer} \pts\stepcounter{Ejer}}{\vspace{.3cm}}
+
+%Comandos que utilizamos
+\newcommand{\id}{\mathrm{id}}
+\newcommand{\op}{{}^{\mathrm{op}}}
+\newcommand{\set}[1]{\{#1\}}
+\renewcommand{\emptyset}{\varnothing}
+\DeclareMathOperator{\ima}{ima}
+\DeclareMathOperator{\dom}{dom}
+
+%Colors
+\definecolor{azul}{RGB}{0, 60, 113}
+\definecolor{dorado}{RGB}{196, 151, 57}
+\definecolor{morado}{RGB}{101, 43, 145}
+
+%Entorno de Demostración
+\renewcommand\qedsymbol{$\blacksquare$}
+\makeatletter
+    \renewenvironment{proof}[1][]{%
+        \par\pushQED{\qed}%
+        \normalfont\topsep6pt \partopsep0pt % espacio antes del entorno
+        \trivlist
+        \item[\hskip\labelsep
+                \textbf{\textit{Demostración.}}% Cambiado aquí
+        ]#1
+        }{%
+        \popQED\endtrivlist\@endpefalse
+    }
+\makeatother
+
+\makeatletter
+    \newenvironment{solu}[1][]{%
+        \par\pushQED{\hfill \lozenge}%
+        \normalfont\topsep6pt \partopsep0pt % espacio antes del entorno
+        \trivlist
+        \item[\hskip\labelsep
+                \textbf{\textit{Solución.}}% Cambiado aquí
+        ]#1
+        }{%
+        \popQED\endtrivlist\@endpefalse
+    }
+\makeatother
+
+\begin{document}
+
+    \begin{center}
+        {\fontsize{30}{60}\rmfamily \textbf{Tarea 1 (Solución)}} \\ \vspace{.2cm}
+        Álgebra Superior 1, 2025-4
+    \end{center}
+    \begin{flushright}
+        \footnotesize \hfill Profesor: Luis Jesús Trucio Cuevas.\\
+        \hfill Ayudante: Hugo Víctor García Martínez.
+    \end{flushright}
+
+    \begin{ejercicio}{1}
+        Demuestra las siguientes equivalencias lógicas.
+        \begin{multicols}{2}
+            \begin{enumerate}
+                \item \(\alpha\land(\alpha\lor\beta)\equiv\alpha\).
+                \item \(\alpha\lor(\alpha\land\beta)\equiv\alpha\).
+                \item \(\alpha\lor(\beta\land\gamma)\equiv(\alpha\lor\beta)\land(\alpha\lor\gamma)\).
+                \item \(\neg(\alpha\land\beta)\equiv\neg\alpha\lor\neg\beta\).
+            \end{enumerate}
+        \end{multicols}
+    \end{ejercicio}
+    \begin{proof}
+        Se probará cada inciso utilizando la definición de equivalencia lógica, esto es, coincidencia total en las tablas de verdad.
+        \begin{enumerate}
+            \item \(\alpha\land(\alpha\lor\beta)\equiv\alpha\).
+            \begin{center}        
+                \begin{tabular}{>{\columncolor{dorado!35}}c| >{\columncolor{gray!20}}c||c|>{\columncolor{dorado!35}}c|c|c|c}
+                    \truthtable{A,B}{$\alpha$,$\beta$}
+                    {A, A&(A | B) , A , A | B , B}
+                    {$\alpha$, $\land$, $( \alpha $,$\lor$, $ \beta)$}
+                    {$1$}{$0$}
+                \end{tabular}
+            \end{center}
+            \item \(\alpha\lor(\alpha\land\beta)\equiv\alpha\).
+            \begin{center}        
+                \begin{tabular}{>{\columncolor{dorado!35}}c| >{\columncolor{gray!20}}c||c|>{\columncolor{dorado!35}}c|c|c|c}
+                    \truthtable{A,B}{$\alpha$,$\beta$}
+                    {A, A | (A & B) , A , A & B , B}
+                    {$\alpha$, $\lor$, $( \alpha $,$\land$, $ \beta)$}
+                    {$1$}{$0$}
+                \end{tabular}
+            \end{center}
+            \item \(\alpha\lor(\beta\land\gamma)\equiv(\alpha\lor\beta)\land(\alpha\lor\gamma)\).
+            \begin{center}        
+                \begin{tabular}{>{\columncolor{gray!20}}c| >{\columncolor{gray!20}}c|>{\columncolor{gray!20}}c||c|>{\columncolor{dorado!35}}c|c|c|c||c|c|c|>{\columncolor{dorado!35}}c|c|c|c}
+                    \truthtable{A,B,C}{$\alpha$,$\beta$,$\gamma$}
+                    {A, A | (B & C) , B , B & C , C,  A , A | B, B , (A | B)&(A | C) , A, A | C, C}
+                    {$ \alpha$, $\lor$, $( \beta$, $\land$, $\gamma )$, $(\alpha$, $\lor$, $ \beta )$,$\land$, $(\alpha$, $\lor$ ,$\gamma)$}
+                    {$1$}{$0$}
+                \end{tabular}
+            \end{center}
+            \item \(\neg(\alpha\land\beta)\equiv\neg\alpha\lor\neg\beta\).
+            \begin{center}        
+                \begin{tabular}{>{\columncolor{gray!20}}c| >{\columncolor{gray!20}}c||>{\columncolor{dorado!35}}c|c|c|c||c|>{\columncolor{dorado!35}}c|c}
+                    \truthtable{A,B}{$\alpha$,$\beta$}
+                    {!(A & B) , A, A & B, B, !A, !A | !B ,!B }
+                    {$\lnot$, $( \alpha$, $ \land $,$ \beta) $, $ \lnot \alpha$, $\lor$ ,$\lnot \beta$}
+                    {$1$}{$0$}
+                \end{tabular}
+            \end{center}
+        \end{enumerate}
+        Finalizando la demostración de cada inciso.
+    \end{proof}
+
+    \begin{ejercicio}{1}
+        Escribe fórmulas lógicas (de primer orden) que, a tu criterio, capturen mejor cada una de las siguientes afirmaciones.
+        \columnratio{0.35}
+        \begin{paracol}{2}
+            \begin{enumerate}
+                \item Cada persona viva respira.
+                \item $2$ es el único primo par.
+                \item Existe un hombre inmortal.
+            \end{enumerate}
+            \switchcolumn
+             \begin{enumerate}\setcounter{enumi}{3}
+                \item No existen estudiantes en Ciudad Universitaria que sean felices.
+                \item Todos los peces del acuario de la facultad se aparean con otro pez.
+            \end{enumerate}
+        \end{paracol}
+    \end{ejercicio}
+    \begin{solu}
+        (i) Tomando $\alpha(x):$ ``$x$ es persona'', $\beta(x):$ ``$x$ está viva'' y $\gamma(x):$ ``$x$ respira'', se tiene que:
+        \begin{align*}
+            \text{``Cada persona viva respira''} & \Leftrightarrow \text{``Para todo } x \text{, si } x \text{ es persona y } x \text{ está viva, entonces } x \text{ respira''} \\
+            & \Leftrightarrow \forall x \big( (\alpha(x) \land \beta(x)) \rightarrow \gamma(x) \big)
+        \end{align*}
+
+        (ii) Considerando las propiedades $\alpha(x):$ ``$x$ es primio'' y $\beta(x):$ ``$x$ es par'', la traducción de este inciso queda de la siguiente forma:
+        \begin{align*}
+            2 \text{`` es el único primo par.''} & \Leftrightarrow 2 \text{`` es primo y par } \text{ y, para todo } n \text{, si } n \text{ es primo y par, entonces } n \text{ es 2''} \\
+            & \Leftrightarrow \big( \alpha(2) \land \beta(2) \big) \land \forall n \Big( \big( \alpha(n) \land \beta(n) \big) \to n=2 \Big)
+        \end{align*}
+
+        (iii) Si $\alpha(x):$ ``$x$ es hombre'' y $\gamma(x):$ ``$x$ es mortal'', entonces:
+        \[ \text{``Existe un hombre inmortal''} \; \Leftrightarrow \; \exists x \big( \alpha(x) \land \lnot \gamma(x) \big) \]
+
+        (iv) Tomemos $\alpha(x):$ ``$x$ es estudiante de Ciudad Universitaria'' y $\beta(x):$ ``$x$ es feliz'', así:
+        \begin{align*}
+            & \; \text{``No existen estudiantes en Ciudad Universitaria que sean felices''} \Leftrightarrow \\
+            \Leftrightarrow \; & \text{``Es falso que existe cierto } x \text{ tal que: } x \text{ es estudiante de Ciudad Universitaria y } x \text{ es feliz''} \\
+            \Leftrightarrow \; & \lnot \Big( \exists x \big( \alpha(x) \land \beta(x) \big) \Big)
+        \end{align*}
+
+        (iv) Si $\alpha(x):$ ``$x$ es un pez del acuario de la facultad'' y $\beta(x,y):$ ``$x$ y $y$ se aparean'', la traducción queda de la siguiente forma:
+        \begin{align*}
+            & \; \text{``Todos los peces del acuario de la facultad se aparean con otro pez''} \Leftrightarrow \\
+            \Leftrightarrow \; & \text{``Para cualquier } x \text{, si } x \text{ es un pez del acuario de la facultad, entonces existe } w \\
+            \phantom{\Leftrightarrow \;} & \text{ tal que } w \text{ es pez del acuario de la facultad, y, } x \text{ se aparea con } w \text{''} \\
+            \Leftrightarrow \; & \forall x \Big( \alpha(x) \to \exists w \big( \alpha(w) \land \beta(x,w) \big) \Big)
+        \end{align*}
+        \textit{Si se considera que cada pez del acuario de la facultad se aparea con un pez \textbf{distinto}, la traducción queda como:}
+        \[ \forall x \Big( \alpha(x) \to \exists w \big( \alpha(w) \land \beta(x,w) \land x \neq w \big) \Big) \]
+        \textit{y también es válida.}
+    \end{solu}
+
+    \begin{ejercicio}{1}
+        Escribe la negación de las siguientes proposiciones. Si el inciso está en español, escribe tu respuesta en español.
+        \columnratio{0.21,0.42}
+        \begin{paracol}{3}
+            \begin{enumerate}
+                \item $\alpha \leftrightarrow \beta$.
+                \item $\lnot \alpha \to \gamma$.
+                \item $\gamma \to (\delta \to \gamma)$.
+            \end{enumerate}
+
+            \switchcolumn
+             \begin{enumerate}\setcounter{enumi}{3}
+                \item $\exists x \big( \alpha(x) \land \big( \beta(x) \land \gamma(x) \big) \big)$.
+                \item $\forall a \big(\alpha(a) \to \exists b \big( \beta(a,b) \big) \big)$.
+                \item $\exists b \forall x \big( \forall y(\alpha(y)) \leftrightarrow \big( Q(x,y) \land R(b) \big) \big)$.
+            \end{enumerate}
+
+            \switchcolumn
+             \begin{enumerate}\setcounter{enumi}{6}
+                \item Si $n$ es un número primo y es mayor que 4, $n$ es impar.
+                \item Hay cierto elemento en $A$ que es real, pero no entero.
+            \end{enumerate}
+        \end{paracol}
+    \end{ejercicio}
+    \begin{solu}
+        (i) Como $\alpha \leftrightarrow \beta \equiv (\alpha \to \beta) \land (\beta \to \alpha)$, entonces:
+        \begin{align*}
+            \lnot(\alpha \land \beta) & \equiv \lnot\big( (\alpha \to \beta) \land (\beta \to \alpha) \big) \tag*{Equivalencia de $\leftrightarrow$} \\
+            & \equiv \lnot(\alpha \to \beta) \lor \lnot(\beta \to \alpha) \tag*{Ley de De Morgan} \\
+            & \equiv \big( \alpha \land \lnot\beta \big) \lor \big( \beta \land \lnot\alpha \big) \tag*{Negación de $\to$}
+        \end{align*}
+        (ii) Utilizando la negación de la implicación:
+        \begin{align*}
+            \lnot(\lnot \alpha \to \gamma) & \equiv \lnot \alpha \land \lnot \gamma \tag*{Negación de $\to$}
+        \end{align*}
+
+        (iii) De nuevo, utilizando la negación de la implicación:
+        \begin{align*}
+            \lnot\big(\gamma \to (\delta \to \gamma)\big) & \equiv \gamma \land \lnot(\delta \to \gamma) \tag*{Negación de $\to$} \\
+            & \equiv \gamma \land \big( \delta \land \lnot \gamma \big) \tag*{Negación de $\to$} \\
+            & \equiv \gamma \land \big( \lnot \gamma \land \delta \big) \tag*{Conmutatividad de $\land$} \\
+            & \equiv \big( \gamma \land \lnot \gamma \big) \land \delta \tag*{Asociatividad de $\land$} \\
+            & \equiv \perp \land \delta \tag*{$\gamma \land \lnot \gamma$ siempre es contradicción} \\
+            & \equiv \perp \tag*{$\perp \land \, P$ siempre es contradicción} 
+        \end{align*}
+
+        (iv) La negación de $\exists x \big( \alpha(x) \land \big( \beta(x) \land \gamma(x) \big) \big)$ es:
+        \begin{align*}
+            \lnot \Big( \exists x \big( \alpha(x) \land \big( \beta(x) \land \gamma(x) \big) \big) \Big) & \equiv \forall x \Big( \lnot \big( \alpha(x) \land \big( \beta(x) \land \gamma(x) \big) \big) \Big) \tag*{Negación de $\exists$} \\
+            & \equiv \forall x \Big( \lnot \alpha(x) \lor \lnot \big( \beta(x) \land \gamma(x) \big) \Big) \tag*{Ley de De Morgan} \\
+            & \equiv \forall x \Big( \lnot \alpha(x) \lor \big( \lnot \beta(x) \lor \lnot \gamma(x) \big) \Big) \tag*{Ley de De Morgan} \\
+            & \equiv \forall x \Big( \alpha(x) \to \big( \lnot \beta(x) \lor \lnot \gamma(x) \big) \Big) \tag*{$\lnot P \lor Q \equiv P \to Q$}
+        \end{align*}
+
+        (v) La negación de $\forall a \big(\alpha(a) \to \exists b \big( \beta(a,b) \big) \big)$ es:
+        \begin{align*}
+            \lnot \Big( \forall a \big(\alpha(a) \to \exists b \big( \beta(a,b) \big) \big) \Big) & \equiv \exists a \Big( \lnot \big(\alpha(a) \to \exists b \big( \beta(a,b) \big) \big) \Big) &\tag*{Negación de $\forall$} \\
+            & \equiv \exists a \Big( \lnot \alpha(a) \land \lnot \big(\exists b \big( \beta(a,b) \big) \big) \Big) &\tag*{Negación de $\to$} \\
+            & \equiv \exists a \big( \lnot \alpha(a) \land \forall b (  \lnot \beta(a,b) ) \big) &\tag*{Negación de $\exists$} \\
+        \end{align*}
+        
+        (vi) La negación de $\exists b \forall x \big( \forall y(\alpha(y)) \leftrightarrow \big( Q(x,y) \land R(b) \big) \big)$ es:
+        \begin{align*}
+            & \; \lnot \Big(\exists b \forall x \big( \forall y(\alpha(y)) \leftrightarrow \big( Q(x,y) \land R(b) \big) \big)\Big) \equiv \\
+            & \; \equiv \forall b  \Big( \lnot \forall x \big( \forall y(\alpha(y)) \leftrightarrow \big( Q(x,y) \land R(b) \big) \big)\Big) \tag*{Negación de $\exists$} \\
+            & \; \equiv \forall b  \exists x \Big( \lnot \Big( \forall y(\alpha(y)) \leftrightarrow \big( Q(x,y) \land R(b) \big) \Big)\Big) \tag*{Negación de $\forall$} \\
+            & \; \equiv \forall b  \exists x \bigg( \Big( \forall y \big( \alpha(y) \big) \land \lnot \big( Q(x,y) \land R(b) \big) \Big) \lor \Big( \big( Q(x,y) \land R(b) \big) \land \lnot \big( \forall y \big( \alpha(y) \big) \big) \Big) \bigg) \tag*{Negación de $\leftrightarrow$, inciso (i)} \\
+            & \; \equiv \forall b  \exists x \bigg( \Big( \forall y \big( \alpha(y) \big) \land \big( \lnot Q(x,y) \lor \lnot R(b) \big) \Big) \lor \Big( \big( Q(x,y) \land R(b) \big) \land \lnot \big( \forall y \big( \alpha(y) \big) \big) \Big) \bigg) \tag*{Ley de De Morgan} \\
+            & \; \equiv \forall b  \exists x \bigg( \Big( \forall y \big( \alpha(y) \big) \land \big( \lnot Q(x,y) \lor \lnot R(b) \big) \Big) \lor \Big( \big( Q(x,y) \land R(b) \big) \land \exists y \big( \lnot \alpha(y) \big) \Big) \bigg) \tag*{Negación de $\forall$}
+        \end{align*}
+        
+        (vii) ``Si $n$ es un número primo y es mayor que 4, $n$ es impar'' es una proposición de la forma ``$(\alpha(n) \land \beta(n)) \to \gamma(n)$''; donde $\alpha(x):$ ``$x$ es número primo'', $\beta(x):$ ``$x>4$'' y $\gamma(x):$ ``$x$ es impar''. Dado que:
+        \begin{align*}
+            \lnot \big( (\alpha(n) \land \beta(n)) \to \gamma(n) \big) & \equiv (\alpha(n) \land \beta(n)) \land \lnot \gamma(n) \tag*{Negación de $\to$}
+        \end{align*}
+        la negación del enunciado original es: ``$n$ es un número primo, mayor que $4$ y es par''.
+        
+        (v) ``Hay cierto elemento en $A$ que es real, pero no entero'' es una proposición (o fórmula) de la forma ``$\exists x \big( x \in A \land \big( \alpha(x) \land \lnot \beta(x) \big) \big)$''; donde, $\alpha(x):$ ``$x$ es real'' y $\beta(x):$ ``$x$ es entero''. Dado que:
+        \begin{align*}
+            \lnot \Big( \exists x \big( x \in A \land \big( \alpha(x) \land \lnot \beta(x) \big) \big) \Big) & \equiv \forall x \Big( \lnot \big( x \in A \land \big( \alpha(x) \land \lnot \beta(x) \big) \big) \Big) \tag*{Negación de $\exists$} \\
+            & \equiv \forall x \Big( x \in A \to \lnot \big( \alpha(x) \land \lnot \beta(x) \big) \Big) \tag*{$\lnot(\alpha \land \beta) \equiv \alpha \to \lnot \beta$} \\
+            & \equiv \forall x \Big( x \in A \to \big( \alpha(x) \to \beta(x) \big) \Big) \tag*{$\lnot(\alpha \land \lnot \beta) \equiv \alpha \to \beta$} \\
+            & \equiv \forall x \Big( \big( x \in A \land \alpha(x) \big) \to \beta(x) \Big) \tag*{$P \to (Q \to R) \equiv (P \land Q) \to R$}
+        \end{align*}
+        la negación del enunciado original es: ``Todo elemento de $A$ que sea real, es entero''.
+    \end{solu}
+
+    \begin{ejercicio}{1}
+        Indica cuáles de las siguientes proposiciones son tautologías, cuáles son contradicciones, y, para las contingentes, da una equivalencia lógica que utilice únicamente los conectivos negación ($\lnot$) y disyunción ($\lor$). No es necesario justificar.
+        \begin{multicols}{3}
+            \begin{enumerate}
+                \item $\lnot (\gamma \land \gamma)$.
+                \item $\alpha \to \alpha$.
+                \item $\alpha \land (\alpha \lor \beta)$.
+                \item $\alpha \lor (\alpha \land \beta)$.
+                \item $\beta \to (\alpha \to \beta)$.
+                \item $\big( \lnot \gamma \land (\lnot \gamma \lor \beta) \big) \leftrightarrow \gamma$.
+                \item $\lnot \delta \leftrightarrow \delta$.
+                \item $(\gamma \to \eta) \to (\lnot \eta \to \lnot \gamma)$.
+                \item $\beta \land \alpha$.
+            \end{enumerate}
+        \end{multicols}
+    \end{ejercicio}
+    \begin{solu}
+        Las proposiciones (ii), (v) y (viii) son tautologías; mientras que, (i), (vi) y (vii) son contradicciones; además:
+        \begin{enumerate}[\hspace{1.5cm}]
+            \item iii) $\alpha \land (\alpha \lor \beta) \equiv \alpha$.
+            \item iv) $\alpha \lor (\alpha \land \beta) \equiv \alpha$.
+            \item ix) $\beta \land \alpha \equiv \lnot ( \lnot \alpha \lor \lnot \beta )$.
+        \end{enumerate}
+        son equivalencias lógicas para (iii), (iv) y (ix) que utilizan únicamente negación y disyunción.
+    \end{solu}
+
+    \begin{ejercicio}{1}
+        Traduce las siguientes equivalencias lógicas a igualdades entre conjuntos. Demuestra las igualdades que propusiste.
+        \begin{multicols}{2}
+            \begin{enumerate}
+                \item \(\alpha\lor(\beta\land\gamma)\equiv(\alpha\lor\beta)\land(\alpha\lor\gamma)\).
+                \item \(\neg(\alpha\land\beta)\equiv\neg\alpha\lor\neg\beta\).
+            \end{enumerate}
+        \end{multicols}
+    \end{ejercicio}
+    \begin{solu}
+        (i) Si $A,B,C$ son conjuntos, esta equivalencia se traduce como:
+        \[ A \cup (B \cap C) = (A \cup B) \cap (A \cup C) \]
+        
+        Para probar tal igualdad, consideremos cualquier objeto matemático $x$, entonces:
+        \begin{align*}
+            x \in A \cup (B \cap C) & \Leftrightarrow x \in A \lor x \in B \cap C \tag*{Definición de $\cup$} \\
+            & \Leftrightarrow x \in A \lor (x \in B \land x \in C) \tag*{Definición de $\cap$} \\
+            & \Leftrightarrow (x \in A \land x \in B) \lor (x \in A \lor \in C) \tag*{$\alpha\lor(\beta\land\gamma)\equiv(\alpha\lor\beta)\land(\alpha\lor\gamma)$} \\
+            & \Leftrightarrow (x \in A \cap B) \lor (x \in A \cap C) \tag*{Definición de $\cap$} \\
+            & \Leftrightarrow x \in (A \cap B) \cup x \in (A \cap C) \tag*{Definición de $\cup$}
+        \end{align*}
+        Por lo tanto, $\forall x (x \in A \cup (B \cap C) \leftrightarrow x \in (A \cap B) \cup x \in (A \cap C))$ es verdadera, probando que $A \cup (B \cap C)=(A \cap B) \cup x \in (A \cap C)$.
+
+        (ii) Si $A,B$ y $X$ son conjuntos, esta equivalencia se traduce a la igualdad:
+        \[ X \setminus (X \cap B) = (X \setminus A) \cup (X \setminus B) \]
+
+        Y su demostración consiste en considerar cualquier objeto $x$ y observar que:
+        \begin{align*}
+            x \in X \setminus (A \cap B) & \Leftrightarrow x \in X \land \lnot (x \in (A \cap B)) \tag*{Definición de $\setminus$} \\
+            & \Leftrightarrow x \in X \land \lnot (x \in A \land x \in B) \tag*{Definición de $\cap$} \\
+            & \Leftrightarrow x \in X \land \big( \lnot (x \in A) \lor \lnot (x \in B) \big) \tag*{$\neg(\alpha\land\beta)\equiv\neg\alpha\lor\neg\beta$} \\
+            & \Leftrightarrow \big( x \in X \land \lnot (x \in A) \big) \lor \big( x \in X \land \lnot(x \in B) \big) \tag*{Distribución de $\land$ en $\lor$} \\
+            & \Leftrightarrow x \in X \setminus A \lor x \in X \setminus B \tag*{Definición de $\setminus$} \\
+            & \Leftrightarrow x \in (X \setminus A) \cup (X \setminus B) \tag*{Definición de $\cup$}
+        \end{align*}
+        Por lo tanto, $\forall x (x \in X \setminus (A \cap B) \leftrightarrow x \in (X \setminus A) \cup (X \setminus B))$ es verdadera, demostrando así la igualdad de conjuntos: $X \setminus (A \cap B)=(X \setminus A) \cup (X \setminus B)$.
+    \end{solu}
+
+    \begin{ejercicio}{1}
+        Sean $A$ y $X$ conjuntos de modo que $A \subseteq X$. Demuestra \textit{un inciso} de cada una de las siguientes columnas (tres igualdades en total).
+        \begin{multicols}{3}
+            \begin{enumerate}
+                \item $A \cap \emptyset = \emptyset$.
+                \item $A \cup \emptyset = A$.
+                \item $A \cup A = A$.
+                \item $A \cap X = A$.
+                \item $A \cup X = X$.
+                \item $A \cap A = A$.
+                \item $A \cap (X \setminus A) = \emptyset$.
+                \item $A \cup (X \setminus A) = X$.
+                \item $X \setminus (X \setminus A) = A$.
+            \end{enumerate}
+        \end{multicols}
+    \end{ejercicio}
+    \begin{proof}
+        Probaremos (ii), (iv) y (ix). Para ser ilustrativos, en cada inciso utilizaremos un ``método'' distinto, pero en cada inciso se puede emplear el método que se desee.
+
+        (i) Para verificar que $A \cup \emptyset = A$, habrá de mostrarse que:
+        \[ \forall x ( x \in A \cup \emptyset \leftrightarrow x \in A) \equiv \forall x \big( (x \in A \lor x \in \emptyset) \leftrightarrow x \in A \big) \]
+        es verdadera.
+
+        Y efectivamente, sea $x$ cualquier objeto. Por definición de vacío ``$x \in \emptyset$'' es siempre falsa, por ello, los renglones primero y tercero de la siguiente tabla nunca ocurren:
+        \begin{center}        
+            \begin{tabular}{>{\columncolor{gray!20}}c| >{\columncolor{gray!20}}c||c|c|c}
+                \truthtable{A,B}{$x \in A$,$x \in \emptyset$}
+                { A | B , <>((A|B);A), A}
+                {$( x \in A  \lor x \in \emptyset) $, $\leftrightarrow$ , $ x \in A$}
+                {$1$}{$0$}
+            \end{tabular}
+        \end{center}
+
+        Como en los demás renglones, ``$(x \in A \lor x \in \emptyset) \leftrightarrow x \in A$'' es verdadera, se ha mostrado que ``$\forall x \big( (x \in A \lor x \in \emptyset) \leftrightarrow x \in A \big)$'' es verdadera. Por lo tanto, ``$\forall x ( x \in A \cup \emptyset \leftrightarrow x \in A)$'' es verdadera; y así, se tiene que $A \cup \emptyset = A$.
+
+
+        (ii) Se demostrará por doble contención que:
+        \[ A \cap X = A \]
+        ($\subseteq$) Supongamos que $x \in A \cap X$, entonces por definición de intersección $x \in A$ y $x \in X$. Particularmente, $x \in A$. Así, ``$x \in A \cap X \to x \in A$'' es verdadera. Como $x$ fue cualquier objeto, entonces ``$\forall x (x \in A \cap X \to x \in A )$'' es verdadera; es decir, $A \cap X \subseteq A$.
+
+        ($\supseteq$) Supongamos que $x \in A$. Dado que $A \subseteq X$ y 
+        
+        (iii) Sea $x$ cualquier objeto, entonces:
+        \begin{align*}
+            x \in X \setminus (X \setminus A) & \Leftrightarrow x \in X \land \lnot(x \in X \setminus A) \tag*{Definición de $\setminus$} \\
+            & \Leftrightarrow x \in X \land \lnot\big(x \in X \land \lnot(x \in A) \big) \tag*{Definición de $\setminus$} \\
+            & \Leftrightarrow x \in X \land \big( \lnot(x \in X) \lor \lnot \lnot(x \in A) \big) \tag*{Ley de De Morgan} \\
+            & \Leftrightarrow x \in X \land \big( \lnot(x \in X) \lor x \in A \big) \tag*{Doble negación} \\
+            & \Leftrightarrow \big( x \in X \land \lnot(x \in X) \big) \lor \big( x \in X \land x \in A \big) \tag*{Distribución de $\land$ en $\lor$} \\
+            & \Leftrightarrow \perp \lor \big( x \in X \land x \in A \big) \tag*{$\gamma \land \lnot \gamma$ es contradicción} \\
+            & \Leftrightarrow x \in X \land x \in A \tag*{$\perp \lor \: \gamma \equiv \gamma$} \\
+            & \Leftrightarrow x \in X \cap A \tag*{Definición de $\cap$} \\\
+            & \Leftrightarrow x \in A \tag*{Como $A \subseteq X$, se puede aplicar el inciso anterior} \\
+        \end{align*}
+        Por lo tanto, $\forall x ( x \in X \setminus (X \setminus A) \leftrightarrow x \in A )$ es verdadera, mostrando así que $X \setminus (X \setminus A) = A$.
+    \end{proof}
+
+    \begin{ejercicio}{1}
+        Denotamos por $A \vartriangle B$ a la diferencia simétrica entre los conjuntos $A$ y $B$. Demuestra  que $A \cup B = (A \vartriangle B) \vartriangle (A \cap B)$.
+    \end{ejercicio}
+    \begin{proof}
+        Utilizaremos la siguiente equivalencia vista (y probada) en clase:
+        \begin{align*}
+            x \in X \vartriangle Y \; \Leftrightarrow \; x \in X | x \in Y \tag*{(*)}
+        \end{align*}
+        donde $|$ denota el \textit{``o exclusivo''}. Ademas utilizarmos el siguiente Lema:
+
+        \begin{enumerate}[\hspace{1.5cm}]
+            \item \textbf{\textit{Lema.}} $(\alpha | \beta) | (\alpha \land \beta) \equiv \alpha \lor \beta$.
+            \item \textbf{\textit{Demostración.}} Basta verificar la tabla de verdad de ambas proposiciones.
+            \begin{center}
+                \begin{tabular}{>{\columncolor{gray!20}}c| >{\columncolor{gray!20}}c||c|c|c|>{\columncolor{dorado!35}}c|c|c|c||c|>{\columncolor{dorado!35}}c|c}
+                    \truthtable{A,B}{$\alpha$,$\beta$}
+                    {A,^(A; B),B, ^(^(A; B); (A&B)) ,A,A&B,B,A,A|B,B}
+                    {$(\alpha$, $|$, $\beta)$, $|$, $(\alpha$, $\land$, $\beta)$, $\alpha$, $\lor$, $\beta$}
+                    {$1$}{$0$}
+                \end{tabular}
+            \end{center}
+
+            Lo cual finaliza la prueba del Lema. \hfil $\boxtimes$
+        \end{enumerate}
+
+        De esta manera, para cualquier objeto $x$, se tiene:
+        \begin{align*}
+            x \in (A \vartriangle B) \vartriangle (A \cap B) & \Leftrightarrow x \in A \vartriangle B | x \in A \cap B \tag*{Por (*)} \\
+            & \Leftrightarrow (x \in A | x \in B) | x \in A \cap B \tag*{Por (*)} \\
+            & \Leftrightarrow (x \in A | x \in B) | (x \in A \land x \in B) \tag*{Definición de $\cap$} \\
+            & \Leftrightarrow x \in A \lor x \in B \tag*{Lema} \\
+            & \Leftrightarrow x \in A \cup B \tag*{Definición de $\cup$} \\
+        \end{align*}
+        
+        Por lo tanto, ``$\forall x \big( x \in (A \vartriangle B) \vartriangle (A \cap B) \leftrightarrow x \in A \cup B \big)$'' es verdadera, esto es, $(A \vartriangle B) \vartriangle (A \cap B)=A \cup B$.
+    \end{proof}
+
+    \begin{ejercicio}{1}
+        Sean $A$ y $B$ conjuntos. Demuestra que:
+        \begin{enumerate}
+            \item $A \subseteq A \cap B$ si y sólo si $A \subseteq B$.
+            \item $A \cup B \subseteq B$ si y sólo si $A \subseteq B$.
+        \end{enumerate}
+    \end{ejercicio}
+    \begin{proof}
+        (i) Veamos que $A \subseteq A \cap B$ si y sólo si $A \subseteq B$.
+        ($\Rightarrow$) Supongamos que $A \subseteq A \cap B$, veamos por definición que $A \subseteq B$. Sea $x \in A$ cualquier elementom, como $A \subseteq A \cap B$, entonces $x \in A$ y $x \in B$. Particularmente $x \in B$. Así, hemos mostrado que $x\in A \to x \in B$ es verdadera, y esto, para cualquier objeto $x$. Por lo tanto $A \subseteq B$.
+
+        ($\Leftarrow$) Supongamos que $A \subseteq B$, veamos por definición que $A \subseteq A \cap B$. Sea $x \in A$ cualquier elemento, como $A \subseteq B$, entonces $x \in B$. Por ello, $x \in A$ y $x \in B $son verdaderas, así que $x \in A \land x \in B$ también es verdadera. Luego, hemos probado que $x \in A \to (x \in A \land x \in B)$ es verdadera, y esto, para todo objeto $x$. Por lo tanto $A \subseteq A \cap B$.
+
+        (ii) Este inciso se puede haver de forma similar al anterior, pero veamos otra manera.
+
+        Sea $X:=A\cup B$, entonces $A  \subseteq X$ y $B \subseteq X$. Entonces:
+        \begin{align*}
+            A \subseteq B & \Leftrightarrow X \setminus B \subseteq X \setminus A \tag*{Probado en calse} \\
+            & \Leftrightarrow X \setminus B \subseteq (X \setminus B) \cap (X \setminus A) \tag*{Inciso anterior} \\
+            & \Leftrightarrow X \setminus B \subseteq X \setminus (B \cup A) \tag*{Probado en clase} \\
+            & \Leftrightarrow B \cup A \subseteq B \tag*{Probado en clase} \\
+            & \Leftrightarrow A \cup B \subseteq B \tag*{Probado en clase}
+        \end{align*}
+        
+        Mostrando la equivalencia deseada.
+    \end{proof}
+
+    \begin{ejercicio}{1}
+        Sean $A$ y $B$ conjuntos. Prueba que $A \subseteq B$ si y sólo si $\mathscr{P}(A) \subseteq \mathscr{P}(B)$.
+    \end{ejercicio}
+    \begin{proof}
+        ($\Rightarrow$) Supongamos que $A \subseteq B$, veamos por definición que $\mathscr{P}(A) \subseteq \mathscr{P}(B)$. Sea $X \in \mathscr{P}(A)$ cualquier elemento, entonces $X \subseteq A$. Puesto que $A \subseteq B$, entonces $X \subseteq B$ y con ello $X \in \mathscr{P}(B)$. Se ha mostrado que ``$ \forall X (X \in \mathscr{P}(A) \to X \in \mathscr{P}(B)) $'' es verdadera, es decir, que ocurre $\mathscr{P}(A) \subseteq \mathscr{P}(B)$.
+
+        ($\Leftarrow$) Supongamos que $\mathscr{P}(A) \subseteq \mathscr{P}(B)$, veamos por definición que $A \subseteq B$. Sea $a \in A$ cualquier elemento, oboservamos que $\{a\} \subseteq A$; o lo que es lo mismo, $\{a\} \in \mathscr{P}(A)$. Puesto que $\mathscr{P}(A) \subseteq \mathscr{P}(B)$, resulta que $\{a\} \in \mathscr{P}(B)$; o equivalentemente, $\{b\} \in B$. Así que $b \in B$, y así, se ha mostrado que ``$\forall a (a \in A \to a \in B)$'' es verdadera; esto es, $A \subseteq B$.
+    \end{proof}
+
+    \begin{ejercicio}{1}
+        Muestra que, en general, \textit{no se da} la igualdad $\mathscr{P}(A \setminus B) = \mathscr{P}(A) \setminus \mathscr{P}(B)$.
+    \end{ejercicio}
+    \begin{solu}
+        Daremos un contrajemplo, es decir, encontraremos conjuntos $A$ y $B$ de modo que $\mathscr{P}(A \setminus B) = \mathscr{P}(A) \setminus \mathscr{P}(B)$.
+
+        Consideremos $A=\{0,x\}$ y $B:=\{x\}$ (con $0\neq x$). Entonces $A \setminus B=\{0\}$. Notamos que:
+        \begin{multicols}{3}
+            \begin{enumerate}
+                \item $A \subseteq A$.
+                \item $A \not\subseteq B$.
+                \item $A \not\subseteq A \setminus B$.
+            \end{enumerate}
+        \end{multicols}
+        Efectivamente, (i) es claro. (ii) ocurre pues $0 \in A$ pero $0 \notin B$ por lo que ``$\forall x (x \in A \to x \in B)$'' es falsa. Y (iii) ocurre debido a que $x \in A$ pero $x \notin A \setminus B$ (esto último pues $x \in A \land x \notin B$ es falsa, ya que $x \in B$), así que ``$\forall x (x \in A \to x \in A \setminus B)$'' es falsa.
+
+        Traduciendo, (i) dice que $A \in \mathscr{P}(A)$ y (ii) dice que $A \notin \mathscr{P}(B)$, por lo que $A \in \mathscr{P}(A) \setminus \mathscr{P}(B)$. Sin embargo, (iii) indica que $A \notin \mathscr{P}(A \setminus B)$. Así que $\mathscr{P}(A) \setminus \mathscr{P}(B)$ y $\mathscr{P}(A \setminus B)$ no tienen los mismos elementos, es decir, son conjuntos distintos.
+    \end{solu}
+
+
+
+\end{document}
