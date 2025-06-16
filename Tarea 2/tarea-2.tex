@@ -12,6 +12,11 @@
 \usepackage{multicol}
 \usepackage{paracol}
 
+%Para escribir := hay un comando \coloneq, este asegura que los dos puntos estén
+%centrados verticalmente respecto a el signo de igualdad. Con mathtools se puede
+%hacer que := sea una "comando" y así no tener que escribir \coloneq cada vez.
+\mathtoolsset{centercolon}
+
 %Enumeraciones
 \usepackage[shortlabels]{enumitem}
 \setenumerate[1]{label=\MakeLowercase{\roman*}), ref=\roman*}
@@ -40,7 +45,7 @@
 \newcommand{\op}{{}^{\mathrm{op}}}
 \newcommand{\set}[1]{\{#1\}}
 \renewcommand{\emptyset}{\varnothing}
-\DeclareMathOperator{\ima}{ima}
+\DeclareMathOperator{\ima}{im}
 \DeclareMathOperator{\dom}{dom}
 \newcommand{\quot}[2]{{\raisebox{.2em}{$#1$}\left/\raisebox{-.2em}{$#2$}\right.}}
 
@@ -70,7 +75,9 @@
             \item $A \times B = X \times Y$ si y sólo si $A=X$ y $B=Y$.
             \item $(A \setminus X) \times B = (A \times B) \setminus (X \times B) $.
         \end{enumerate}
-        \textit{Sugerencia: Para (ii), utiliza el inciso (i) y el hecho de que dos conjuntos son iguales si y sólo si, uno está contenido en el otro}.
+        \textit{Sugerencia: Para (ii), utiliza el inciso (i) y el hecho de que
+        dos conjuntos son iguales si y sólo si, uno está contenido en el otro y
+        el otro en el uno}.
     \end{ejercicio}
 
     \begin{ejercicio}{3}
@@ -92,14 +99,14 @@
 
             \item $A$ es el conjunto $\{\text{Piedra, Papel, Tijeras}\}$ y $R \subseteq A \times A$ la relación:
             \[ R := \Set*{(\text{Piedra}, \text{Tijeras}), (\text{Tijeras}, \text{Papel}), (\text{Papel}, \text{Piedra})} \]
-
+ 
             \item $A$ es cualquier conjunto y $R=\id_A$.
 
             \item $A$ es el conjunto de todas las rectas del plano (digamos, $\mathbb{R}^2$) y $R \subseteq A \times A$ es la relación $R:=\{(x,y) \in A \times A \st x \text{ es paralela a } y\}$.
             
             \item $A=\mathbb{Z}$ y $R \subseteq A \times A$ está dada por: $n \mathrel{R} m$ si y sólo si $n ^2 \leq m^2$.
 
-            \item $A=\mathscr{P}(\{0,1,2,.....,1534\})$ y $R$ está dada por: $a \mathrel{R} b$ si y sólo si $a$ tiene (estrictamente) menos elementos que $b$.
+            \item $A=\mathscr{P}(\{0,1,2,\dots,1534\})$ y $R$ está dada por: $a \mathrel{R} b$ si y sólo si $a$ tiene (estrictamente) menos elementos que $b$.
         \end{enumerate}
     \end{ejercicio}
 
@@ -114,7 +121,7 @@
     \end{ejercicio}
 
     \begin{ejercicio}{1}
-        Sean $A,B,C$ cualesquiera conjuntos y $f:A \to B$, $g:B \to C$ funciones arbitrarias. Entre las siguientes implicaciones, hay una que es falsa, demuestra las dos verdaderas y da un contraejemplo para la falsa.
+        Sean $A,B,C$ cualesquiera conjuntos y $f\colon A \to B$, $g\colon B \to C$ funciones arbitrarias. Entre las siguientes implicaciones, hay una que es falsa, demuestra las dos verdaderas y da un contraejemplo para la falsa.
         \begin{enumerate}
             \item Si $g \circ f$ es sobreyectiva, entonces $g$ es sobreyectiva.
             \item Si $f$ es biyectiva, entonces $g \circ f$ es biyectiva.
@@ -137,7 +144,11 @@
     \end{ejercicio}
 
     \begin{ejercicio}{1}
-        Sean $A,B$ conjuntos y $f:A \to B$ una función. La relación $\sim \subseteq A \times A$ definida por $x \sim y \; \Leftrightarrow \; f(x)=f(y)$ es de equivalencia (\textit{¿por qué?}). Sea $\pi:A \to \quot{A}{\sim}$ definida por $f(x) = [x]$. Demuestre que $\pi$ es biyectiva si y sólo si $R=\id_A$.
+        Sean $A,B$ conjuntos y $f\colon A \to B$ una función. La relación 
+        ${\sim}\subseteq A \times A$ definida por 
+        $x \sim y \iff f(x)=f(y)$ es de equivalencia (\textit{¿por qué?}). Sea 
+        $q\colon A \to\quot{A}{\sim}$ definida por $q(x) = [x]$. Demuestre que $q$ es
+        biyectiva si y sólo si $R=\id_A$.
     \end{ejercicio}
 
 \end{document}
