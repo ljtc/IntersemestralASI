@@ -471,7 +471,10 @@
     \begin{proof}
         ($\Rightarrow$) Supongamos que $A \subseteq B$, veamos por definición que $\mathscr{P}(A) \subseteq \mathscr{P}(B)$. Sea $X \in \mathscr{P}(A)$ cualquier elemento, entonces $X \subseteq A$. Puesto que $A \subseteq B$, entonces $X \subseteq B$ y con ello $X \in \mathscr{P}(B)$. Se ha mostrado que ``$ \forall X (X \in \mathscr{P}(A) \to X \in \mathscr{P}(B)) $'' es verdadera, es decir, que ocurre $\mathscr{P}(A) \subseteq \mathscr{P}(B)$.
 
-        ($\Leftarrow$) Supongamos que $\mathscr{P}(A) \subseteq \mathscr{P}(B)$, veamos por definición que $A \subseteq B$. Sea $a \in A$ cualquier elemento, oboservamos que $\{a\} \subseteq A$; o lo que es lo mismo, $\{a\} \in \mathscr{P}(A)$. Puesto que $\mathscr{P}(A) \subseteq \mathscr{P}(B)$, resulta que $\{a\} \in \mathscr{P}(B)$; o equivalentemente, $\{b\} \in B$. Así que $b \in B$, y así, se ha mostrado que ``$\forall a (a \in A \to a \in B)$'' es verdadera; esto es, $A \subseteq B$.
+        ($\Leftarrow$) Supongamos que $\mathscr{P}(A) \subseteq \mathscr{P}(B)$, veamos que $A \subseteq B$. De la hipótesis y la definición del conjunto potencia, se tiene que:
+        \[ \forall X (X \subseteq A \to X \subseteq B ) \]
+        
+        Y, dado que $A \subseteq A$, entonces de lo anterior se obtiene $A \subseteq B$.
     \end{proof}
 
     \begin{ejercicio}{1}
