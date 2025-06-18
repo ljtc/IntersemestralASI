@@ -1,21 +1,16 @@
 \documentclass{article}
-\usepackage[table]{xcolor}  % importante: activar 'table' para color en tablas
-%\usepackage{colortbl}
-\usepackage{booktabs}
+\usepackage[most]{tcolorbox}
+\usepackage[x11names]{xcolor}
 
-% Definimos un color personalizado (opcional)
-\definecolor{myblue}{RGB}{220,230,255}
+%\tcbset{highlight rounded/.style={boxrule=0pt,colframe=yellow!30,colback=yellow!30,arc=2mm,left=.7pt,right=.7pt,top=.7pt,bottom=.7pt}}
+
+\newcommand{\resalta}[2][Gold2]{\tcbox[boxrule=0pt,colframe=#1!25,colback=#1!25,arc=2mm,left=.7pt,right=.7pt,top=.7pt,bottom=.7pt]{#2}}
+
+\newcommand{\teste}[2][Perro]{#1, #2}
 
 \begin{document}
 
-\begin{tabular}{l|>{\columncolor{myblue}}c|r}
-\toprule
-Nombre & Edad & Ciudad \\
-\midrule
-Ana    & 23   & Madrid \\
-Luis   & 31   & Sevilla \\
-Marta  & 27   & Valencia \\
-\bottomrule
-\end{tabular}
+Este texto tiene \resalta{un resaltado con bordes redondeados} que parece de marcador.
+
 
 \end{document}

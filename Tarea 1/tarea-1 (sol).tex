@@ -1,4 +1,4 @@
-	\documentclass[letterpaper,DIV=14,headsepline,12pt]{scrartcl}
+\documentclass[letterpaper,DIV=14,headsepline,12pt]{scrartcl}
 \usepackage[spanish,mexico,shorthands=off,es-lcroman]{babel}
 \usepackage{stix2}
 \pagenumbering{gobble}
@@ -43,13 +43,14 @@
 \renewcommand{\emptyset}{\varnothing}
 \DeclareMathOperator{\ima}{ima}
 \DeclareMathOperator{\dom}{dom}
+\newcommand{\quot}[2]{{\raisebox{.2em}{$#1$}\left/\raisebox{-.2em}{$#2$}\right.}}
 
 %Colors
 \definecolor{azul}{RGB}{0, 60, 113}
 \definecolor{dorado}{RGB}{196, 151, 57}
 \definecolor{morado}{RGB}{101, 43, 145}
 
-%Entorno de Demostración
+%Entorno de Demostración y Solución
 \renewcommand\qedsymbol{$\blacksquare$}
 \makeatletter
     \renewenvironment{proof}[1][]{%

@@ -1,0 +1,374 @@
+\documentclass[letterpaper,DIV=14,headsepline,12pt]{scrartcl}
+%Utilidades en texto
+\usepackage{amsthm}
+\usepackage{thmtools}
+\usepackage{array}
+\usepackage{multicol, paracol}
+\usepackage{truthtable}
+\usepackage[x11names, table]{xcolor}
+\usepackage{arydshln}
+\setlength{\dashlinedash}{0.5pt} % Longitud de los trazos
+\setlength{\dashlinegap}{1.5pt}  % Espacio entre trazos
+\usepackage[most]{tcolorbox}
+%Stix2 como fuente
+\usepackage[spanish,es-lcroman,mexico,shorthands=off]{babel}
+\usepackage{stix2}
+\usepackage{mathtools}
+%Referencias
+\usepackage[colorlinks=true, allcolors=VioletRed2]{hyperref}
+\newcommand{\customRef}[2]{\hyperref[#1]{#2~\ref*{#1}}}
+%Etiquetas de las enumeraciones
+\usepackage[shortlabels]{enumitem}
+\setenumerate[1]{label=\MakeLowercase{\roman*}), ref=\roman*}
+\setenumerate[2]{label=\MakeLowercase{\arabic*}), ref=\alph*}
+\usepackage{ifthen}
+
+%Notación de conjuntos
+\providecommand\st{\;|\;}
+\providecommand\given{}
+\newcommand\SetSymbol[1][]{\nonscript\:#1\vert\allowbreak\nonscript\:\mathopen{}}
+\DeclarePairedDelimiterX\Set[1]\{\}{\renewcommand\given{\SetSymbol[\delimsize]}#1}
+
+
+%Ejercicios
+\newcounter{Ejer}
+\newcounter{Pts}
+\setcounter{Ejer}{1}
+\setcounter{Pts}{1}
+\newcommand{\pts}{}
+\newenvironment{ejercicio}[1]{\noindent
+    \ifthenelse{\equal{#1}{1} \OR \equal{#1}{+1}}{\renewcommand{\pts}{\textbf{(#1 pt)}}}{\renewcommand{\pts}{\textbf{(#1 pts)}}}\textbf{Ej. \theEjer} \pts\stepcounter{Ejer}}{\vspace{.3cm}}
+
+%Marcador
+    \newcommand{\marker}[2][Gold2]{
+        \ifmmode
+        \tcbox[on line,boxrule=0pt,colframe=#1!30,colback=#1!30,arc=2mm,left=0pt,right=0pt,top=.7pt,bottom=.7pt]{\ensuremath{#2}}%
+        \else
+        \tcbox[on line,boxrule=0pt,colframe=#1!30,colback=#1!30,arc=2mm,left=0pt,right=0pt,top=.7pt,bottom=.7pt]{#2}%
+        \fi}
+
+%Entorno de Demostración y Solución
+\renewcommand\qedsymbol{$\blacksquare$}
+\makeatletter
+    \renewenvironment{proof}[1][]{%
+        \par\pushQED{\qed}%
+        \normalfont\topsep6pt \partopsep0pt % espacio antes del entorno
+        \trivlist
+        \item[\hskip\labelsep
+                \textbf{\textit{Demostración.}}% Cambiado aquí
+        ]#1
+        }{%
+        \popQED\endtrivlist\@endpefalse
+    }
+    \newenvironment{solu}[1][]{%
+        \par\pushQED{\hfill \lozenge}%
+        \normalfont\topsep6pt \partopsep0pt % espacio antes del entorno
+        \trivlist
+        \item[\hskip\labelsep
+                \textbf{\textit{Solución.}}% Cambiado aquí
+        ]#1
+        }{%
+        \popQED\endtrivlist\@endpefalse
+    }
+\makeatother
+
+%Comandos que utilizamos
+\newcommand{\id}{\mathrm{id}}
+\newcommand{\op}{{}^{\mathrm{op}}}
+\newcommand{\set}[1]{\{#1\}}
+\renewcommand{\emptyset}{\varnothing}
+\DeclareMathOperator{\ima}{ima}
+\DeclareMathOperator{\dom}{dom}
+\newcommand{\quot}[2]{{\raisebox{.2em}{$#1$}\left/\raisebox{-.2em}{$#2$}\right.}}
+
+\pagenumbering{gobble}
+
+\begin{document}
+    \pagenumbering{gobble}
+
+    \begin{center}
+        {\fontsize{30}{60}\rmfamily \textbf{Tarea 2 (Solución)}} \\ \vspace{.2cm}
+        Álgebra Superior 1, 2025-4
+    \end{center}
+    \begin{flushright}
+        \footnotesize \hfill Profesor: Luis Jesús Trucio Cuevas.\\
+        \hfill Ayudante: Hugo Víctor García Martínez.
+    \end{flushright}
+
+    \begin{ejercicio}{1}
+        Sean $I,J,K$ conjuntos no vacíos y supongamos que $J \cup K = I$. Si $\{X_i \st i \in I\}$ es una familia indexada de conjuntos, demuestra que:
+        \[ \bigcap_{i \in I} X_i = \Big( \bigcap_{i \in J} X_i \Big) \cap \Big( \bigcap_{i \in K} X_i \Big) \]
+    \end{ejercicio}
+    \begin{proof}
+        ($\subseteq$) Supongamos que $x \in \bigcap_{i \in I} X_i$, por definición de intersección (indexada):
+        \begin{equation}\label{ej1-inter}
+            \forall i \in I (x \in X_i) \equiv \forall ( i \in I \to x \in X_i)
+        \end{equation}
+
+        Veamos que $x \in \bigcap_{i \in J} X_i$ y $x \in \bigcap_{i \in K} X_i$. Para lo primero, sea $j \in J$ cualquier elemento, como $I=J \cup K$, entonces $j \in I$ y debido a la \customRef{ej1-inter}{proposición}, $x \in X_j$, por lo tanto $x \in \bigcap_{j \in J} X_j = \bigcap_{i \in J} X_i$. Similarmente, si $k \in K$ es cualquiera, como $I=J \cup K$, entonces $k \in K$ y debido a la \customRef{ej1-inter}{proposición}, $x \in X_k$, por lo tanto $x \in \bigcap_{k \in K} X_k = \bigcap_{i \in K} X_i$. Así que $x \in ( \bigcap_{i \in J} X_i ) \cap ( \bigcap_{i \in K} X_i )$, hemos mostrado que:
+        \[ \forall x \bigg( x \in \bigcap_{i \in I} X_i \to x \in \Big( \bigcap_{i \in J} X_i \Big) \cap \Big( \bigcap_{i \in K} X_i \Big) \bigg) \]
+        es decir, $\bigcap_{i \in I} X_i \subseteq \Big( \bigcap_{i \in J} X_i \Big) \cap \Big( \bigcap_{i \in K} X_i \Big)$.
+
+        ($\supseteq$) Sea $x \in ( \bigcap_{i \in J} X_i ) \cap ( \bigcap_{i \in K} X_i )$ cualquier elemento, entonces $x \in \bigcap_{i \in J} X_i$ y $x \in \bigcap_{i \in K} X_i$. Luego, por definición de intersección (indexada):
+        \begin{equation}\label{ej1-inters}
+            \forall ( i \in J \to x \in X_i) \quad \text{y} \quad \forall ( i \in K \to x \in X_i)
+        \end{equation}
+        
+        Ahora, si $i \in I$ es cualquier elemento entonces $i \in J$ o $i \in K$, esto último se debe a que $I=J \cup K$. Por tanto, se sigue de la \customRef{ej1-inters}{proposición}, que (en cualquiera de estos dos casos) $x \in X_i$. Por tanto $x \in \bigcap_{i \in I}  X_i$, probando que:
+        \[ \forall x \bigg( x \in \Big( \bigcap_{i \in J} X_i \Big) \cap \Big( \bigcap_{i \in K} X_i \Big) \to x\in \bigcap_{i \in I} X_i \bigg) \]
+        es decir, $( \bigcap_{i \in J} X_i ) \cap ( \bigcap_{i \in K} X_i ) \subseteq \bigcap_{i \in I} X_i$.
+    \end{proof} \newpage
+
+    \begin{ejercicio}{1}
+        Sean $A,B,X$ y $Y$ conjuntos no vacíos. Demuestra:
+        \begin{enumerate}
+            \item $A \times B \subseteq X \times Y$ si y sólo si $A \subseteq X$ y $B \subseteq Y$.
+            \item $A \times B = X \times Y$ si y sólo si $A=X$ y $B=Y$.
+            \item $(A \setminus X) \times B = (A \times B) \setminus (X \times B)$.
+        \end{enumerate}
+        \textit{Sugerencia: Para (ii), utiliza el inciso (i) y el hecho de que
+        dos conjuntos son iguales si y sólo si, uno está contenido en el otro y
+        el otro en el uno}.
+    \end{ejercicio}
+    \begin{proof}
+        Como todos los conjuntos son no vacíos, existen elementos $a_0 \in A$, $b_0 \in B$, $x_0 \in X$ y $y_0 \in Y$, respectivamente.
+
+        (i) ($\Rightarrow$) Supongamos que $A \times B \subseteq X \times Y$, veamos que $A \subseteq X$ y $B \subseteq Y$. Para lo primero, sea $a \in A$ cualquier elemento, como $b_0 \in B$, entonces $(a,b_0) \in A \times B$, pero como $A \times B \subseteq X \times Y$, entonces $(a,b_0) \in X \times Y$; particularmente, $a \in X$. Por lo tanto, $\forall x (x \in A \to x \in X)$; esto es $A \subseteq X$.
+
+        Para la otra contención, sea $b \in B$ arbitrario, como $a_0 \in A$, entonces $(a_0,b) \in A \times B$, pero como $A \times B \subseteq X \times Y$, entonces $(a_0,b) \in X \times Y$; particularmente, $b \in Y$. Por lo tanto, $\forall x (x \in B \to x \in Y)$; esto es $B \subseteq Y$.
+
+        ($\Leftarrow$) Supongamos que $A \subseteq X$ y que $B \subseteq Y$, veamos que $A \times B \subseteq X \times Y$. Supongamos que $x \in A \times B$ es cualquiera, por definición de producto cartesiano, $x=(a,b)$, donde $a \in A$ y $b \in B$; en consecuencia, $a \in X$ y $b \in Y$, respectivamente (ya que $A \subseteq X$ y que $B \subseteq Y$, respectivamente). Así, $x = (a,b) \in X \times Y$. Por lo tanto $\forall x (x \in A \times B \to x \in X \times Y)$; esto es $A \times B \subseteq X \times Y$.
+
+        (ii) Utilizando el inciso anterior (y el hecho de que todos estos conjuntos son no vacíos):
+        \begin{align*}
+            A \times B = X \times Y & \Leftrightarrow (A \times B \subseteq X \times Y) \land (A \times B \subseteq X \times Y) \tag*{Doble contención} \\
+            & \Leftrightarrow (A \subseteq X \land B \subseteq Y) \land (X \subseteq A \land Y \subseteq B) \tag*{Inciso anterior} \\
+            & \Leftrightarrow (A \subseteq X \land X \subseteq A) \land (B \subseteq Y \land Y \subseteq B) \tag*{Equivalencias lógicas} \\
+            & \Leftrightarrow A = X \land B=Y \tag*{Doble contención}
+        \end{align*}
+
+        (iii) ($\subseteq$) Sea $x \in (A \setminus X) \times B$ cualquiera, entonces $x=(u,w)$ para ciertos $u \in A \setminus X$ y $w \in B$. Así, $u \in A$, $u \notin X$ y $w \in B$.
+
+        Como $u \in A$ y $w \in B$, entonces $x=A \times B$; y, como $u \notin X$ y $w \in B$, entonces $x \notin X \times B$. Por tanto $x \in (A \times B) \setminus (X \times B)$, por lo que $\forall x \big( x \in (A \setminus X) \times B \to x \in (A \times B) \setminus (X \times B) \big)$, es decir, $(A \setminus X) \times B \subseteq (A \times B) \setminus (X \times B)$.
+
+        ($\supseteq$) Supongamos que $y \in (A \times B) \setminus (X \times B)$, entonces $y \in (A \times B)$ y $y \notin (X \times B)$. Como $y \in A \times B$, entonces $y=(f,g)$ con $f \in A$ y $g \in B$. Notemos que, como $y=(f,g) \notin (X \times B)$, es necesario que $f \notin X$ o $g \notin B$, pero sabemos que $g \in B$, así que $f \notin X$. Por lo tanto $f \in A \setminus X$ y $g \in B$; es decir, $y = (f,g) \in (A \setminus X) \times B$.
+        
+        Por lo tanto $\forall x \big( x \in(A \times B) \setminus (X \times B) \to x \in (A \setminus X) \times B \big)$, es decir, $(A \times B) \setminus (X \times B) \subseteq (A \setminus X) \times B$.
+    \end{proof}
+
+    \begin{ejercicio}{1}
+        Sean $A$ un conjunto y $R,S \subseteq A \times A$ relaciones sobre $A$. Demuestra que:
+        \begin{enumerate}
+            \item $R \cap S$ es reflexiva si y solamente si $R$ y $S$ son reflexivas.
+            \item $R$ es simétrica si y sólo si $R=R^{-1}$.
+        \end{enumerate}
+    \end{ejercicio}
+    \begin{proof}
+        (i) Nótese que $R \cap S \subseteq A \times A$, esto es debido a que $R \subseteq A \times A$ y $S \subseteq A \times A$, entonces $R \cap S \subseteq A \times A$ (es decir, $R \cap S$ es relación en $A$). Por ello:
+        \begin{align*}
+            R \cap S \text{ es reflexiva} & \Leftrightarrow \forall a \in A \,\big(\, a \mathrel{R \cap S} a \,\big) \tag*{Def. de reflexividad} \\
+            & \Leftrightarrow \forall a \in A \,\big(\, (a,a) \in R \cap S \,\big) \tag*{Notación} \\
+            & \Leftrightarrow \forall a \in A \,\big(\, (a,a) \in R \land (a,a) \in S \,\big) \tag*{Def. de intersección} \\
+            & \Leftrightarrow \forall a \in A \,\big(\, (a,a) \in R \,\big) \land \forall a \in A \,\big(\, (a,a) \in S \,\big) \tag*{$\forall$ respeta conjunciones} \\
+            & \Leftrightarrow \forall a \in A \,\big(\, a \mathrel{R} a \,\big) \land \forall a \in A \,\big(\, a \mathrel{S} a \,\big) \tag*{Notación} \\
+             & \Leftrightarrow R \text{ es reflexiva } \land \text{ } S \text{ es reflexiva} \tag*{Def. de reflexividad}
+        \end{align*}
+        
+        Lo cual finaliza la prueba de la equivalencia deseada.
+
+        (ii) Dado que $R \subseteq A \times A$, se tiene que $R^{-1} \subseteq A \times A$ (es decir, $R^{-1}$ es relación sobre $A$). Por ello:
+        \begin{align*}
+            R \text{ es simétrica } & \Leftrightarrow \forall a \in A \forall b \in A \,\big(\, a \mathrel{R} b \to b \mathrel{R} a \,\big) \tag*{Def. de simetría} \\
+            & \Leftrightarrow \forall \marker[Goldenrod2]{a} \in A \forall \marker[RoyalBlue1]{b} \in A \,\big(\, \marker[RoyalBlue1]{b} \mathrel{R^{-1}} \marker[Goldenrod2]{a} \to \marker[Goldenrod2]{a} \mathrel{R^{-1}} \marker[RoyalBlue1]{b} \,\big) \tag*{Def. de relación inversa} \\
+            & \Leftrightarrow \forall \marker[Goldenrod2]{y} \in A \forall \marker[RoyalBlue1]{x} \in A \,\big(\, \marker[RoyalBlue1]{x} \mathrel{R^{-1}} \marker[Goldenrod2]{y} \to \marker[Goldenrod2]{y} \mathrel{R^{-1}} \marker[RoyalBlue1]{x} \,\big) \tag*{Variables ``mudas''} \\
+            & \Leftrightarrow \forall \marker[RoyalBlue1]{x} \in A \forall \marker[Goldenrod2]{y} \in A \,\big(\, \marker[RoyalBlue1]{x} \mathrel{R^{-1}} \marker[Goldenrod2]{y} \to \marker[Goldenrod2]{y} \mathrel{R^{-1}} \marker[RoyalBlue1]{x} \,\big) \tag*{Variables ``mudas''} \\
+            & \Leftrightarrow R^{-1} \text{ es simétrica} \tag*{Def. de simetría}
+        \end{align*}
+        
+        Finalizando el segundo inciso.
+    \end{proof}
+
+    \begin{ejercicio}{1}
+        Sea $R$ una relación cualquiera. Prueba que, si $\dom(R) \cap \ima(R) =
+        \emptyset$, entonces $R$ es antisimétrica. ?`Qué ocurre con el recíproco
+        de lo anterior? Es decir, ?'Si $R$ es antisimétrica, entonces $\dom(R)
+        \cap \ima(R) = \emptyset$?
+    \end{ejercicio}
+    \begin{proof}
+        Probaremos lo que se pide por contradicción.
+        
+        Supongamos pues que $\dom(R)\cap\ima(R)=\emptyset$ y que $R$ no es antireflexiva. Como $R$ no es antireflexiva, existe $a \in \dom(R)$ tal que $a \mathrel{R} a$; es decir, $(a,a \in R)$, con ello $a \in \dom(R)$ y $a \in \ima(R)$, lo cual implica que $a \in \dom(R) \cap \ima(R)$ y se contradice que $\dom(R)\cap\ima(R)=\emptyset$. El absurdo surge de suponer la negación de la implicación que queríamos probar, por tanto, tal implicación es cierta.
+
+        El recíproco es falso (en general). Como contraejemplo, consideremos $A:=\{1,2\}$ y:
+        \[ R:=\{(1,2),(2,1)\} \subseteq A \]
+
+        Notemos que $1 \in \dom(R)$ pues hay cierto $y$ (a saber, $2$) tal que $(1,y) \in R$, además, $1 \in \ima(R)$ pues existe un elemento $x$ (a saber, $2$) tal que $(x,1) \in R$. Por lo tanto $1 \in \dom(R) \cap \ima(R)$ y por ello $\dom(R) \cap \ima(R) \neq \emptyset$. Sin embargo, $R$ es antisimétrica pues, como $(1,1),(2,2) \notin R$, se tiene que $\forall a \in A (a \not\mathrel{R} a)$.
+    \end{proof}
+
+    \begin{ejercicio}{1}
+        En cada inciso $R$ es una relación sobre un conjunto $A$. Indica en cada caso, si $R$ es: reflexiva, simétrica, transitiva, antireflexiva o antisimétrica. Si en algún caso $R$ es relación de orden parcial, o de equivalencia, indícalo. No es necesario justificar.
+        \begin{enumerate}
+            \item $A$ es el conjunto $\{0,1,2\}$ y $R:=\{(1,1),(2,2),(0,1),(1,0)\}$.
+
+            \item $A$ es el conjunto $\{\text{Piedra, Papel, Tijeras}\}$ y $R \subseteq A \times A$ la relación:
+            \[ R := \Set*{(\text{Piedra}, \text{Tijeras}), (\text{Tijeras}, \text{Papel}), (\text{Papel}, \text{Piedra})} \]
+ 
+            \item $A$ es cualquier conjunto y $R=\id_A$.
+
+            \item $A$ es el conjunto de todas las rectas del plano (digamos, $\mathbb{R}^2$) y $R \subseteq A \times A$ es la relación $R:=\{(x,y) \in A \times A \st x \text{ es paralela a } y\}$.
+            
+            \item $A=\mathbb{Z}$ y $R \subseteq A \times A$ está dada por: $n \mathrel{R} m$ si y sólo si $n ^2 \leq m^2$.
+
+            \item $A=\mathscr{P}(\{0,1,2,\dotsc,1534\})$ y $R$ está dada por: $a \mathrel{R} b$ si y sólo si $a$ tiene (estrictamente) menos elementos que $b$.
+        \end{enumerate}
+    \end{ejercicio}
+    \begin{solu}
+        Organizaremos en una tabla las propiedades, recordemos que una relación es de equivalencia si y sólo si es reflexiva, simétrica y transitiva; y, una relación es de orden parcial si es reflexiva, transitiva y antisimétrica.
+        \begin{center}
+            \begin{tabular}{|>{\columncolor{Purple3!30}}c||c|c|c|c|c|}\hline \rowcolor{Purple3!30}
+            Inciso & Reflexiva & Simétrica & Transitiva & Antireflexiva & Antisimétrica \\ \hline
+            i)      & No & \cellcolor{SeaGreen3!15} Sí & No & No & No \\ \hdashline
+            ii)     & No & \cellcolor{SeaGreen3!15} Sí & No & \cellcolor{SeaGreen3!15} Sí & \cellcolor{SeaGreen3!15} Sí \\ \hdashline
+            iii)    & \cellcolor{SeaGreen3!15} Sí & \cellcolor{SeaGreen3!15} Sí & \cellcolor{SeaGreen3!15} Sí & No & \cellcolor{SeaGreen3!15} Sí \\ \hdashline
+            iv)     & \cellcolor{SeaGreen3!15} Sí & \cellcolor{SeaGreen3!15} Sí & \cellcolor{SeaGreen3!15} Sí & No & No \\ \hdashline
+            v)      & \cellcolor{SeaGreen3!15} Sí & No & \cellcolor{SeaGreen3!15} Sí & No & No \\ \hdashline
+            vi)     & No & No & \cellcolor{SeaGreen3!15} Sí & \cellcolor{SeaGreen3!15} Sí & No \\ \hline
+            \end{tabular}
+        \end{center}
+        Así que las relaciones de equivalencia son sólo las de (iii) y (iv); y, no hay relaciones de orden.
+    \end{solu}
+
+    \begin{ejercicio}{1}\label{ej-6}
+        Sea $R$ una relación de equivalencia sobre un conjunto $A$. Demuestra que $R$ es la diagonal de $A$ si y sólo si para cualesquiera $a,b \in A$ se tiene que $[a]=[b]$ implica $a=b$.
+    \end{ejercicio}
+    \begin{proof}
+        ($\Rightarrow$) Supongamos que $R=\vartriangle_A=\id_A$, y, sean $a,b \in A$, veamos que:
+        \begin{center}
+            $[a]=[b]$ implica $a=b$.
+        \end{center}
+
+        Supongamos pues que $[a]=[b]$, esto significa que $a \mathrel{R} b$, pero, como $R$ es la identidad de $A$, $a=b$. Como $a,b \in A$ fueron arbitrarios, hemos probado que $\forall a \in A \forall b \in A ([a]=[b] \to a=b)$.
+
+        ($\Leftrightarrow$) Supongamos que $\forall a \in A \forall b \in A ([a]=[b] \to a=b)$, veamos que $R=\id_A$ por doble contención. Notemos que, como $R$ es de equivalencia, entonces es reflexiva, lo cual significa que $\id_A \subseteq R$; así, sólo falta verificar:
+        \[ R \subseteq \id_A \]
+
+        Efectivamente, si $x=(a,b) \in R$ es cualquier elemento; entonces, por definición de clases $[a]=[b]$, y por hipótesis, $a=b$, lo cual prueba que $x=(a,b)=(a,a) \in \id_A$; y con ello, $\forall x ( x\in R \to x \in \id_A)$; es decir, $R \subseteq \id_A$.
+    \end{proof}
+
+    \begin{ejercicio}{1}\label{ej-7}
+        Sean $A,B$ conjuntos y $\{f_i \st i\in I\}$ una familia indexada de funciones tal que para cada $i \in I$, $f_i$ es una función de $A$ en $B$. Demuestra que la relación $R$ sobre $A$ definida por:
+        \[ x \mathrel{R} y \: \text{si y sólo si} \: \forall i \in I \big( f_i(x)=f_i(y) \big) \]
+        es de equivalencia.
+    \end{ejercicio}
+    \begin{proof}
+        Veamos que $R$ es reflexiva, simétrica y transitiva, en orden (pero claro, el orden da igual).
+
+        ($R$ es reflexiva) Sea $a \in A$ cualquier elemento, veamos (por definición de $R$) que $a \mathrel{R} a$. Efectivamente, si $i \in I$ es cualquiera, entonces $f_i(a)=f_i(a)$ (ya que $f$ es función); por ello, $\forall i \in I \big( f_i(a)=f_i(a) \big)$. Es decir, hemos mostrado que $a \mathrel{R} a$; y esto, para cada $a \in A$, lo cual prueba que $R$ es reflexiva.
+
+        ($R$ es simétrica) Sean $a,b \in A$ y supongamos que $(a,b) \in R$. Por definición de $R$, entonces:
+        \begin{equation}\label{ej7-Rdef}
+            \forall i \in I \big( f_i(x)=f_i(y) \big)
+        \end{equation}
+
+        Veamos que $b \mathrel{R} a$. En efecto, si $i \in I$ es cualquiera, entonces por la proposición \customRef{ej7-Rdef}{proposición}, se tiene que $f_i(a)=f_i(b)$. De esta manera, $f_i(b)=f_i(a)$, lo cual prueba que $\forall i \in I \big( f_i(b)=f_i(a) \big)$. Así que, $b \mathrel{R} a$, y entonces $\forall a,b \in A (a \mathrel{R} b \to b \mathrel{R} a)$, es decir, $R$ es simétrica.
+
+        ($R$ es transitiva) Supongamos que $a,b,c \in A$ son tales que $a \mathrel{R} b$ y $b \mathrel{R} c$; entonces:
+        \begin{equation}\label{ej7-Trans}
+            \forall i \in I \big( f_i(a)=f_i(b) \big) \quad \text{y} \quad \forall i \in I \big( f_i(b)=f_i(c) \big)
+        \end{equation}
+
+        Veamos que $a \mathrel{R} c$; en efecto, sea $i \in I$ cualquiera, debido a la \customRef{ej7-Trans}{proposición}, se tiene que $f_i(a)=f_i(b)$ y que $f_i(b)=f_i(c)$. Debido a lo anterior, $f_i(a)=f_i(c)$, probando que $\forall i \in I \big( f_i(a)=f_i(c) \big)$; es decir, $a \mathrel{R} c$. Hemos probado que:
+        \[ \forall a,b,c \in A \Big( \big( a \mathrel{R} b \land b \mathrel{R} c \big) \to a \mathrel{R} c \Big) \]
+
+        probando que $R$ es transitiva; y a consecuencia de lo anterior, de equivalencia.
+    \end{proof}
+
+    \begin{ejercicio}{1}
+        Sean $A,B,C$ cualesquiera conjuntos y $f\colon A \to B$, $g\colon B \to C$ funciones arbitrarias. Entre las siguientes implicaciones, hay una que es falsa, demuestra las dos verdaderas y da un contraejemplo para la falsa.
+        \begin{enumerate}
+            \item Si $g \circ f$ es sobreyectiva, entonces $g$ es sobreyectiva.
+            \item Si $f$ es biyectiva, entonces $g \circ f$ es biyectiva.
+            \item Si $g \circ f$ es inyectiva, entonces $f$ es inyectiva.
+        \end{enumerate}
+    \end{ejercicio}
+    \begin{solu}
+        La única afimación falsa es (ii). Probemos primero (i) y (iii); al final, daremos el contraejemplo para (ii).
+
+        (i) Supongamos que $g \circ f$ es sobreyectiva; veamos que $g \colon B \to C$ es sobreyectiva. Sea $c \in C$ cualquier elemento, como $g \circ f \colon A \to C$ es sobreyectiva, existe $a \in A$ de modo que:
+        \[ \big(g \circ f\big) (a) = g \big( f(a) \big)=c \]
+
+        De esta manera, $b:=f(a)$ es un elemento del conjunto $B$ que satisface $g(b)=c$. Hemos mostrado entonces que $\forall c \in C \exists b \in B \big(g(b)=c\big)$; esto es, $g$ es sobreyectiva.
+
+        (iii) Supongamos que $g \circ f$ es inyectiva, veamos que $f:A \to B$ es inyectiva. Sean $x,y \in A$ y supongamos que $f(x)=f(y)$. Por ser $g$ función, se tiene que:
+        \[ \big(g \circ f\big) (x) = g\big( f(x) \big) = g\big( f(y) \big) = \big(g \circ f\big) (y) \]
+
+        Así que, por ser $g \circ f$ biyectiva, $x=y$. Hemos mostrado entonces que la siguiente proposición es verdadera: $\forall x,y \in A \big( f(x)=f(y) \to x=y \big)$; es decir, $f$ es inyectiva.
+
+        (ii) Por último, daremos un contraejemplo para este inciso; esto es, buscaremos conjuntos $A$ y $B$; y, funciones $f\colon A \to B$ y $g\colon B \to C$, de forma que $f$ es biyectiva, \textit{pero}, $g \circ f$ \textit{no es} biyectiva.
+
+        Consideremos $A:=\{2\}$, $B:=A$ y $C:=\{0,2\}$, $f:=\id_A$ y sea $g:B \to C$ definida por $g(2)=0$ (basta dar $g$ sólo en este punto, pues $B$ sólo tiene un elemento, $2$). Notemos que $f$ es biyectiva (toda identidad lo es) $2 \notin \ima(g \circ f)$; es decir, no existe $x \in A$ de modo que $\big(g \circ f\big) (x)=2$. Efectivamente, de ocurrir lo contrario (por contradicción), existiría $x \in A$ de modo que $\big(g \circ f\big) (x)=2$; sin embargo, entonces se tendría que:
+        \begin{align*}
+            2 & = \big(g \circ f\big) (x) \tag*{Recién mencionado} \\
+            & = g \big( f(x) \big) \tag*{Def. de composición} \\
+            & = g ( x ) \tag*{$f=\id_A$} \\
+            & = g (2) \tag*{$x=2$, pues $x \in A$ y $A=\{2\}$} \\
+            & = 0 \tag*{Def. de $g$}
+        \end{align*}
+        lo cual es un absurdo (pues $0 \neq 2$); así, no existe $x \in A$ de modo que $\big(g \circ f\big)(x)=2$. Por lo tanto, $g \circ f:A \to C$ no es sobreyectiva; y por ello, tampoco es biyectiva.
+    \end{solu}
+
+    \begin{ejercicio}{1}
+        En cada inciso $f$ es una función de $A$ en $B$. Indica en cada caso, si $f$ es: inyectiva, sobreyectiva o biyectiva. No es necesario justificar.
+        \begin{enumerate}
+            \item $A=\mathbb{N}$, $B=\mathbb{N}$ y, para cada $a \in A$, $f(a)=a$.
+            \item $A=\mathscr{P}(\{0,2,4,6,\dotsc,30\})$, $B=A$ y, para cada $a \in A$, $f(a)$ es el mínimo de $a$.
+            \item $A=\mathbb{N}$, $B=\mathbb{Z}$ y, para cada $a \in A$, $f(a)=a$.
+            \item $A=\mathbb{R}$, $B=\mathbb{R}^+ \cup \{0\}$ y, para cada $a \in A$, $f(a)=a^2$.
+            \item $A=\mathbb{R}^+\cup\{0\}$, $B=\mathbb{R}^+ \cup \{0\}$ y, para cada $a \in A$, $f(a)=a^2$.
+            \item $A=\mathbb{N} \times \mathbb{N}$, $B=\mathbb{N}$ y, para cada $(a,b)\in A$, $f(a,b)=2^a \cdot 3^b$.
+            \item $A=\{0,1,2,3,\dotsc,10\}$, $B=\mathscr{P}(\mathbb{R}^2)$ y, para cada $a \in A$, $f(a)=\{(x,y) \in \mathbb{R}^2 \st x-y=2\}$.
+            \item $A=\mathbb{R}$, $B=\{0,1\}$ y, para cada $a \in A$; si $a \in \mathbb{Q}$, $f(a)=1$; y, si $a \notin \mathbb{Q}$, $f(a)=0$.
+        \end{enumerate}
+    \end{ejercicio}
+    \begin{solu}
+        De nuevo, organizaremos la información en una tabla.
+        \begin{center}
+            \begin{tabular}{|>{\columncolor{Purple3!30}}c||c|c|}\hline \rowcolor{Purple3!30}
+            Inciso & Inyectiva & Sobreyectiva \\ \hline
+            i)      & \cellcolor{SeaGreen3!15} Sí & \cellcolor{SeaGreen3!15} Sí \\ \hdashline
+            ii)     & No & \cellcolor{SeaGreen3!15} Sí \\ \hdashline
+            iii)    & \cellcolor{SeaGreen3!15} Sí & No \\ \hdashline
+            iv)     & No & \cellcolor{SeaGreen3!15} Sí \\ \hdashline
+            v)      & \cellcolor{SeaGreen3!15} Sí & \cellcolor{SeaGreen3!15} Sí \\ \hdashline
+            vi)     & \cellcolor{SeaGreen3!15} Sí & No \\ \hdashline
+            vii)    & No & No \\ \hdashline
+            viii)   & No & No \\ \hline
+            \end{tabular}
+        \end{center}
+        Por lo tanto, sólo (i) y (v) son biyecciones.
+    \end{solu}
+    
+    \begin{ejercicio}{1}
+        Sean $A,B$ conjuntos y $f\colon A \to B$ una función. La relación 
+        ${\sim}\subseteq A \times A$ definida por 
+        $x \sim y \iff f(x)=f(y)$ es de equivalencia (\textit{?`por qué?}). Sea 
+        $q\colon A \to\quot{A}{\sim}$ definida por $q(x) = [x]$. Demuestre que $q$ es
+        biyectiva si y sólo si $\sim =\id_A$.
+    \end{ejercicio}
+    \begin{proof}
+        Lo primero es notar que $\sim$ es de equivalencia, ya que si $f_1:=f$, entonces $\{f_1\}=\{f_i \st i\in \{1\}\}$ es una familia indexada de funciones de $A$ en $B$; y entonces, $\sim$ es exactamente la relación $R$ del \hyperref[ej-7]{Ejercicio 7}. Ahora sí, veamos que:
+        \begin{center}
+            $q$ es biyectiva si y sólo si $\sim =\id_A$.
+        \end{center}
+
+        Nótese que:
+        \begin{align*}
+            q \text{ es inyectiva} & \Leftrightarrow \forall a,b \in A \big( q(a)=q(b) \to a=b \big) \tag*{Def. de inyectividad} \\
+            & \Leftrightarrow \forall a,b \in A \big( [a]=[b] \to a=b \big) \tag*{Def. de $q$} \\
+            & \Leftrightarrow R \text{ es la diagonal de } A \tag*{\hyperref[ej-6]{Ejercicio 6}} \\
+            & \Leftrightarrow R = \id_A \tag*{Def. de diagonal}
+        \end{align*}
+
+        Además $q$ es siempre sobreyectiva, pues para cada $b=[x] \in \quot{A}{\sim}$ se tiene que $q(x)=[x]=b$. Entonces, $q$ es biyectiva si y sólo si $q$ es inyectiva (de nuevo, porque $q$ ya es sobreyectiva), y dado lo anterior, esto último ocurre si y solamente si $R = \id_A$. \QED
+    \end{proof}
+\end{document}

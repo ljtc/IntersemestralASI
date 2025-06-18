@@ -1,0 +1,37 @@
+{
+    "editor.minimap.enabled": false,
+    "editor.fontSize": 17,
+    "editor.wordWrap": "on",
+    "workbench.panel.showLabels": false,
+    "editor.mouseWheelZoom": true,
+    "explorer.confirmDelete": false,
+    "git.autofetch": true,
+    "latex-workshop.latex.tools": [
+    {
+        "name": "lualatex",
+        "command": "lualatex",
+        "args": [
+        "--interaction=nonstopmode",
+        "--synctex=1",
+        "%DOC%"
+        ]
+    }
+    ],
+    "latex-workshop.latex.recipes": [
+    {
+        "name": "lualatex",
+        "tools": ["lualatex"]
+    }
+    ],
+    "latex-workshop.latex.autoBuild.run": "onSave",
+    "latex-workshop.latex.recipe.default": "lualatex",
+    "json.schemas": [],
+    "workbench.activityBar.location": "top",
+    "git.enableSmartCommit": true,
+    "git.confirmSync": false,
+    "window.customTitleBarVisibility": "windowed",
+    "git.openRepositoryInParentFolders": "never",
+    "latex-workshop.intellisense.biblatexJSON.replace": {},
+    "workbench.preferredDarkColorTheme": "Default Dark+",
+    "workbench.colorTheme": "Default Dark+",
+}
