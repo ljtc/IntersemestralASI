@@ -1,16 +1,19 @@
 \documentclass{article}
-\usepackage[most]{tcolorbox}
-\usepackage[x11names]{xcolor}
+\usepackage{fontspec}
+\usepackage{unicode-math} % ← debe ir antes de mathtools y amsthm
+\usepackage{mathtools}
+\usepackage{amsthm}
+\usepackage{ifthen}
 
-%\tcbset{highlight rounded/.style={boxrule=0pt,colframe=yellow!30,colback=yellow!30,arc=2mm,left=.7pt,right=.7pt,top=.7pt,bottom=.7pt}}
-
-\newcommand{\resalta}[2][Gold2]{\tcbox[boxrule=0pt,colframe=#1!25,colback=#1!25,arc=2mm,left=.7pt,right=.7pt,top=.7pt,bottom=.7pt]{#2}}
-
-\newcommand{\teste}[2][Perro]{#1, #2}
+\setmainfont{STIX Two Text}
+\setmathfont{STIX Two Math}
 
 \begin{document}
 
-Este texto tiene \resalta{un resaltado con bordes redondeados} que parece de marcador.
+Prueba de fuente: STIX Two Text. Consideremos ahora el ambiente matemático:
 
+\[
+\mathbb{R} = \{x^2 : x \in \mathbb{R} \}
+\]
 
 \end{document}

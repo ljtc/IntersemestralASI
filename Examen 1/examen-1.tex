@@ -1,4 +1,4 @@
-\documentclass[letterpaper,DIV=14,headsepline,11pt]{scrartcl}
+\documentclass[letterpaper,DIV=16,headsepline,11pt]{scrartcl}
 \usepackage[spanish,mexico]{babel}
 \pagenumbering{gobble}
 %\setlength{\parindent}{0cm}
@@ -35,7 +35,7 @@
 \setcounter{Pts}{1}
 \newcommand{\pts}{}
 \newenvironment{ejercicio}[1]{\noindent
-    \ifthenelse{\equal{#1}{1}}{\renewcommand{\pts}{\textbf{(#1
+    \ifthenelse{\equal{#1}{1} \OR \equal{#1}{+1}}{\renewcommand{\pts}{\textbf{(#1
     pt)}}}{\renewcommand{\pts}{\textbf{(#1 pts)}}}\textbf{Ej. \theEjer}
     \pts\stepcounter{Ejer}}{\vspace{.3cm}}
 
@@ -47,87 +47,89 @@
 
 \begin{document}
 
-\begin{center}
-  {\fontsize{30}{60}\rmfamily \textbf{Primer Examen Parcial}} \\
-  \vspace{.2cm} Álgebra Superior 1, 2025-4
-\end{center}
-%\begin{flushright}
-%  \footnotesize \hfill Profesor: Luis Jesús Trucio Cuevas.\\
-%  \hfill Ayudante: Hugo Víctor García Martínez.
-%\end{flushright}
+  \begin{center}
+    {\fontsize{30}{60}\rmfamily \textbf{Primer Examen Parcial}} \\
+    \vspace{.2cm} Álgebra Superior 1, 2025-4
+  \end{center}
 
-\noindent\textit{\textbf{Instrucciones.} Resuelve los siguientes ejercicios,
-se pueden utilizar libremente resultados vistos en clase, siempre y cuando,
-se indique claramente dónde y cuáles se utilizan.}\vspace{.4cm}
+  \noindent\textit{\textbf{Instrucciones.} Resuelve los siguientes ejercicios,
+  se pueden utilizar libremente resultados vistos en clase, siempre y cuando,
+  se indique claramente dónde y cuáles se utilizan.}\vspace{.4cm}
 
-\begin{ejercicio}{2.5}
-  Sean \(I,J,K\) conjuntos no vacíos y supongamos que \(J \cup K = I\). Si 
-  \(\{X_i\mid i \in I\}\) es una familia indexada de conjuntos, demuestra que:
-  \[ 
-  \bigcap_{i \in I} X_i = \Big( \bigcap_{i \in J} X_i \Big) \cap 
-  \Big(\bigcap_{i \in K} X_i \Big)
-  \]       
-\end{ejercicio}
+  \begin{ejercicio}{2.5}
+    Sean \(I,J,K\) conjuntos no vacíos y supongamos que \(J \cup K = I\). Si 
+    \(\{X_i\mid i \in I\}\) es una familia indexada de conjuntos, demuestra que:
+    \[ 
+    \bigcap_{i \in I} X_i = \Big( \bigcap_{i \in J} X_i \Big) \cap 
+    \Big(\bigcap_{i \in K} X_i \Big)
+    \]       
+  \end{ejercicio}
 
-\begin{ejercicio}{2.5}
-  Demuestra que \((A\times B)\cup(C\times D)\subseteq(A\cup C)\times(B\cup D)\).
-  Además da un ejemplo que muestre que la otra contención no siempre se
-  cumple.
-\end{ejercicio}
+  \begin{ejercicio}{2.5}
+    Demuestra que \((A\times B)\cup(C\times D)\subseteq(A\cup C)\times(B\cup D)\).
+    Además da un ejemplo que muestre que la otra contención no siempre se
+    cumple.
+  \end{ejercicio}
 
-\begin{ejercicio}{2.5}
-  Si \(A\), \(B\) y \(S\) son tales que \(A\cap C=B\cap C\) y 
-  \(A\cup C=B\cup C\), entonces \(A=B\).
-\end{ejercicio}
+  \begin{ejercicio}{2.5}
+    Si \(A\), \(B\) y \(S\) son tales que \(A\cap C=B\cap C\) y 
+    \(A\cup C=B\cup C\), entonces \(A=B\).
+  \end{ejercicio}
 
-\begin{ejercicio}{2.5}
-  Sean \(A, B\) conjuntos. Demuestra que 
-  \(\mathscr{P}(A\cup B)=\mathscr{P}(A)\cap\mathscr{P}(B)\) implica \(A=B\). 
-\end{ejercicio}
+  \begin{ejercicio}{2.5}
+    Sean \(A, B\) conjuntos. Demuestra que 
+    \(\mathscr{P}(A\cup B)=\mathscr{P}(A)\cap\mathscr{P}(B)\) implica \(A=B\). 
+  \end{ejercicio}
 
+  \begin{ejercicio}{+1}
+    \textit{Este ejercicio es opcional y sólo se tomará en cuenta si no hay errores en la solución.}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\vspace{2cm}
-\setcounter{Ejer}{1}
+    Sea $A$ un conjunto y $R \subseteq A \times A$ una relación sobre $A$. Demuestre que si $R$ es reflexiva y transitiva, entonces $Q:=R \cup R^{-1}$ es una relación de equivalencia.
+  \end{ejercicio}
 
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \vspace{.7cm}
+  \setcounter{Ejer}{1}
 
-\begin{center}
-  {\fontsize{30}{60}\rmfamily \textbf{Primer Examen Parcial}} \\
-  \vspace{.2cm} Álgebra Superior 1, 2025-4
-\end{center}
-%\begin{flushright}
-%  \footnotesize \hfill Profesor: Luis Jesús Trucio Cuevas.\\
-%  \hfill Ayudante: Hugo Víctor García Martínez.
-%\end{flushright}
+  \begin{center}
+    {\fontsize{30}{60}\rmfamily \textbf{Primer Examen Parcial}} \\
+    \vspace{.2cm} Álgebra Superior 1, 2025-4
+  \end{center}
 
-\noindent\textit{\textbf{Instrucciones.} Resuelve los siguientes ejercicios,
-se pueden utilizar libremente resultados vistos en clase, siempre y cuando,
-se indique claramente dónde y cuáles se utilizan.}\vspace{.4cm}
+  \noindent\textit{\textbf{Instrucciones.} Resuelve los siguientes ejercicios,
+  se pueden utilizar libremente resultados vistos en clase, siempre y cuando,
+  se indique claramente dónde y cuáles se utilizan.}\vspace{.4cm}
 
-\begin{ejercicio}{2.5}
-  Sean \(I,J,K\) conjuntos no vacíos y supongamos que \(J \cup K = I\). Si 
-  \(\{X_i\mid i \in I\}\) es una familia indexada de conjuntos, demuestra que:
-  \[ 
-  \bigcap_{i \in I} X_i = \Big( \bigcap_{i \in J} X_i \Big) \cap 
-  \Big(\bigcap_{i \in K} X_i \Big)
-  \]       
-\end{ejercicio}
+  \begin{ejercicio}{2.5}
+    Sean \(I,J,K\) conjuntos no vacíos y supongamos que \(J \cup K = I\). Si 
+    \(\{X_i\mid i \in I\}\) es una familia indexada de conjuntos, demuestra que:
+    \[ 
+    \bigcap_{i \in I} X_i = \Big( \bigcap_{i \in J} X_i \Big) \cap 
+    \Big(\bigcap_{i \in K} X_i \Big)
+    \]       
+  \end{ejercicio}
 
-\begin{ejercicio}{2.5}
-  Demuestra que \((A\times B)\cup(C\times D)\subseteq(A\cup C)\times(B\cup D)\).
-  Además da un ejemplo que muestre que la otra contención no siempre se
-  cumple.
-\end{ejercicio}
+  \begin{ejercicio}{2.5}
+    Demuestra que \((A\times B)\cup(C\times D)\subseteq(A\cup C)\times(B\cup D)\).
+    Además da un ejemplo que muestre que la otra contención no siempre se
+    cumple.
+  \end{ejercicio}
 
-\begin{ejercicio}{2.5}
-  Si \(A\), \(B\) y \(S\) son tales que \(A\cap C=B\cap C\) y 
-  \(A\cup C=B\cup C\), entonces \(A=B\). 
-\end{ejercicio}
+  \begin{ejercicio}{2.5}
+    Si \(A\), \(B\) y \(S\) son tales que \(A\cap C=B\cap C\) y 
+    \(A\cup C=B\cup C\), entonces \(A=B\). 
+  \end{ejercicio}
 
-\begin{ejercicio}{2.5}
-  Sean \(A, B\) conjuntos. Demuestra que 
-  \(\mathscr{P}(A\cup B)=\mathscr{P}(A)\cap\mathscr{P}(B)\) implica \(A=B\). 
-\end{ejercicio}
+  \begin{ejercicio}{2.5}
+    Sean \(A, B\) conjuntos. Demuestra que 
+    \(\mathscr{P}(A\cup B)=\mathscr{P}(A)\cap\mathscr{P}(B)\) implica \(A=B\). 
+  \end{ejercicio}
+
+  \begin{ejercicio}{+1}
+    \textit{Este ejercicio es opcional y sólo se tomará en cuenta si no hay errores en la solución.}
+
+    Sea $A$ un conjunto y $R \subseteq A \times A$ una relación sobre $A$. Demuestre que si $R$ es reflexiva y transitiva, entonces $Q:=R \cup R^{-1}$ es una relación de equivalencia.
+  \end{ejercicio}
 
 
 \end{document}
