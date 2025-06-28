@@ -1,43 +1,76 @@
 \documentclass[letterpaper,DIV=14,headsepline,12pt]{scrartcl}
-\usepackage[spanish,mexico,shorthands=off,es-lcroman]{babel}
-\usepackage{stix2}
-\pagenumbering{gobble}
-%\setlength{\parindent}{0cm}
-
-\usepackage{mathtools}
+%Utilidades en texto
 \usepackage{amsthm}
-\usepackage{tikz-cd}
-\usepackage{comment}
-\usepackage{lipsum}
-\usepackage{ifthen}
-\usepackage{truthtable} %para las tablas de verdad
-
-\usepackage{multicol}
-\usepackage{paracol}
+\usepackage{thmtools}
+\usepackage{array}
+\usepackage{multicol, paracol}
+%\usepackage{truthtable}
+\usepackage[x11names, table]{xcolor}
+\usepackage{arydshln}
+\setlength{\dashlinedash}{0.5pt} % Longitud de los trazos
+\setlength{\dashlinegap}{1.5pt}  % Espacio entre trazos
+\usepackage[most]{tcolorbox}
+%Stix2 como fuente
+\usepackage[spanish,es-lcroman,mexico,shorthands=off]{babel}
+\usepackage{stix2}
+\usepackage{mathtools}
+%Referencias
+\usepackage[colorlinks=true, allcolors=VioletRed2]{hyperref}
+\newcommand{\customRef}[2]{\hyperref[#1]{#2~\ref*{#1}}}
+%Etiquetas de las enumeraciones
 \usepackage[shortlabels]{enumitem}
 \setenumerate[1]{label=\MakeLowercase{\roman*}), ref=\roman*}
 \setenumerate[2]{label=\MakeLowercase{\arabic*}), ref=\alph*}
+\usepackage{ifthen}
 
-% Para escribir el "tal que" de los conjuntos
+%Notación de conjuntos
 \providecommand\st{\;|\;}
-
-%Para el uso de \Set y \Set*
 \providecommand\given{}
 \newcommand\SetSymbol[1][]{\nonscript\:#1\vert\allowbreak\nonscript\:\mathopen{}}
 \DeclarePairedDelimiterX\Set[1]\{\}{\renewcommand\given{\SetSymbol[\delimsize]}#1}
-\DeclarePairedDelimiterX\Par[1](){#1}
-%Ejercicios
-%\newcommand{\pts}[1]{%
-  %\ifthenelse{\equal{#1}{1}}{\hfill \textbf{(#1 pt)}}{\hfill\textbf{(#1 pts)}}
-%}
 
+
+%Ejercicios
 \newcounter{Ejer}
 \newcounter{Pts}
 \setcounter{Ejer}{1}
 \setcounter{Pts}{1}
 \newcommand{\pts}{}
 \newenvironment{ejercicio}[1]{\noindent
-    \ifthenelse{\equal{#1}{1}}{\renewcommand{\pts}{\textbf{(#1 pt)}}}{\renewcommand{\pts}{\textbf{(#1 pts)}}}\textbf{Ej. \theEjer} \pts\stepcounter{Ejer}}{\vspace{.3cm}}
+    \ifthenelse{\equal{#1}{1} \OR \equal{#1}{+1}}{\renewcommand{\pts}{\textbf{(#1 pt)}}}{\renewcommand{\pts}{\textbf{(#1 pts)}}}\textbf{Ej. \theEjer} \pts\stepcounter{Ejer}}{\vspace{.3cm}}
+
+%Marcador
+    \newcommand{\marker}[2][Gold2]{
+        \ifmmode
+        \tcbox[on line,boxrule=0pt,colframe=#1!30,colback=#1!30,arc=2mm,left=0pt,right=0pt,top=.7pt,bottom=.7pt]{\ensuremath{#2}}%
+        \else
+        \tcbox[on line,boxrule=0pt,colframe=#1!30,colback=#1!30,arc=2mm,left=0pt,right=0pt,top=.7pt,bottom=.7pt]{#2}%
+        \fi}
+
+%Entorno de Demostración y Solución
+\renewcommand\qedsymbol{$\blacksquare$}
+\makeatletter
+    \renewenvironment{proof}[1][]{%
+        \par\pushQED{\qed}%
+        \normalfont\topsep6pt \partopsep0pt % espacio antes del entorno
+        \trivlist
+        \item[\hskip\labelsep
+                \textbf{\textit{Demostración.}}% Cambiado aquí
+        ]#1
+        }{%
+        \popQED\endtrivlist\@endpefalse
+    }
+    \newenvironment{solu}[1][]{%
+        \par\pushQED{\hfill \lozenge}%
+        \normalfont\topsep6pt \partopsep0pt % espacio antes del entorno
+        \trivlist
+        \item[\hskip\labelsep
+                \textbf{\textit{Solución.}}% Cambiado aquí
+        ]#1
+        }{%
+        \popQED\endtrivlist\@endpefalse
+    }
+\makeatother
 
 %Comandos que utilizamos
 \newcommand{\id}{\mathrm{id}}
@@ -46,8 +79,12 @@
 \renewcommand{\emptyset}{\varnothing}
 \DeclareMathOperator{\ima}{ima}
 \DeclareMathOperator{\dom}{dom}
+\newcommand{\quot}[2]{{\raisebox{.2em}{$#1$}\left/\raisebox{-.2em}{$#2$}\right.}}
+
+\pagenumbering{gobble}
 
 \begin{document}
+    \pagenumbering{gobble}
 
     \begin{center}
         {\fontsize{30}{60}\rmfamily \textbf{Tarea 3}} \\ \vspace{.2cm}
@@ -57,19 +94,50 @@
         \footnotesize \hfill Profesor: Luis Jesús Trucio Cuevas.\\
         \hfill Ayudante: Hugo Víctor García Martínez.
     \end{flushright}
-
+    
     \noindent\textit{\textbf{Instrucciones.} Resuelve los siguientes ejercicios. Esta tarea es individual y deberá ser entregada presencialmente, durante la clase del \textbf{lunes 30 de junio}.}\vspace{.4cm}
-
+    
+    \begin{ejercicio}{1}
+        En cada inciso, determine si la correspondiente función es inyectiva, sobreyectiva, o biyectiva. Demuestra la conclusión a la que llego (es decir, prueba si la función tiene o no la propiedad que se afrima).
+        \begin{enumerate}
+            \item $h:\{0,1,2\} \to \{x,y\}$ definida por $h=\{(0,x),(1,x),(2,y)\}$, aquí $x \neq y$.
+            \item $A:\mathbb{R}\to \mathbb{R}$ dada para cada $x \in \mathbb{R}$ por $A(x)=4x+55$.
+            \item $f:\mathbb{N}\to \mathscr{P}(\mathbb{N})$ dada para cada $n \in \mathbb{N}$ como $f(n)=\{0,n\}$.
+        \end{enumerate} 
+    \end{ejercicio}
+    
+    \begin{ejercicio}{1}
+        Se dice que una función $g:X \to Y$ es \textbf{constante} si y sólo si para cualesquiera $x,y \in X$ se tiene $g(x)=g(y)$. Encuentra dos funciones no constantes, cuya composición sí sea constante.
+    \end{ejercicio}
+    
+    \begin{ejercicio}{1.5}
+        Sean $X,Y$ y $A$ conjuntos tales que $A \subseteq X$; $f:X \to Y$ cualquier función; y, definamos $i:A \to X $ para cada $a \in A$ como $i(a)=a$. Demuestra que para cualquier subconjunto $B \subseteq Y$ se da la igualdad $(f \circ i)^{-1}[B]=A \cap f^{-1}[B]$.
+    \end{ejercicio}
+    
     \begin{ejercicio}{2}
-
+        Sean $A$ y $B$ conjuntos, y $f:A \to B$ cualesquiera. Definimos $F:\mathscr{P}(B) \to \mathscr{P}(A)$ para cada $X \in \mathscr{P}(B)$ como $F(X)=f^{-1}[X]$. Demuestra que si $F$ es inyectiva, entonces $f$ es sobreyectiva.
     \end{ejercicio}
-
+    
+    \begin{ejercicio}{1}
+        Prueba que para cualquier $n \in \mathbb{N}$ se tiene que $2^{n+1}>n^2$.
+    \end{ejercicio}
+    
+    \begin{ejercicio}{1.5}
+        Muestra que $7$ divide a cualquier natural de la forma $9^n-2^n$. Es decir, para cada $n \in \mathbb{N}$ existe un entero $k \in \mathbb{Z}$ de modo que $9^n-2^n=7k$.
+    \end{ejercicio}
+    
     \begin{ejercicio}{2}
-        
+        Supongamos que solo hay monedas de $4\$$ y $7\$$. Demuestre que sólo con este tipo de monedas se puede conseguir cualquier cantidad de dinero mayor o igual a $18 \$ $. Por ejemplo: $20\$$ son $5$ monedas de $4\$$; $21\$$ son $3$ monedas de $7\$$ y $22\$$ son $2$ monedas de $7\$$ y $2$ monedas de $4\$$.     
     \end{ejercicio}
-
-    \begin{ejercicio}{3}
-        
-    \end{ejercicio}
-
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 \end{document}
+% ^{-1}
