@@ -1,19 +1,8 @@
 \documentclass{article}
-\usepackage{fontspec}
-\usepackage{unicode-math} % ← debe ir antes de mathtools y amsthm
-\usepackage{mathtools}
-\usepackage{amsthm}
-\usepackage{ifthen}
-
-\setmainfont{STIX Two Text}
-\setmathfont{STIX Two Math}
-
+\usepackage{MnSymbol,bbding,pifont}
 \begin{document}
-
-Prueba de fuente: STIX Two Text. Consideremos ahora el ambiente matemático:
-
-\[
-\mathbb{R} = \{x^2 : x \in \mathbb{R} \}
-\]
-
+   $ \pentagram,\;\bigotimes,\;\bigoast $\\[6pt]
+   \FiveStar, \FiveStarCenterOpen, \FiveStarConvex \\[6pt]
+   \EightStar, \EightStarTaper, \SixStar \\[6pt]
+   \ding{65}, \ding{80}, \ding{81}, \ding{107}
 \end{document}
