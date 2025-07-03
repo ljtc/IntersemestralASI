@@ -10,8 +10,11 @@
 \usepackage{ifthen}
 %\usepackage{truthtable} %para las tablas de verdad
 \usepackage[x11names, table]{xcolor}
+\usepackage[most]{tcolorbox}
 \usepackage[colorlinks=true, allcolors=VioletRed2]{hyperref}
 \newcommand{\customRef}[2]{\hyperref[#1]{#2~\ref*{#1}}}
+\usepackage{newunicodechar}
+\newunicodechar{¿}{?`}
 
 \usepackage{scrlayer-scrpage}
     \clearpairofpagestyles
@@ -49,14 +52,6 @@
 \DeclarePairedDelimiterX\Set[1]\{\}{\renewcommand\given{\SetSymbol[\delimsize]}#1}
 \DeclarePairedDelimiterX\Par[1](){#1}
 
-\newcounter{Ejer}
-\newcounter{Pts}
-\setcounter{Ejer}{1}
-\setcounter{Pts}{1}
-\newcommand{\pts}{}
-\newenvironment{ejercicio}[1]{\noindent
-    \ifthenelse{\equal{#1}{1} \OR \equal{#1}{+1}}{\renewcommand{\pts}{\textbf{(#1 pt)}}}{\renewcommand{\pts}{\textbf{(#1 pts)}}}\textbf{Ej. \theEjer} \pts\stepcounter{Ejer}}{\vspace{.3cm}}
-
 %Comandos que utilizamos
 \newcommand{\id}{\mathrm{id}}
 \newcommand{\op}{{}^{\mathrm{op}}}
@@ -70,6 +65,13 @@
 \definecolor{azul}{RGB}{0, 60, 113}
 \definecolor{dorado}{RGB}{196, 151, 57}
 \definecolor{morado}{RGB}{101, 43, 145}
+%Marcador
+    \newcommand{\marker}[2][Gold2]{
+        \ifmmode
+        \tcbox[on line,boxrule=0pt,colframe=#1!30,colback=#1!30,arc=2mm,left=0pt,right=0pt,top=.7pt,bottom=.7pt]{\ensuremath{#2}}%
+        \else
+        \tcbox[on line,boxrule=0pt,colframe=#1!30,colback=#1!30,arc=2mm,left=0pt,right=0pt,top=.7pt,bottom=.7pt]{#2}%
+        \fi}
 
 %Cajas para teoremas y esas cosas
 \usepackage{thmtools}
@@ -80,6 +82,8 @@
 \newmdtheoremenv[backgroundcolor=RoyalBlue2!10]{recordatorio}[definicion]{Recordatorio}
 \newmdtheoremenv[backgroundcolor=teal!10]{teorema}[definicion]{Teorema}
 \newmdtheoremenv[backgroundcolor=dorado!10]{observacion}[definicion]{Observación}
+\newmdtheoremenv[backgroundcolor=Salmon1!10]{ejemplo}[definicion]{Ejemplo}
+\newmdtheoremenv[backgroundcolor=Bisque4!10]{ejercicio}[definicion]{Ejercicio Moral}
 
 %Entorno de Demostración y Solución
 \renewcommand\qedsymbol{$\blacksquare$}
@@ -133,7 +137,7 @@
             \item Para todo $a \in A$, existe un único $b \in B$ tal que $a \mathrel{f} b$, \textit{como tal $b$ es único, se le puede dar una notación especial: $f(a)$}.
         \end{enumerate}
         Cuando $f$ sea función de $A$ en $B$, se escribirá $f: A \to B$. Además, se conviene que:
-        \begin{enumerate} \setcounter{enumi}{3}
+        \begin{enumerate}\setcounter{enumi}{2}
             \item \textbf{UN codominio} para $f$ es cualquier conjunto $Y$ de modo que $\ima(f) \subseteq Y$.
         \end{enumerate}
     \end{definicion}
@@ -168,6 +172,12 @@
         \end{enumerate}
     \end{definicion}
 
+    \begin{observacion}
+        Para todo conjunto $A$, la función identidad $\id_A:A \to A$ definida por $\id_A(x)=x$ es biyectiva, pues es inyectiva y sobreyectiva (en $A$).
+
+        Lo anterior funciona incluso si $A=\emptyset$ (¿por qué?).
+    \end{observacion}
+
     
 
     \section{Funciones y subconjuntos}
@@ -188,7 +198,9 @@
 
     \begin{observacion}
         Tomar elementos en cualquier imagen directa $f[\bigstar]$ se traduce a lo siguiente:
-        \[ l \in f[\bigstar] \iff \exists x \in \bigstar \big( l=f(x) \big) \]
+        \begin{equation}\label{directa}
+            l \in f[\bigstar] \iff \exists x \in \bigstar \big( l=f(x) \big)
+        \end{equation}
 
         Además, siempre que se tenga un elemento $y \in A$ se cumplirá:
         \[ y \in \bigstar \Rightarrow f(y) \in f[\bigstar] \]
@@ -197,7 +209,7 @@
 
     En clase se demostró lo siguiente:
     \begin{teorema}
-        Sean $f:A \to B$ una función y $X, Y \subseteq A$ arbitrario. Entonces:
+        Sean $f:A \to B$ una función y $X, Y \subseteq A$ arbitrarios. Entonces:
         \begin{enumerate}
             \item $f[\emptyset]=\emptyset$.
             \item $f[A]=f[\dom(f)]=\ima(f)$.
@@ -215,23 +227,154 @@
         \[ f^{-1}[Y]:=\{ x \in X \tq f(x) \in Y \} \]
     \end{definicion}
 
-    
+    Desde ya se nota que la imagen inversa es más ``amigable'' que la imagen directa, pues si se tiene un elemento $x$ en una imagen inversa $f^{-1}[\bigstar]$, no hay necesidad de ``involucrar'' un tercer elemento (además de $x$ y $\bigstar$), como sí ocurre en la \customRef{directa}{equivalencia}.
 
+    \begin{observacion}
+        Tomar elementos en una imagen inversa $f^{-1}[\bigstar]$ se traduce a lo siguiente:
+        \begin{equation}\label{inversa}
+            x \in f^{-1}[\bigstar] \iff f(x) \in \bigstar
+        \end{equation}
 
+        \textit{Pensando muy, muy, muuuuuy informalmente, la equivalencia anterior se puede pensar como un ``depeje'' de $f$ en las pertenencias correspondientes.}
+    \end{observacion}
 
-    \newpage
+    Como muestra de que la imagen inversa se comporta ``mejor'' que la imagen directa, consideremos el siguiente argumento: Si $f:A \to B$ y $X,Y \subseteq B$, entonoces debe ocurrir que $f^{-1}[X \cap Y] = f^{-1}[X] \cap f^{-1}[Y]$, pues para todo (objeto matemático) $x$ se tiene:
+    \begin{align*}
+        x \in f^{-1}[X \marker[Maroon1]{\cap} Y] & \Leftrightarrow f(x) \in X \marker[Maroon1]{\cap} Y \tag*{Def. de imagen inversa} \\
+        & \Leftrightarrow f(x) \in X \marker[SeaGreen4]{\land} f(x) \in Y \tag*{Def. de intersección} \\
+        & \Leftrightarrow x \in f^{-1}[X] \marker[SeaGreen4]{\land} x \in f^{-1}[X] \tag*{Def. de imagen inversa} \\
+        & \Leftrightarrow x \in f^{-1}[X] \marker[Maroon1]{\cap} f^{-1}[X] \tag*{Def. de intersección}
+    \end{align*}
+
+    Por lo tanto, $\forall x \big( x \in f^{-1}[X \cap Y] \leftrightarrow x \in f^{-1}[X] \cap f^{-1}[X] \big)$, mostrando la igualdad deseada.
+
+    Nótese que en la justificación anterior, itercambiar $\marker[Maroon1]{\cap}$ por $\marker[Maroon1]{\cup}$ y $\marker[SeaGreen4]{\land}$ por $\marker[SeaGreen4]{\lor}$, resultaría en una argumentación suficiente para mostrar que $f^{-1}[X \cup Y] = f^{-1}[X] \cup f^{-1}[Y]$. De razonamientos similares a este se desprende lo siguiente (también demostrado en clase):
+     \begin{teorema}
+        Sean $f:A \to B$ una función y $X, Y \subseteq B$ arbitrarios. Entonces:
+        \begin{enumerate}
+            \item $f^{-1}[\emptyset]=\emptyset$.
+            \item $f^{-1}[A]=f^{-1}[B]=\dom(f)$.
+            \item $f^{-1}[A]=f^{-1}[\ima(f)]=\dom(f)$.
+            \item Si $X \subseteq Y$, entonces $f^{-1}[X] \subseteq f^{-1}[Y]$.
+            \item $f^{-1}[X \cup Y] = f^{-1}[X] \cup f^{-1}[Y]$.
+            \item $f^{-1}[X \cap Y] = f^{-1}[X] \cap f^{-1}[Y]$.
+            \item $f^{-1}[X] \setminus f^{-1}[Y] = f^{-1}[X \setminus Y]$.
+        \end{enumerate}
+    \end{teorema}
+
     \section{Composición de funciones}
     \begin{definicion}
         Sean $f: A \to B$ y $g: B \to C$ funciones. Se define la función $g \circ f:A \to C$, para cada $a \in A$, por medio de:
         \[ \big( g \circ f \big)(a) = g\big( f(a) \big) \]
     \end{definicion}
 
+    Algo que parece insignnificante es el orden de las funciones en la composición, y, cuándo tiene sentido cmponer doos funciones. Sin embargo, es bueno meditar sobre esto:
+
     \begin{observacion}
         Para que dos funcines $f$ y $g$ se puedan componer, aplicando (por ejemplo) primero $f$ y luego $g$, tal composición debe tener sentido; y para ello, es requisito que:
         \[ \ima(f) \subseteq \dom(g) \]
 
-        Es decir, basta que \textit{algún} codominio de $f$ (recordemos que hay muchos codominios), esté contenido en el dominio de $g$.
+        Es decir, basta que \textit{algún} codominio de $f$ (recordemos que hay muchos codominios), esté contenido en el dominio de $g$. Esto es, basta que $f:A \to B$ y $g:B \to Y$; o bien, que $f:A \to B$ y $g:X \to C$ bajo la condición $B \subseteq X$
     \end{observacion}
+
+    \begin{ejemplo}
+        Si $f:\mathbb{N} \to \mathbb{Z}$ y $g:\mathbb{R} \to \mathbb{R}$ son las funciones definidas por:
+        \[ f(n)=n+1 \quad \text{y} \quad g(x)=x^6 \]
+        entonces se puede realizar la composición de $f$ y luego $g$ (pues $\mathbb{Z}$, un codominio de $f$, está contenido en el dominio de $g$, $\mathbb{R}$). Así, $g \circ f : \mathbb{N} \to \mathbb{R}$, y $g$ estará dada, para cada $n \in \mathbb{N}$, por $\big( g \circ f \big) (n) = (n+1)^6$.
+    \end{ejemplo}
+
+    En clase se demostró que:
+    \begin{teorema}
+        Sean $f: A \to B$, $g: B \to C$ y $h: C \to D$ funciones. Entonces:
+        \begin{enumerate}
+            \item $(h \circ g) \circ f = h \circ (g \circ f)$.
+        \end{enumerate}
+
+        por lo que tiene sentido escribir $h \circ g \circ f$ (sin paréntesis), pues no hay riesgo de ambigüedades.
+    \end{teorema}
+
+    \begin{teorema}
+        Si $f:A \to B$ es cualquier función, entonces $f \circ \id_A = f$, y también $\id_B \circ f = f$.
+    \end{teorema}
+
+    Además se tienen los siguientes resultados en relación a la sobreyectividad e inyectividad de las funciones en términos de composicioines. Lo siguiente también se probó durante las clases:
+    
+    \begin{teorema}
+        Sean $f: A \to B$ y $g: B \to C$ cualesquiera funciones, entonces:
+        \begin{enumerate}
+            \item Si $f$ y $g$ son sobreyectivas, entonces $g \circ f$ es sobreyectiva.
+            \item Si $g \circ f$ es sobreyectiva, entonces $g$ es sobreyectiva. \textit{¿Puedes encontrar un ejemplo donnde $g \circ f$ sea sobreyectiva, pero $f$ no lo sea?}
+            \item Si $f$ y $g$ son inyectivas, entonces $g \circ f$ es inyectiva.
+            \item Si $g \circ f$ es inyectiva, entonces $f$ es inyectiva. \textit{¿Puedes encontrar un ejemplo donnde $g \circ f$ sea innyectiva, pero $g$ no lo sea?}
+        \end{enumerate}
+
+        Además, si $A\neq \emptyset$, para todo unitario (conjunto de la forma $\{*\}$) se tiene:
+        \begin{enumerate}\setcounter{enumi}{4}
+            \item Cualquier función $f:A \to \{*\}$ es sobreyectiva.
+            \item Cualquier función $g:\{*\} \to A$ es innyectiva.
+        \end{enumerate}        
+    \end{teorema}
+
+    Se tienen las siguientes definiciones:
+
+    \begin{definicion}
+        Si $f:A \to B$ es una función, se conviene que:
+        \begin{enumerate}
+            \item Una \textbf{inversa derecha para $f$} es una función $g:B \to A$ tal que $f \circ g = \id_B$.
+            \item Una \textbf{inversa izquierda para $f$} es una función $h:B \to A$ tal que $h \circ f = \id_A$.
+            \item $f$ es \textbf{cancelable por izquierda} si para cualesquiera funciones $i,j:X \to A$ se tiene que: $f \circ i = f \circ j \Rightarrow i=j$.
+            \item $f$ es \textbf{cancelable por derecha} si para cualesquiera funciones $k,l:B \to Y$ se tiene que: $k \circ f = l \circ f \Rightarrow k=l$.
+        \end{enumerate}
+    \end{definicion}
+
+    El siguiente teorema se demostró en clase y es clave para tener distintas formas de pensar a las funciones sobreyectivas:
+
+    \begin{teorema}\label{teo:sobre}
+        Sean $f:A \to B$ una función. Entonces, las siguientes condiciones son equivalentes:
+        \begin{enumerate}
+            \item $f$ es sobreyectiva.
+            \item Existe una inversa derecha para $f$.
+            \item $f$ es cancelable por derecha.
+        \end{enumerate}
+    \end{teorema}
+
+    \section{Algunas Tareas Morales (que recordamos, je je)}
+
+    \begin{ejercicio}
+        Demostrar que si $f:A \to B$ es una función, entonces:
+        \begin{enumerate}
+            \item Para cualquier familia indexada $\{ X_i \tq i \in I\}$ de subconjuntos de $A$, se tiene que:
+            \[ f\left[ \bigcup_{i \in I} X_i \right] = \bigcup_{i \in I} f[X_i] \]
+            \item Para cualquier familia indexada $\{ Y_i \tq j \in J\}$ de subconjuntos de $B$, se tiene que:
+            \[ f^{-1}\left[ \bigcup_{i \in I} X_i \right] = \bigcup_{i \in I} f^{-1}[X_i] \]
+            y, si la familia es no vacía:
+            \[ f^{-1}\left[ \bigcap_{i \in I} X_i \right] = \bigcap_{i \in I} f^{-1}[X_i] \]
+        \end{enumerate}
+    \end{ejercicio}
+
+    \begin{ejercicio}
+        Sea $f:A \to B$ cualquiera, demostrar que:
+        \begin{enumerate}
+            \item Para cada $X \subseteq A$ se tiene $X \subseteq f^{-1}\big[ f[X] \big]$, pero no siempre ocurre que $f^{-1}\big[ f[X] \big] \subseteq X$ (dar un contraejemplo para esto último).
+            \item Para cada $Y \subseteq B$ se tiene $f\big[ f^{-1}[Y] \big] \subseteq Y$, pero no siempre ocurre que $Y \subseteq f\big[ f^{-1}[Y] \big]$ (dar un contraejemplo para esto último).
+        \end{enumerate}
+    \end{ejercicio}
+
+    Se dejó pensar en el teorema análogo al \autoref{teo:sobre}, es decir:
+    \begin{ejercicio}
+        Sean $f:A \to B$ una función. Entonces, las siguientes condiciones son equivalentes:
+        \begin{enumerate}
+            \item $f$ es inyectiva.
+            \item Existe una inversa derecha para $f$.
+            \item $f$ es cancelable por derecha.
+        \end{enumerate}
+
+        Recordemos que (i) $\Leftrightarrow$ (ii) ya se probó en clase, así que basta verificar la equivalencia de cualquiera de ellas con (iii).
+    \end{ejercicio}
+
+
+
+
     
     
 
