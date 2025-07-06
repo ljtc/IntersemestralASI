@@ -1,8 +1,82 @@
-\documentclass{article}
-\usepackage{MnSymbol,bbding,pifont}
+\documentclass{scrartcl}
+\usepackage[spanish]{babel}
+\usepackage{amsmath,amssymb}
+\usepackage[most]{tcolorbox}
+\usepackage{xparse} % Para redefinir el entorno
+\usepackage{xcolor}
+\usepackage{etoolbox}
+
+\usepackage{thmtools}
+\usepackage[framemethod=TikZ]{mdframed}
+\mdfsetup{innertopmargin=-2pt, innerbottommargin=5pt, roundcorner=5pt, linewidth=0}
+
+% Definimos el estilo base para los teoremas
+\mdfdefinestyle{estiloteorema}{
+  backgroundcolor=teal!10,
+  linecolor=teal,
+  linewidth=1pt,
+  innertopmargin=10pt,
+  innerbottommargin=10pt,
+  innerrightmargin=10pt,
+  innerleftmargin=10pt,
+  skipabove=10pt,
+  skipbelow=10pt,
+  frametitleaboveskip=5pt,
+  frametitlebelowskip=5pt,
+  frametitlefont=\normalfont\bfseries,
+}
+
+% Definimos el entorno con título opcional personalizado
+\NewDocumentEnvironment{teorema}{O{} +b}
+  {
+    \refstepcounter{definicion}%
+    \begin{mdframed}[style=estiloteorema, frametitle={%
+      \textbf{Teorema~\thedefinicion%
+      \ifstrempty{#1}{}{~(\textbf{#1})}}}]
+  }
+  {
+    #2
+    \end{mdframed}
+  }
+
+% Contador compartido con definiciones
+\newcounter{definicion}
+\renewcommand{\thedefinicion}{\arabic{definicion}}
+
+% Ejemplo adicional: definición
+\mdfdefinestyle{estilodefinicion}{
+  backgroundcolor=morado!10,
+  linecolor=purple,
+  linewidth=1pt,
+  innertopmargin=10pt,
+  innerbottommargin=10pt,
+  innerrightmargin=10pt,
+  innerleftmargin=10pt,
+  skipabove=10pt,
+  skipbelow=10pt,
+  frametitlefont=\normalfont\bfseries,
+}
+
+\NewDocumentEnvironment{definicion}{O{} +b}
+  {
+    \refstepcounter{definicion}%
+    \begin{mdframed}[style=estilodefinicion, frametitle={%
+      \textbf{Definición~\thedefinicion%
+      \ifstrempty{#1}{}{~(\textbf{#1})}}}]
+  }
+  {
+    #2
+    \end{mdframed}
+  }
+
 \begin{document}
-   $ \pentagram,\;\bigotimes,\;\bigoast $\\[6pt]
-   \FiveStar, \FiveStarCenterOpen, \FiveStarConvex \\[6pt]
-   \EightStar, \EightStarTaper, \SixStar \\[6pt]
-   \ding{65}, \ding{80}, \ding{81}, \ding{107}
+
+\begin{teorema}[Hola]\label{TeoIso}
+Cualquier función \( f : A \to B \) se puede escribir como composición.
+\end{teorema}
+
+\begin{definicion}[Morfismo]
+Una función entre conjuntos con estructura que la respeta.
+\end{definicion}
+
 \end{document}
