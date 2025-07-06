@@ -14,6 +14,7 @@
 \usepackage[colorlinks=true, allcolors=VioletRed2]{hyperref}
 \usepackage{newunicodechar}
 \newunicodechar{¿}{?`}
+\usepackage{float}
 %\usepackage{multicol}
 %\usepackage{paracol}
 \usepackage[shortlabels]{enumitem}
@@ -97,7 +98,7 @@
         \hfill Ayudante: Hugo Víctor García Martínez.
     \end{flushright}
 
-    \noindent\textit{\textbf{Instrucciones.} Resuelve los siguientes ejercicios. Esta tarea es individual y deberá ser entregada presencialmente, durante la clase del \textbf{lunes 28 de julio.} \vspace{.4cm}}
+    \noindent\textit{\textbf{Instrucciones.} Resuelve los siguientes ejercicios. Esta tarea es individual y deberá ser entregada \textbf{presencialmente}, durante la clase del \textbf{lunes 28 de julio.} \vspace{.4cm}}
 
     La idea de esta tarea es demostrar la versión para conjuntos de uno de los resultados más importantes en matemáticas; el Primer Teorema de Isomorfismo de Noether\footnote{Emmy Noether (1882-1935) fue una matemática alemana reconocida por sus contribuciones fundamentales en la física; y claro, en las matemáticas, particularlemten sobre el álgebra abstracta. Existen muchos resultados que llevan su nombre en su honor, y el de esta tarea es la versión para conjuntos de uno de ellos.}. Existen versiones de este teorema para áreas como la Teoría de Grupos, la Teoría de Anillos, la Topología, etcétera; pero la formulación que se deemostrará en esta tarea es la siguiente:
 
@@ -140,7 +141,7 @@
         Demuestra que la función $\hat{f}:A \to f[A]$ siempre es función sobreyectiva; y concluye que, si $f:A \to B$ es inyectiva, entonces $\hat{f}:A \to f[A]$ es biyectiva.
     \end{ejercicio}
 
-    Por lo tanto, la no sobreyectividad de $f$ no representa un obstáculo grande al momento de demostrar el \author{teo:primero}; esto es porque, $f:A \to B$ se puede pensar como primero aplicar $\hat{f}:A \to f[A]$ y luego una función que tome cada punto en $f[A]$ y, sin hacerele nada, lo piense como punto de $B$. Las funciones que se encargan de esto último se llaman ``inclusiones'', y su definición es la siguiente:
+    Por lo tanto, la no sobreyectividad de $f$ no representa un obstáculo grande al momento de demostrar el \autoref{teo:primero}; esto es porque, $f:A \to B$ se puede pensar como primero aplicar $\hat{f}:A \to f[A]$ y luego una función que tome cada punto en $f[A]$ y, sin hacerele nada, lo piense como punto de $B$. Las funciones que se encargan de esto último se llaman ``inclusiones'', y su definición es la siguiente:
 
     \begin{definicion}
         Si $X$ y $Y$ son conjuntos tales que $X \subseteq Y$, definimos la \textit{inclusión} de $X$ en $Y$ como la función $i_{X,Y}:X \to Y$ definida para cada $x \in X$ como $i_{X,Y}(x) = x$.
@@ -156,7 +157,7 @@
         \end{enumerate}
     \end{ejercicio}
 
-    Por lo tanto, ya hemos resuelto una pqueña parte del problema que nos ataña, pues hemos demostrado que cualquier función $f:A \to B$ se puede escribir como composición de una sobreyección y una inyección, es decir, en términos del \hyperref[eq:obj]{Diagrama~\ref*{eq:obj}}, tenemos descubierto quiénes deberían ser $U$ e $i$:
+    Por lo tanto, ya hemos resuelto una pqueña parte del problema que nos ataña, pues hemos demostrado que cualquier función $f:A \to B$ se puede escribir como composición de una sobreyección y una inyección, es decir, en términos del \hyperref[eq:obj]{Diagrama~\ref*{eq:obj}}, tenemos descubierto quiénes deberían ser $V$ e $i$:
     \begin{equation}\label{eq:hat}
         \begin{tikzcd}
             A && B \\
@@ -175,93 +176,94 @@
     \section*{``Inyectivizando'' una función}
 
     Una vez resuelto el problema de la sobreyectividad, el siguiente obstáculo es la inyectividad. ¿Cómo se puede transformar una función no inyectiva en otra que sí sea biyectiva?. Imaginemos el siguiente caso particular:
-    \begin{center}
-        \begin{tikzpicture}
-            \draw[DodgerBlue3, fill=DodgerBlue3!10, line width=2pt] (0,-.5) ellipse (0.8cm and 2.8cm);
-            \draw[Chartreuse4, fill=Chartreuse4!10, line width=2pt] (5,-.5) ellipse (0.8cm and 2cm);
+    \begin{figure}[H]\label{fig:ejemplo}
+        \begin{center}
+            \begin{tikzpicture}
+                \draw[DodgerBlue3, fill=DodgerBlue3!10, line width=2pt] (0,-.5) ellipse (0.8cm and 2.8cm);
+                \draw[Chartreuse4, fill=Chartreuse4!10, line width=2pt] (5,-.5) ellipse (0.8cm and 2cm);
 
-            \node at (0,3) {$X=\{0,1,2,3,4\}$};
-            \node at (5,3) {$Y=\{a,b,c\}$};
+                \node at (0,3) {$X=\{0,1,2,3,4\}$};
+                \node at (5,3) {$Y=\{a,b,c\}$};
 
-            \node at (0,1.5) {$0$};
-            \node at (0,.5) {$1$};
-            \node at (0,-.5) {$2$};
-            \node at (0,-1.5) {$3$};
-            \node at (0,-2.5) {$4$};
+                \node at (0,1.5) {$0$};
+                \node at (0,.5) {$1$};
+                \node at (0,-.5) {$2$};
+                \node at (0,-1.5) {$3$};
+                \node at (0,-2.5) {$4$};
 
-            \node at (5,.5) {$a$};
-            \node at (5,-.5) {$b$};
-            \node at (5,-1.5) {$c$};
+                \node at (5,.5) {$a$};
+                \node at (5,-.5) {$b$};
+                \node at (5,-1.5) {$c$};
 
-            \draw[-latex] (.2,1.5) -- (4.8,.5);
-            \draw[-latex] (.2,.5) -- (4.8,.5);
-            \draw[-latex] (.2,-.5) -- (4.8,-1.5);
-            \draw[-latex] (.2,-1.5) -- (4.8,-.5);
-            \draw[-latex] (.2,-2.5) -- (4.8,-1.5);
+                \draw[-latex] (.2,1.5) -- (4.8,.5);
+                \draw[-latex] (.2,.5) -- (4.8,.5);
+                \draw[-latex] (.2,-.5) -- (4.8,-1.5);
+                \draw[-latex] (.2,-1.5) -- (4.8,-.5);
+                \draw[-latex] (.2,-2.5) -- (4.8,-1.5);
 
-            \draw[->, thick] (1.7,3) -- (3.8,3)  node[midway, above] {$g$};
-        \end{tikzpicture}
-    \end{center}
+                \draw[->, thick] (1.7,3) -- (3.8,3)  node[midway, above] {$g$};
+            \end{tikzpicture}
+        \end{center}
+        \caption{Ejemplo particular de función}
+    \end{figure}
 
-    Aunque el dominio de $g$ conste de cinco puntos, se puede pensar que $g$ aplica únicamente tres reglas: \textit{mandar hacia $a$, mandar hacia $b$} o \textit{mandar hacia $c$}, según sea el caso. Por lo cual, podemos clasificar a los elemenetos de $X$ en tres grupos: los que se mandan a $a$, los que se mandan a $b$ y los que se mandan a $c$ bajo $g$. Tal clasificación resulta en tres \textit{clases}: $\{0,1\}$, $\{3\}$ y $\{2,4\}$. Notemos que la manera de construir estas clases fue exactamente considerando $g^{-1}[\{a\}]$, $g^{-1}[\{b\}]$ y $g^{-1}[\{c\}]$.
-
-    Por ello, en este ejemplo particular, dos elementos $x,y \in X$ pertenecerán a la misma clase (es decir a $\{0,1\}$, $\{3\}$ o $\{2,4\}$) únicamente cuando $g(x)=g(y)$.
+    Aunque el dominio de $g$ conste de cinco puntos, se puede pensar que $g$ aplica únicamente tres reglas: \textit{mandar hacia $a$, mandar hacia $b$} o \textit{mandar hacia $c$}, según sea el caso. Por lo cual, podemos clasificar a los elementos de $X$ en tres \textit{clases}: los que se mandan a $a$, los que se mandan a $b$ y los que se mandan a $c$ bajo $g$. Tal clasificación resulta en: $\{0,1\}=g^{-1}[\{a\}]$, $\{3\}=g^{-1}[\{b\}]$ y $\{2,4\}=g^{-1}[\{c\}]$, respectivamente.
 
     \begin{definicion}
         Definimos la relación $\sim$ en $A$ como: $ x \sim y \; \text{si y sólo si} \; f(x)=f(y)$
     \end{definicion}
 
     \begin{ejercicio}{1.5}\label{ej:rela}
-        Por un ejercicio de las taras (\textit{¿cuál?}) $\sim$ es de equivalencia. Demuestra la igualdad de conjuntos: $\quot{A}{\sim}=\{ f^{-1}[\{b\}] \tq b \in f[A] \}$.
+        Por un ejercicio de las taras (\textit{¿cuál?}), la relación $\sim$ es de equivalencia. Demuestra la igualdad de conjuntos: $\quot{A}{\sim}=\{ f^{-1}[\{b\}] \tq b \in f[A] \}$.
     \end{ejercicio}
 
-    Retomando el ejemplo particular de $g$, se nota que:
+    Retomando el ejemplo particular de $g$ \hyperref[fig:ejemplo]{Figura~1}, se nota que:
     \begin{enumerate}
         \item Se puede mandar cada elemento $x\in X$ a su clase de equivalencia, por ejemplo $1$ a $\{0,1\}$.
         \item Cada clase surge de agrupar los elementos de $X$ según $g$ actúa en ellos. Luego, a la clase $\{0,1\}=g^{-1}[\{a\}]$ se le puede asignar el valor $a \in Y$ (pues esta clase se construyó como todos aquellos elementos de $X$ que al aplicarles $g$ daban $a$); a la calse $\{3\}=g^{-1}[\{b\}]$ se le puede asignar $b$ y a la clase $\{2,4\}=g^{-1}[\{c\}]$ se le puede asignar $c$.
     \end{enumerate}
-    \begin{figure}[h]\label{fig:g}
+    \begin{figure}[H]\label{fig:g}
         \begin{center}
-        \begin{tikzpicture}
-            \draw[DodgerBlue3, fill=DodgerBlue3!10, line width=2pt] (0,-.5) ellipse (0.8cm and 2.8cm);
-            \draw[Goldenrod3, fill=Goldenrod3!10, line width=2pt] (5,-.5) ellipse (2.3cm and 2cm);
-            \draw[Chartreuse4, fill=Chartreuse4!10, line width=2pt] (10,-.5) ellipse (0.8cm and 2cm);
+            \begin{tikzpicture}
+                \draw[DodgerBlue3, fill=DodgerBlue3!10, line width=2pt] (0,-.5) ellipse (0.8cm and 2.8cm);
+                \draw[Goldenrod3, fill=Goldenrod3!10, line width=2pt] (5,-.5) ellipse (2.3cm and 2cm);
+                \draw[Chartreuse4, fill=Chartreuse4!10, line width=2pt] (10,-.5) ellipse (0.8cm and 2cm);
 
-            \node at (0,3) {$X=\{0,1,2,3,4\}$};
-            \node at (5,-3) {$\quot{X}{\sim}$};
-            \node at (10,3) {$Y=\{a,b,c\}$};
+                \node at (0,3) {$X=\{0,1,2,3,4\}$};
+                \node at (5,-3) {$\quot{X}{\sim}$};
+                \node at (10,3) {$Y=\{a,b,c\}$};
 
-            \node at (0,1.5) {$0$};
-            \node at (0,.5) {$1$};
-            \node at (0,-.5) {$2$};
-            \node at (0,-1.5) {$3$};
-            \node at (0,-2.5) {$4$};
+                \node at (0,1.5) {$0$};
+                \node at (0,.5) {$1$};
+                \node at (0,-.5) {$2$};
+                \node at (0,-1.5) {$3$};
+                \node at (0,-2.5) {$4$};
 
-            \node at (5,.5) {$\{0,1\}=g^{-1}[\{a\}]$};
-            \node at (5,-.5) {$\{3\}=g^{-1}[\{b\}]$};
-            \node at (5,-1.5) {$\{2,4\}=g^{-1}[\{c\}]$};
+                \node at (5,.5) {$\{0,1\}=g^{-1}[\{a\}]$};
+                \node at (5,-.5) {$\{3\}=g^{-1}[\{b\}]$};
+                \node at (5,-1.5) {$\{2,4\}=g^{-1}[\{c\}]$};
 
-            \node at (10,.5) {$a$};
-            \node at (10,-.5) {$b$};
-            \node at (10,-1.5) {$c$};
+                \node at (10,.5) {$a$};
+                \node at (10,-.5) {$b$};
+                \node at (10,-1.5) {$c$};
 
-            \draw[-latex] (.2,1.5) -- (3.4,.5);
-            \draw[-latex] (.2,.5) -- (3.4,.5);
-            \draw[-latex] (.2,-1.5) -- (3.55,-.5);
-            \draw[-latex] (.2,-.5) -- (3.4,-1.5);
-            \draw[-latex] (.2,-2.5) -- (3.4,-1.5);
+                \draw[-latex] (.2,1.5) -- (3.4,.5);
+                \draw[-latex] (.2,.5) -- (3.4,.5);
+                \draw[-latex] (.2,-1.5) -- (3.55,-.5);
+                \draw[-latex] (.2,-.5) -- (3.4,-1.5);
+                \draw[-latex] (.2,-2.5) -- (3.4,-1.5);
 
-            \draw[-latex] (6.6,.5) -- (9.8,.5);
-            \draw[-latex] (6.4,-.5) -- (9.8,-.5);
-            \draw[-latex] (6.6,-1.5) -- (9.8,-1.5);
+                \draw[-latex] (6.6,.5) -- (9.8,.5);
+                \draw[-latex] (6.4,-.5) -- (9.8,-.5);
+                \draw[-latex] (6.6,-1.5) -- (9.8,-1.5);
 
-            \draw[->, thick] (1.7,3) -- (8.8,3)  node[midway, above] {$g$};
-        \end{tikzpicture}
-    \end{center}
-    \caption{Descomposición de $g$ en dos procesos (o funciones).}
+                \draw[->, thick] (1.7,3) -- (8.8,3)  node[midway, above] {$g$};
+            \end{tikzpicture}
+        \end{center}
+        \caption{Descomposición de $g$ en dos procesos (o funciones).}
     \end{figure}
 
-    La imagen anterior describe dos procesos (o funciones) cuya aplicación seguida resulta en hacer exactamente lo mismo que $g$, los estudiaremos con detenimiento a través de los siguientes ejercicios. El primero de ellos, le asigna a cada $x \in X$ el conjunto de todos los puntos de $X$ que, bajo $g$, van a dar exactamente a $g(x)$. En términos de nuestra relación $\sim$:
+    La imagen anterior describe dos procesos (o funciones) cuya aplicación seguida resulta en hacer exactamente lo mismo que $g$, los estudiaremos con detenimiento a través de los siguientes ejercicios. El primero de ellos se define así:
 
     \begin{definicion}
         Definimos $s_f:A \to \quot{A}{\sim}$ por medio de: $s_f(x)=[x]$.
@@ -299,7 +301,7 @@
         \end{tikzcd}
     \end{equation}
 
-    Únicamente resta definir $b:\quot{A}{\sim} \to f[A]$ biyectiva, de modo que se tenga la composición que queremos, esto es justamente lo que representa la segunda función aplicada en la \autoref{fig:g} de el ejemplo particular. Éste puede ser pensado como asignarle a cada clase $g^{-1}[\{y\}]$ el elemento $y$. Por supuesto, hay que verificar que tal cosa es función, es decir, está bien definida. Así que a continuación la definiremos únicamente como relación; y, posteriormente se verificará que es función:
+    Únicamente resta definir $b:\quot{A}{\sim} \to f[A]$ biyectiva, de modo que se tenga la composición que queremos, esto es justamente lo que representa la segunda función aplicada en la \hyperref[fig:g]{Figura~2} de el ejemplo particular. Éste puede ser pensado como asignarle a cada clase $g^{-1}[\{y\}]$ el elemento $y$. Por supuesto, hay que verificar que tal cosa es función, es decir, está bien definida. Así que a continuación la definiremos únicamente como relación; y, posteriormente se verificará que es función:
     \begin{definicion}
         Definimos $f^* \subseteq \quot{A}{\sim} \times f[A]$ como la relación:
         \[  M f^* b \quad \text{si y sólo si} \quad \exists y \in M \big( b=f(y) \big) \]
@@ -307,7 +309,7 @@
 
     Nada (aún) garantiza que $f^*$ sea función, es decir, podría existir cierto $M \in \quot{A}{\sim}$ que se relacioine con dos elementos diferentes $b,b' \in f[A]$, es decir $M f^* b$ y $M f^* b'$, lo cual prohibiría que $f^*$ sea función.
     
-    Lo anterior no debería ocurrir, notemos que si $M \in \quot{A}{\sim}$ entonces $M=[x]$ para cierto $x \in A$. Luego, si $M f^* b$, es decir, $[x] f^* b$; por definición de $f^*$, existe $y \in [x]$ de modo que $b=f(y)$; simimilarmente, $b'=f(y')$ para algún $y'\in[x]$, a partir de aquí ¿Cómo garantizamos que $b=b'$?...
+    Lo anterior no debería ocurrir, notemos que si $M \in \quot{A}{\sim}$ entonces $M=[x]$ para cierto $x \in A$. Luego, si $M f^* b$, es decir, $[x] f^* b$; por definición de $f^*$, existe $y \in [x]$ de modo que $b=f(y)$; simimilarmente, $b'=f(y')$ para algún $y'\in[x]$, a partir de aquí ¿Cómo se tiene la garantía de que $b=b'$?...
 
     \begin{ejercicio}{1.5}\label{ej:fStar}
         Completa la demostración empezada en el párrafo anterior; es decir, prueba que $f^*$ es función de $\quot{A}{\sim}$ en $f[A]$ mostrando que:
@@ -361,6 +363,8 @@
             f & = i_{f[A],B} \; \circ \; k \; \circ \; s_f
         \end{align*}
         entonces $j=k$ (y por tanto ambas deben ser $f^*$).
+        
+        \textit{Hint: Recuerde que una función es sobreyectiva si y sólo si tiene...; y, es inyectiva si y sólo si tiene...}
     \end{ejercicio}
 
 
