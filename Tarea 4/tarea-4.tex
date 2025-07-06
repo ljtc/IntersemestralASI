@@ -1,13 +1,10 @@
 \documentclass[letterpaper,DIV=14,headsepline,12pt]{scrartcl}
-\usepackage[spanish,mexico,shorthands=off,es-lcroman]{babel}
+\usepackage[spanish,mexico,shorthands=off,es-noindentfirst]{babel}
 \usepackage{stix2}
 \usepackage{mathtools}
 \usepackage{amsthm}
 \usepackage{tikz-cd}
-\tikzcdset{
-  font=\normalsize,
-  every label/.append style = {font=\small}
-}
+\tikzcdset{ font=\normalsize, every label/.append style = {font=\small} }
 \usepackage{ifthen}
 \usepackage[x11names, table]{xcolor}
 \usepackage[most]{tcolorbox}
@@ -15,16 +12,15 @@
 \usepackage{newunicodechar}
 \newunicodechar{¿}{?`}
 \usepackage{float}
-%\usepackage{multicol}
-%\usepackage{paracol}
+%\usepackage{multicol} \usepackage{paracol}
 \usepackage[shortlabels]{enumitem}
 \setenumerate[1]{label=\MakeLowercase{\roman*}), ref=\roman*}
 \setenumerate[2]{label=\MakeLowercase{\arabic*}), ref=\alph*}
 
 \usepackage{scrlayer-scrpage}
     \clearpairofpagestyles
-    \ihead{\footnotesize \textit{Álgebra Superior I}}
-    \ohead{\footnotesize \textit{Intersemestral 2025-4}}
+    \ihead{\footnotesize \textit{Álgebra Superior I}} \ohead{\footnotesize
+    \textit{Intersemestral 2025-4}}
     \cfoot{\normalfont\thepage}
     \addtokomafont{title}{\bfseries \rmfamily}
     \setlength{\headsep}{5pt}
@@ -45,12 +41,15 @@
 \definecolor{dorado}{RGB}{196, 151, 57}
 \definecolor{morado}{RGB}{101, 43, 145}
 %Marcador
-    \newcommand{\marker}[2][Gold2]{
-        \ifmmode
-        \tcbox[on line,boxrule=0pt,colframe=#1!30,colback=#1!30,arc=2mm,left=0pt,right=0pt,top=.7pt,bottom=.7pt]{\ensuremath{#2}}%
-        \else
-        \tcbox[on line,boxrule=0pt,colframe=#1!30,colback=#1!30,arc=2mm,left=0pt,right=0pt,top=.7pt,bottom=.7pt]{#2}%
-        \fi}
+\newcommand{\marker}[2][Gold2]{
+    \ifmmode
+    \tcbox[on
+    line,boxrule=0pt,colframe=#1!30,colback=#1!30,arc=2mm,left=0pt,right=0pt,top=.7pt,bottom=.7pt]{\ensuremath{#2}}%
+    \else
+    \tcbox[on
+    line,boxrule=0pt,colframe=#1!30,colback=#1!30,arc=2mm,left=0pt,right=0pt,top=.7pt,bottom=.7pt]{#2}%
+    \fi
+}
 
 %Cajas para teoremas y esas cosas
 \usepackage{thmtools}
@@ -61,16 +60,21 @@
 \newmdtheoremenv[backgroundcolor=gray!10]{ejj}{Ej}
 
 \newcommand{\pts}{}
-\newenvironment{ejercicio}[1]{\ifthenelse{\equal{#1}{1} \OR \equal{#1}{+1}}{\renewcommand{\pts}{\textbf{(#1 pt)}}}{\renewcommand{\pts}{\textbf{(#1 pts)}}}\begin{ejj}\upshape \pts}{\end{ejj}}
+\newenvironment{ejercicio}[1]{\ifthenelse{\equal{#1}{1} \OR
+\equal{#1}{+1}}{\renewcommand{\pts}{\textbf{(#1
+pt)}}}{\renewcommand{\pts}{\textbf{(#1 pts)}}}\begin{ejj}\upshape
+\pts}{\end{ejj}}
 
 %Ejercicios
 
 %\newenvironment{ejercicio}[1]{\vspace{.3cm}\noindent
-    %\ifthenelse{\equal{#1}{1} \OR \equal{#1}{+1}}{\renewcommand{\pts}{\textbf{(#1 pt)}}}{\renewcommand{\pts}{\textbf{(#1 pts)}}}\textbf{Ej. \theEjer} \pts\stepcounter{Ejer}}{\vspace{.3cm}}
+    %\ifthenelse{\equal{#1}{1} \OR
+    %\equal{#1}{+1}}{\renewcommand{\pts}{\textbf{(#1
+    %pt)}}}{\renewcommand{\pts}{\textbf{(#1 pts)}}}\textbf{Ej. \theEjer}
+    %\pts\stepcounter{Ejer}}{\vspace{.3cm}}
 
 % Para escribir el "tal que" de los conjuntos
-\providecommand\st{\;|\;}
-\providecommand\tq{\;|\;}
+\providecommand\st{\;|\;} \providecommand\tq{\;|\;}
 
 %Para el uso de \Set y \Set*
 \providecommand\given{}
@@ -79,31 +83,51 @@
 \DeclarePairedDelimiterX\Par[1](){#1}
 
 %Comandos que utilizamos
-\newcommand{\id}{\mathrm{id}}
-\newcommand{\op}{{}^{\mathrm{op}}}
+\newcommand{\id}{\mathrm{id}} \newcommand{\op}{{}^{\mathrm{op}}}
 \newcommand{\set}[1]{\{#1\}}
 \renewcommand{\emptyset}{\varnothing}
-\DeclareMathOperator{\ima}{ima}
-\DeclareMathOperator{\dom}{dom}
+\DeclareMathOperator{\ima}{ima} \DeclareMathOperator{\dom}{dom}
 \newcommand{\quot}[2]{{\raisebox{.2em}{$#1$}\left/\raisebox{-.2em}{$#2$}\right.}}
+
+
+%Corrección de las flechas de tikz-cd
+\tikzcdset{arrow style=math font}
+\tikzcdset{every arrow/.append style={line width=0.068em}}%ancho
+\pgfmathdeclarefunction*{axis_height}{0}{%
+    \begingroup%      
+      \pgfmathreturn0.259em \endgroup}% 
 
 \begin{document}
 
     \begin{center}
-        {\fontsize{30}{60}\rmfamily \textbf{Tarea 4}} \\ \vspace{.2cm}
-        Álgebra Superior 1, 2025-4
+        {\fontsize{30}{60}\rmfamily \textbf{Tarea 4}} \\ \vspace{.2cm} Álgebra
+        Superior 1, 2025-4
     \end{center}
     \begin{flushright}
         \footnotesize \hfill Profesor: Luis Jesús Trucio Cuevas.\\
         \hfill Ayudante: Hugo Víctor García Martínez.
     \end{flushright}
 
-    \noindent\textit{\textbf{Instrucciones.} Resuelve los siguientes ejercicios. Esta tarea es individual y deberá ser entregada \textbf{presencialmente}, durante la clase del \textbf{lunes 28 de julio.} \vspace{.4cm}}
+    \noindent\textit{\textbf{Instrucciones.} Resuelve los siguientes ejercicios.
+    Esta tarea es individual y deberá ser entregada \textbf{presencialmente},
+    durante la clase del \textbf{lunes 28 de julio.} \vspace{.4cm}}
 
-    La idea de esta tarea es demostrar la versión para conjuntos de uno de los resultados más importantes en matemáticas; el Primer Teorema de Isomorfismo de Noether\footnote{Emmy Noether (1882-1935) fue una matemática alemana reconocida por sus contribuciones fundamentales en la física; y claro, en las matemáticas, particularlemten sobre el álgebra abstracta. Existen muchos resultados que llevan su nombre en su honor, y el de esta tarea es la versión para conjuntos de uno de ellos.}. Existen versiones de este teorema para áreas como la Teoría de Grupos, la Teoría de Anillos, la Topología, etcétera; pero la formulación que se deemostrará en esta tarea es la siguiente:
+    La idea de esta tarea es demostrar la versión para conjuntos de uno de los
+    resultados más importantes en matemáticas; el Primer Teorema de Isomorfismo
+    de Noether\footnote{Emmy Noether (1882-1935) fue una matemática alemana
+    reconocida por sus contribuciones fundamentales en la física; y claro, en
+    las matemáticas, particularlemten en álgebra abstracta. Existen muchos
+    resultados que llevan su nombre en su honor, y el de esta tarea es la
+    versión para conjuntos de uno de ellos.}. Existen versiones de este teorema
+    para áreas como la Teoría de Grupos, la Teoría de Anillos, la Topología,
+    etcétera; pero la formulación que se deemostrará en esta tarea es la
+    siguiente:
 
     \begin{teorema}[Primero de Isomorfismo de Noehter]\label{teo:primero}
-        Cualquier función $f:A \to B$ se puede escribir como composición de: una sobreyección, una biyección y una inyección. Es decir, existen conjuntos $X$ y $Y$, y funciones $s:A \to U$ sobreyectiva, $b:U \to V$ biyectiva e $i:V \to B$ inyectiva, tales que $f = i \circ s \circ b$.
+        Cualquier función $f\colon A \to B$ se puede escribir como composición
+        de: una sobreyección, una biyección y una inyección. Es decir, existen
+        conjuntos $X$ y $Y$, y funciones $s\colon A \to U$ sobreyectiva, $b\colon U \to V$
+        biyectiva e $i\colon V \to B$ inyectiva, tales que $f = i \circ s \circ b$.
         \begin{equation}\label{eq:obj}
             \begin{tikzcd}
             A && B \\
@@ -117,16 +141,28 @@
         \end{equation}
     \end{teorema}
 
-    \textit{\textbf{Nota:} Desde ahora, y durante toda la tarea, los conjuntos $A$, $B$ y la función $f:A \to B$ serán fijos (pero arbitrarios).}
+    \textit{\textbf{Nota:} Desde ahora, y durante toda la tarea, los conjuntos
+    $A$, $B$ y la función $f\colon A \to B$ serán fijos (pero arbitrarios).}
 
-    \section*{Caso Sencillo}
+    \section*{Caso sencillo}
 
-    Notemos que si $f:A \to B$ es una biyección, entonces el es sencillo, pues podemos escribir a $f$ como $\id_B \circ f \circ \id_A$ (y las identidades de $A$ y $B$ son sobreyectiva e inyectiva, respectivamente). Por lo que el verdadero problema es sabér qué ocurre si $f$ no es sobreyectiva, o, si no es inyectiva.
+    Notemos que si $f\colon A \to B$ es una biyección, entonces el
+    \autoref{teo:primero} es sencillo, pues
+    podemos escribir a $f$ como $\id_B \circ f \circ \id_A$ (y las identidades
+    de $A$ y $B$ son sobreyectiva e inyectiva, respectivamente). Por lo que el
+    verdadero problema es sabér qué ocurre si $f$ no es sobreyectiva, o, si no
+    es inyectiva.
 
-    Como, por definición, un codominio para una función es cualquier conjunto que contenga a la imagen de la función, siempre se puede pensar que una función tiene por codominio a su imagen. En este sentido, $f:A \to B$ puede ser pensada con codominio $f[A]$; lo cual permite pensar a $f$ como una función sobreyectiva. A la función $f$ pensada así, se le denotará por $\hat{f}$, esto es:
+    Como, por definición, un codominio para una función es cualquier conjunto
+    que contenga a la imagen de la función, siempre se puede pensar que una
+    función tiene por codominio a su imagen. En este sentido, $f\colon A \to B$ puede
+    ser pensada con codominio $f[A]$; lo cual permite pensar a $f$ como una
+    función sobreyectiva. A la función $f$ pensada así, se le denotará por
+    $\hat{f}$, esto es:
 
     \begin{definicion}
-        Se define $\hat{f}:B \to f[A]$ como la función $f$ pensada con codominio $f[A]$, es decir, para cada $x \in A$, $\hat{f}(x)=f(x)$.
+        Se define $\hat{f}\colon A \to f[A]$ como la función $f$ pensada con codominio
+        $f[A]$, es decir, para cada $x \in A$, $\hat{f}(x)=f(x)$.
     \end{definicion}
 
     Entonces, como conjuntos $f$ y $\hat{f}$ son iguales, pues:
@@ -137,27 +173,41 @@
     
     La única diferencia es el codominio con el que las pensamos.
 
-    \begin{ejercicio}{1}\label{ej:sobresuimagen}
-        Demuestra que la función $\hat{f}:A \to f[A]$ siempre es función sobreyectiva; y concluye que, si $f:A \to B$ es inyectiva, entonces $\hat{f}:A \to f[A]$ es biyectiva.
+    \begin{ejercicio}{1}\label{ej:sobresuimagen} Demuestra que la función
+        $\hat{f}\colon A \to f[A]$ siempre es función sobreyectiva; y concluye que, si
+        $f\colon A \to B$ es inyectiva, entonces $\hat{f}\colon A \to f[A]$ es biyectiva.
     \end{ejercicio}
 
-    Por lo tanto, la no sobreyectividad de $f$ no representa un obstáculo grande al momento de demostrar el \autoref{teo:primero}; esto es porque, $f:A \to B$ se puede pensar como primero aplicar $\hat{f}:A \to f[A]$ y luego una función que tome cada punto en $f[A]$ y, sin hacerele nada, lo piense como punto de $B$. Las funciones que se encargan de esto último se llaman ``inclusiones'', y su definición es la siguiente:
+    Por lo tanto, la no sobreyectividad de $f$ no representa un obstáculo grande
+    al momento de demostrar el \autoref{teo:primero}; esto es porque, $f\colon A \to
+    B$ se puede pensar como primero aplicar $\hat{f}\colon A \to f[A]$ y luego una
+    función que tome cada punto en $f[A]$ y, sin hacerele nada, lo piense como
+    punto de $B$. Las funciones que se encargan de esto último se llaman
+    ``inclusiones'', y su definición es la siguiente:
 
     \begin{definicion}
-        Si $X$ y $Y$ son conjuntos tales que $X \subseteq Y$, definimos la \textit{inclusión} de $X$ en $Y$ como la función $i_{X,Y}:X \to Y$ definida para cada $x \in X$ como $i_{X,Y}(x) = x$.
+        Si $X$ y $Y$ son conjuntos tales que $X \subseteq Y$, definimos la
+        \textit{inclusión} de $X$ en $Y$ como la función $i_{X,Y}\colon X \to Y$
+        definida para cada $x \in X$ como $i_{X,Y}(x) = x$.
 
-        \textit{Como conjunto, $i_{X,Y}=\id_X$, así que esta función no tendría que depender de $Y$; sin embargo, escribimos las inclusiones así para dejar en claro cuál es el codominio con el que las pensamos.}
+        \textit{Como conjunto, $i_{X,Y}=\id_X$, así que esta función no tendría
+        que depender de $Y$; sin embargo, escribimos las inclusiones así para
+        dejar en claro cuál es el codominio con el que las pensamos.}
     \end{definicion}
 
     \begin{ejercicio}{1.5}
         Demuestra que:
         \begin{enumerate}
-            \item Si $X \subseteq Y$, entonces $i_{X,Y}:X \to Y$ es inyectiva.
+            \item Si $X \subseteq Y$, entonces $i_{X,Y}\colon X \to Y$ es inyectiva.
             \item $f=i_{f[A],B} \circ \hat{f}$.
         \end{enumerate}
     \end{ejercicio}
 
-    Por lo tanto, ya hemos resuelto una pqueña parte del problema que nos ataña, pues hemos demostrado que cualquier función $f:A \to B$ se puede escribir como composición de una sobreyección y una inyección, es decir, en términos del \hyperref[eq:obj]{Diagrama~\ref*{eq:obj}}, tenemos descubierto quiénes deberían ser $V$ e $i$:
+    Por lo tanto, ya hemos resuelto una pqueña parte del problema que nos ataña,
+    pues hemos demostrado que cualquier función $f\colon A \to B$ se puede escribir
+    como composición de una sobreyección y una inyección, es decir, en términos
+    del \hyperref[eq:obj]{Diagrama~\ref*{eq:obj}}, tenemos descubierto quiénes
+    deberían ser $V$ e $i$:
     \begin{equation}\label{eq:hat}
         \begin{tikzcd}
             A && B \\
@@ -171,35 +221,36 @@
         \end{tikzcd}
     \end{equation}
 
-    Ahora falta lo más dificil, probar que $\hat{f}$ se puede descomponer como composición de una sobreyección, y luego, una biyección; es decir, falta descubrir quiénes son $s$, $b$ y $U$ en el \hyperref[eq:hat]{Diagrama~\ref*{eq:hat}}.
+    Ahora falta lo más dificil, probar que $\hat{f}$ se puede descomponer como
+    composición de una sobreyección, y luego, una biyección; es decir, falta
+    descubrir quiénes son $s$, $b$ y $U$ en el
+    \hyperref[eq:hat]{Diagrama~\ref*{eq:hat}}.
 
     \section*{``Inyectivizando'' una función}
 
-    Una vez resuelto el problema de la sobreyectividad, el siguiente obstáculo es la inyectividad. ¿Cómo se puede transformar una función no inyectiva en otra que sí sea biyectiva?. Imaginemos el siguiente caso particular:
+    Una vez resuelto el problema de la sobreyectividad, el siguiente obstáculo
+    es la inyectividad. ¿Cómo se puede transformar una función no inyectiva en
+    otra que sí sea biyectiva? Imaginemos el siguiente caso particular:
     \begin{figure}[H]\label{fig:ejemplo}
         \begin{center}
             \begin{tikzpicture}
-                \draw[DodgerBlue3, fill=DodgerBlue3!10, line width=2pt] (0,-.5) ellipse (0.8cm and 2.8cm);
-                \draw[Chartreuse4, fill=Chartreuse4!10, line width=2pt] (5,-.5) ellipse (0.8cm and 2cm);
+                \draw[DodgerBlue3, fill=DodgerBlue3!10, line width=2pt] (0,-.5)
+                ellipse (0.8cm and 2.8cm); \draw[Chartreuse4,
+                fill=Chartreuse4!10, line width=2pt] (5,-.5) ellipse (0.8cm and
+                2cm);
 
-                \node at (0,3) {$X=\{0,1,2,3,4\}$};
-                \node at (5,3) {$Y=\{a,b,c\}$};
+                \node at (0,3) {$X=\{0,1,2,3,4\}$}; \node at (5,3)
+                {$Y=\{a,b,c\}$};
 
-                \node at (0,1.5) {$0$};
-                \node at (0,.5) {$1$};
-                \node at (0,-.5) {$2$};
-                \node at (0,-1.5) {$3$};
-                \node at (0,-2.5) {$4$};
+                \node at (0,1.5) {$0$}; \node at (0,.5) {$1$}; \node at (0,-.5)
+                {$2$}; \node at (0,-1.5) {$3$}; \node at (0,-2.5) {$4$};
 
-                \node at (5,.5) {$a$};
-                \node at (5,-.5) {$b$};
-                \node at (5,-1.5) {$c$};
+                \node at (5,.5) {$a$}; \node at (5,-.5) {$b$}; \node at (5,-1.5)
+                {$c$};
 
-                \draw[-latex] (.2,1.5) -- (4.8,.5);
-                \draw[-latex] (.2,.5) -- (4.8,.5);
-                \draw[-latex] (.2,-.5) -- (4.8,-1.5);
-                \draw[-latex] (.2,-1.5) -- (4.8,-.5);
-                \draw[-latex] (.2,-2.5) -- (4.8,-1.5);
+                \draw[-latex] (.2,1.5) -- (4.8,.5); \draw[-latex] (.2,.5) --
+                (4.8,.5); \draw[-latex] (.2,-.5) -- (4.8,-1.5); \draw[-latex]
+                (.2,-1.5) -- (4.8,-.5); \draw[-latex] (.2,-2.5) -- (4.8,-1.5);
 
                 \draw[->, thick] (1.7,3) -- (3.8,3)  node[midway, above] {$g$};
             \end{tikzpicture}
@@ -207,55 +258,65 @@
         \caption{Ejemplo particular de función}
     \end{figure}
 
-    Aunque el dominio de $g$ conste de cinco puntos, se puede pensar que $g$ aplica únicamente tres reglas: \textit{mandar hacia $a$, mandar hacia $b$} o \textit{mandar hacia $c$}, según sea el caso. Por lo cual, podemos clasificar a los elementos de $X$ en tres \textit{clases}: los que se mandan a $a$, los que se mandan a $b$ y los que se mandan a $c$ bajo $g$. Tal clasificación resulta en: $\{0,1\}=g^{-1}[\{a\}]$, $\{3\}=g^{-1}[\{b\}]$ y $\{2,4\}=g^{-1}[\{c\}]$, respectivamente.
+    Aunque el dominio de $g$ conste de cinco puntos, se puede pensar que $g$
+    aplica únicamente tres reglas: \textit{mandar hacia $a$, mandar hacia $b$} o
+    \textit{mandar hacia $c$}, según sea el caso. Por lo cual, podemos
+    clasificar a los elementos de $X$ en tres \textit{clases}: los que se mandan
+    a $a$, los que se mandan a $b$ y los que se mandan a $c$ bajo $g$. Tal
+    clasificación resulta en: $\{0,1\}=g^{-1}[\{a\}]$, $\{3\}=g^{-1}[\{b\}]$ y
+    $\{2,4\}=g^{-1}[\{c\}]$, respectivamente.
 
     \begin{definicion}
-        Definimos la relación $\sim$ en $A$ como: $ x \sim y \; \text{si y sólo si} \; f(x)=f(y)$
+        Definimos la relación $\sim$ en $A$ como: $ x \sim y \; \text{si y sólo
+        si} \; f(x)=f(y)$
     \end{definicion}
 
-    \begin{ejercicio}{1.5}\label{ej:rela}
-        Por un ejercicio de las taras (\textit{¿cuál?}), la relación $\sim$ es de equivalencia. Demuestra la igualdad de conjuntos: $\quot{A}{\sim}=\{ f^{-1}[\{b\}] \tq b \in f[A] \}$.
+    \begin{ejercicio}{1.5}\label{ej:rela} Por un ejercicio de las taras
+        (\textit{¿cuál?}), la relación $\sim$ es de equivalencia. Demuestra la
+        igualdad de conjuntos: $\quot{A}{\sim}=\{ f^{-1}[\{b\}] \mid b \in f[A]
+        \}$.
     \end{ejercicio}
 
-    Retomando el ejemplo particular de $g$ \hyperref[fig:ejemplo]{Figura~1}, se nota que:
+    Retomando el ejemplo particular de $g$ \hyperref[fig:ejemplo]{Figura~1}, se
+    nota que:
     \begin{enumerate}
-        \item Se puede mandar cada elemento $x\in X$ a su clase de equivalencia, por ejemplo $1$ a $\{0,1\}$.
-        \item Cada clase surge de agrupar los elementos de $X$ según $g$ actúa en ellos. Luego, a la clase $\{0,1\}=g^{-1}[\{a\}]$ se le puede asignar el valor $a \in Y$ (pues esta clase se construyó como todos aquellos elementos de $X$ que al aplicarles $g$ daban $a$); a la calse $\{3\}=g^{-1}[\{b\}]$ se le puede asignar $b$ y a la clase $\{2,4\}=g^{-1}[\{c\}]$ se le puede asignar $c$.
+        \item Se puede mandar cada elemento $x\in X$ a su clase de equivalencia,
+        por ejemplo $1$ a $\{0,1\}$.
+        \item Cada clase surge de agrupar los elementos de $X$ según $g$ actúa
+        en ellos. Luego, a la clase $\{0,1\}=g^{-1}[\{a\}]$ se le puede asignar
+        el valor $a \in Y$ (pues esta clase se construyó como todos aquellos
+        elementos de $X$ que al aplicarles $g$ daban $a$); a la calse
+        $\{3\}=g^{-1}[\{b\}]$ se le puede asignar $b$ y a la clase
+        $\{2,4\}=g^{-1}[\{c\}]$ se le puede asignar $c$.
     \end{enumerate}
     \begin{figure}[H]\label{fig:g}
         \begin{center}
             \begin{tikzpicture}
-                \draw[DodgerBlue3, fill=DodgerBlue3!10, line width=2pt] (0,-.5) ellipse (0.8cm and 2.8cm);
-                \draw[Goldenrod3, fill=Goldenrod3!10, line width=2pt] (5,-.5) ellipse (2.3cm and 2cm);
-                \draw[Chartreuse4, fill=Chartreuse4!10, line width=2pt] (10,-.5) ellipse (0.8cm and 2cm);
+                \draw[DodgerBlue3, fill=DodgerBlue3!10, line width=2pt] (0,-.5)
+                ellipse (0.8cm and 2.8cm); \draw[Goldenrod3, fill=Goldenrod3!10,
+                line width=2pt] (5,-.5) ellipse (2.3cm and 2cm);
+                \draw[Chartreuse4, fill=Chartreuse4!10, line width=2pt] (10,-.5)
+                ellipse (0.8cm and 2cm);
 
-                \node at (0,3) {$X=\{0,1,2,3,4\}$};
-                \node at (5,-3) {$\quot{X}{\sim}$};
-                \node at (10,3) {$Y=\{a,b,c\}$};
+                \node at (0,3) {$X=\{0,1,2,3,4\}$}; \node at (5,-3)
+                {$\quot{X}{\sim}$}; \node at (10,3) {$Y=\{a,b,c\}$};
 
-                \node at (0,1.5) {$0$};
-                \node at (0,.5) {$1$};
-                \node at (0,-.5) {$2$};
-                \node at (0,-1.5) {$3$};
-                \node at (0,-2.5) {$4$};
+                \node at (0,1.5) {$0$}; \node at (0,.5) {$1$}; \node at (0,-.5)
+                {$2$}; \node at (0,-1.5) {$3$}; \node at (0,-2.5) {$4$};
 
-                \node at (5,.5) {$\{0,1\}=g^{-1}[\{a\}]$};
-                \node at (5,-.5) {$\{3\}=g^{-1}[\{b\}]$};
-                \node at (5,-1.5) {$\{2,4\}=g^{-1}[\{c\}]$};
+                \node at (5,.5) {$\{0,1\}=g^{-1}[\{a\}]$}; \node at (5,-.5)
+                {$\{3\}=g^{-1}[\{b\}]$}; \node at (5,-1.5)
+                {$\{2,4\}=g^{-1}[\{c\}]$};
 
-                \node at (10,.5) {$a$};
-                \node at (10,-.5) {$b$};
-                \node at (10,-1.5) {$c$};
+                \node at (10,.5) {$a$}; \node at (10,-.5) {$b$}; \node at
+                (10,-1.5) {$c$};
 
-                \draw[-latex] (.2,1.5) -- (3.4,.5);
-                \draw[-latex] (.2,.5) -- (3.4,.5);
-                \draw[-latex] (.2,-1.5) -- (3.55,-.5);
-                \draw[-latex] (.2,-.5) -- (3.4,-1.5);
-                \draw[-latex] (.2,-2.5) -- (3.4,-1.5);
+                \draw[-latex] (.2,1.5) -- (3.4,.5); \draw[-latex] (.2,.5) --
+                (3.4,.5); \draw[-latex] (.2,-1.5) -- (3.55,-.5); \draw[-latex]
+                (.2,-.5) -- (3.4,-1.5); \draw[-latex] (.2,-2.5) -- (3.4,-1.5);
 
-                \draw[-latex] (6.6,.5) -- (9.8,.5);
-                \draw[-latex] (6.4,-.5) -- (9.8,-.5);
-                \draw[-latex] (6.6,-1.5) -- (9.8,-1.5);
+                \draw[-latex] (6.6,.5) -- (9.8,.5); \draw[-latex] (6.4,-.5) --
+                (9.8,-.5); \draw[-latex] (6.6,-1.5) -- (9.8,-1.5);
 
                 \draw[->, thick] (1.7,3) -- (8.8,3)  node[midway, above] {$g$};
             \end{tikzpicture}
@@ -263,31 +324,42 @@
         \caption{Descomposición de $g$ en dos procesos (o funciones).}
     \end{figure}
 
-    La imagen anterior describe dos procesos (o funciones) cuya aplicación seguida resulta en hacer exactamente lo mismo que $g$, los estudiaremos con detenimiento a través de los siguientes ejercicios. El primero de ellos se define así:
+    La imagen anterior describe dos procesos (o funciones) cuya aplicación
+    seguida resulta en hacer exactamente lo mismo que $g$, los estudiaremos con
+    detenimiento a través de los siguientes ejercicios. El primero de ellos se
+    define así:
 
     \begin{definicion}
-        Definimos $s_f:A \to \quot{A}{\sim}$ por medio de: $s_f(x)=[x]$.
+        Definimos $s_f\colon A \to \quot{A}{\sim}$ por medio de: $s_f(x)=[x]$.
     \end{definicion}
 
     \begin{ejercicio}{1.5}
         En términos de la definición previa:
         \begin{enumerate}
             \item Demuestra que $s_f$ es sobreyectiva.
-            \item Prueba que si $f$ es inyectiva, entonces para cada $x \in X$, $[x]=\{x\}$.
-            \item Concluye que, si $f$ es inyectiva, entonces $q_f$ es biyectiva.
+            \item Prueba que si $f$ es inyectiva, entonces para cada $x \in X$,
+            $[x]=\{x\}$.
+            \item Concluye que, si $f$ es inyectiva, entonces $q_f$ es
+            biyectiva.
         \end{enumerate}
     \end{ejercicio}
 
     \begin{ejercicio}{1.5}
-        Haciendo uso de la terminología definida hasta ahora, para cada inciso da un ejemplo particular de:
+        Haciendo uso de la terminología definida hasta ahora, para cada inciso
+        da un ejemplo particular de:
         \begin{enumerate}
-            \item Una función $f:\{1,2,3,4,5,6,7,8\} \to \{0,1,2\}$ tal que $s_f$ sea constante.
-            \item Una función $f:\mathbb{N} \to \mathbb{N}$ de modo que $\quot{\mathbb{N}}{\sim}$ posea exactamente $5$ elementos.
-            \item Una función $f:\mathbb{Z} \to \mathbb{Z}$ tal que para cada $z \in \mathbb{Z}$ se cumple $s_f(z) \cap s_f(z+7)$.
+            \item Una función $f\colon \{1,2,3,4,5,6,7,8\} \to \{0,1,2\}$ tal que
+            $s_f$ sea constante.
+            \item Una función $f\colon \mathbb{N} \to \mathbb{N}$ de modo que
+            $\quot{\mathbb{N}}{\sim}$ posea exactamente $5$ elementos.
+            \item Una función $f\colon \mathbb{Z} \to \mathbb{Z}$ tal que para cada $z
+            \in \mathbb{Z}$ se cumple $s_f(z) \cap s_f(z+7)$.
         \end{enumerate}
     \end{ejercicio}
 
-    Con lo hecho hasta el momento, se sugiere que el conjunto $U$ del \hyperref[eq:hat]{Diagrama~\ref*{eq:hat}} debe ser el cociente $\quot{A}{\sim}$, y, la función $s$ debe ser $s_f$; resultando en:
+    Con lo hecho hasta el momento, se sugiere que el conjunto $U$ del
+    \hyperref[eq:hat]{Diagrama~\ref*{eq:hat}} debe ser el cociente
+    $\quot{A}{\sim}$, y, la función $s$ debe ser $s_f$; resultando en:
     \begin{equation}\label{eq:casi}
         \begin{tikzcd}
             A && B \\
@@ -301,31 +373,57 @@
         \end{tikzcd}
     \end{equation}
 
-    Únicamente resta definir $b:\quot{A}{\sim} \to f[A]$ biyectiva, de modo que se tenga la composición que queremos, esto es justamente lo que representa la segunda función aplicada en la \hyperref[fig:g]{Figura~2} de el ejemplo particular. Éste puede ser pensado como asignarle a cada clase $g^{-1}[\{y\}]$ el elemento $y$. Por supuesto, hay que verificar que tal cosa es función, es decir, está bien definida. Así que a continuación la definiremos únicamente como relación; y, posteriormente se verificará que es función:
+    Únicamente resta definir $b\colon \quot{A}{\sim} \to f[A]$ biyectiva, de modo que
+    se tenga la composición que queremos, esto es justamente lo que representa
+    la segunda función aplicada en la \hyperref[fig:g]{Figura~2} del ejemplo
+    particular. Éste puede ser pensado como asignarle a cada clase
+    $g^{-1}[\{y\}]$ el elemento $y$. Por supuesto, hay que verificar que tal
+    cosa es función, es decir, está bien definida. Así que a continuación la
+    definiremos únicamente como relación; y, posteriormente se verificará que es
+    función:
     \begin{definicion}
         Definimos $f^* \subseteq \quot{A}{\sim} \times f[A]$ como la relación:
-        \[  M f^* b \quad \text{si y sólo si} \quad \exists y \in M \big( b=f(y) \big) \]
+        \[  M f^* b \quad \text{si y sólo si} \quad \exists y \in M \big( b=f(y)
+        \big) \]
     \end{definicion}
 
-    Nada (aún) garantiza que $f^*$ sea función, es decir, podría existir cierto $M \in \quot{A}{\sim}$ que se relacioine con dos elementos diferentes $b,b' \in f[A]$, es decir $M f^* b$ y $M f^* b'$, lo cual prohibiría que $f^*$ sea función.
+    Nada (aún) garantiza que $f^*$ sea función, es decir, podría existir cierto
+    $M \in \quot{A}{\sim}$ que se relacioine con dos elementos diferentes $b,b'
+    \in f[A]$, es decir $M f^* b$ y $M f^* b'$, lo cual prohibiría que $f^*$ sea
+    función.
     
-    Lo anterior no debería ocurrir, notemos que si $M \in \quot{A}{\sim}$ entonces $M=[x]$ para cierto $x \in A$. Luego, si $M f^* b$, es decir, $[x] f^* b$; por definición de $f^*$, existe $y \in [x]$ de modo que $b=f(y)$; simimilarmente, $b'=f(y')$ para algún $y'\in[x]$, a partir de aquí ¿Cómo se tiene la garantía de que $b=b'$?...
+    Lo anterior no debería ocurrir, notemos que si $M \in \quot{A}{\sim}$
+    entonces $M=[x]$ para cierto $x \in A$. Luego, si $M f^* b$, es decir, $[x]
+    f^* b$; por definición de $f^*$, existe $y \in [x]$ de modo que $b=f(y)$;
+    simimilarmente, $b'=f(y')$ para algún $y'\in[x]$, a partir de aquí ¿Cómo se
+    tiene la garantía de que $b=b'$? \dots
 
-    \begin{ejercicio}{1.5}\label{ej:fStar}
-        Completa la demostración empezada en el párrafo anterior; es decir, prueba que $f^*$ es función de $\quot{A}{\sim}$ en $f[A]$ mostrando que:
-        \[ \forall M \in \quot{A}{\sim} \; \forall b,b' \in f[A] \; \Big( \big( M f^* b \land M f^* b' \big) \to b=b' \Big) \]
+    \begin{ejercicio}{1.5}\label{ej:fStar} Completa la demostración empezada en
+        el párrafo anterior; es decir, prueba que $f^*$ es función de
+        $\quot{A}{\sim}$ en $f[A]$ mostrando que:
+        \[ \forall M \in \quot{A}{\sim} \; \forall b,b' \in f[A] \; \Big( \big(
+        M f^* b \land M f^* b' \big) \to b=b' \Big) \]
     \end{ejercicio}
 
-    \section*{Juntanto Todo}
+    \section*{Juntando todo}
 
-    Es bueno (y necesario) meditar que, lo que demuestra el ejercicio anterior en el fondo es que, para cada $x \in A$:
+    Es bueno (y necesario) meditar que, lo que demuestra el ejercicio anterior
+    en el fondo es que, para cada $x \in A$:
     \begin{equation}\label{eq:fStar}
         f^*([x])=f(x)
     \end{equation}
 
-    \textit{Notemos que $[x]$; al ser una clase de equivalencia, podría ``tener otro nombre'', como $[u]$ o $[z]$ con $u,z \neq x$, lo cual imposibilita definir al inicio $f^*$ como en (\ref{eq:fStar}), esto es algo que se debía demostrar.}
+    \textit{Notemos que $[x]$; al ser una clase de equivalencia, podría ``tener
+    otro nombre'', como $[u]$ o $[z]$ con $u,z \neq x$, lo cual imposibilita
+    definir al inicio $f^*$ como en (\ref{eq:fStar}), esto es algo que se debía
+    demostrar.}
 
-    Se concluye esta tarea juntanto todo lo que tenemos, esto es, mostrando que hacer $f:A\to B$ es lo mismo que primero hacer $s_f:A\to \quot{A}{\sim}$, luego $f^*:\quot{A}{\sim} \to f[A]$, y por últimio, $i_{f[A],B}$. Esto es, se compelta el \hyperref[eq:obj]{Diagrama~\ref*{eq:casi}} descubriendo quiénes son exactamente todos los objetos que no conocíamos al inicioi, en el \hyperref[eq:obj]{Diagrama~\ref*{eq:obj}}.
+    Se concluye esta tarea juntanto todo lo que tenemos, esto es, mostrando que
+    hacer $f\colon A\to B$ es lo mismo que primero hacer $s_f\colon A\to \quot{A}{\sim}$,
+    luego $f^*\colon \quot{A}{\sim} \to f[A]$, y por últimio, $i_{f[A],B}$. Esto es,
+    se compelta el \hyperref[eq:obj]{Diagrama~\ref*{eq:casi}} descubriendo
+    quiénes son exactamente todos los objetos que no conocíamos al inicioi, en
+    el \hyperref[eq:obj]{Diagrama~\ref*{eq:obj}}.
     \begin{equation}\label{eq:ya}
         \begin{tikzcd}
             A && B \\
@@ -339,31 +437,40 @@
         \end{tikzcd}
     \end{equation}
 
-    Lo único que falta probar es que $f^*$ es biyectiva, para esto, en lugar de usar la definición cruda de $f^*$, se sugiere utilizar la igualdad de la regla de correspondencia para $f^*$ dada en (\ref{eq:fStar}).
+    Lo único que falta probar es que $f^*$ es biyectiva, para esto, en lugar de
+    usar la definición cruda de $f^*$, se sugiere utilizar la igualdad de la
+    regla de correspondencia para $f^*$ dada en (\ref{eq:fStar}).
 
     \begin{ejercicio}{1}
-        Demuestra que $f^*:\quot{A}{\sim} \to f[A]$ es biyectiva.
+        Demuestra que $f^*\colon \quot{A}{\sim} \to f[A]$ es biyectiva.
     \end{ejercicio}
 
     Y finalmente:
     \begin{ejercicio}{.5}
-        Demuestra el Primer Teorema de Isomorfismo para conjuntos; es decir, prueba que:
-        \[ f=i_{f[A],B} \; \circ \; f^* \; \circ \; s_f \]
-        ($f$ es composición de una sobreyección, una biyección y una inyección).
+        Demuestra el Primer Teorema de Isomorfismo para conjuntos; es decir,
+        prueba que:
+        \[ f=i_{f[A],B} \; \circ \; f^* \; \circ \; s_f \] ($f$ es composición
+        de una sobreyección, una biyección y una inyección).
     \end{ejercicio}
 
-    \section*{Por puntos extra...}
+    \section*{Por puntos extra\dots}
 
-    Tras realizar todo lo que acabamos de hacer, quedan varias dudas que sólo los más avispados podrían plantearse. La primera de ellas es la siguiente: ¿La notación $-*$ es buena? es decir, ¿para cada $f:A \to B$, $f*$ es la única función biyectiva $b:\quot{A}{\sim}$ que cumple $f=i_{f[A],B} \circ b \circ s_f$?, en efecto:
+    Tras realizar todo lo que acabamos de hacer, quedan varias dudas que sólo
+    los más avispados podrían plantearse. La primera de ellas es la siguiente:
+    ¿La notación $(-)^*$ es buena? es decir, ¿para cada $f\colon A \to B$, $f^*$ es la
+    única función biyectiva $b\colon \quot{A}{\sim}$ que cumple $f=i_{f[A],B} \circ b
+    \circ s_f$?, en efecto:
     
     \begin{ejercicio}{+2}
-        Prueba que, si $j,k:\quot{A}{\sim} \to f[A]$ son funciones biyectivas tales que se dan las igualdades:
+        Prueba que, si $j,k\colon \quot{A}{\sim} \to f[A]$ son funciones biyectivas
+        tales que se dan las igualdades:
         \begin{align*}
             f & = i_{f[A],B} \; \circ \; j \; \circ \; s_f \\
             f & = i_{f[A],B} \; \circ \; k \; \circ \; s_f
         \end{align*}
         entonces $j=k$ (y por tanto ambas deben ser $f^*$).
 
-        \textit{Hint: Recuerde que una función es sobreyectiva si y sólo si tiene...; y, es inyectiva si y sólo si tiene...}
+        \textit{Hint: Recuerde que una función es sobreyectiva si y sólo si tiene\dots;
+        y, es inyectiva si y sólo si tiene\dots}
     \end{ejercicio}
 \end{document}
