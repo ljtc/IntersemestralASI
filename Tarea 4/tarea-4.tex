@@ -120,12 +120,12 @@ pt)}}}{\renewcommand{\pts}{\textbf{(#1 pts)}}}\begin{ejj}\upshape
         Cualquier función $f\colon A \to B$ se puede escribir como composición ``no obvia''
         de: una sobreyección, una biyección y una inyección. Es decir, existen
         conjuntos $U$ y $V$, y funciones $s\colon A \to U$ sobreyectiva, $b\colon U \to V$
-        biyectiva e $i\colon V \to B$ inyectiva, tales que $f = i \circ s \circ b$.
+        biyectiva e $i\colon V \to B$ inyectiva, tales que $f = i \circ s \circ b$,
         \begin{equation}\label{eq:obj}
             \begin{tikzcd}
             A && B \\
             \\
-            U && V
+            U && V\mathrlap{.}
             \arrow["f", from=1-1, to=1-3]
             \arrow["s"', from=1-1, to=3-1]
             \arrow["b"', from=3-1, to=3-3]
@@ -196,7 +196,7 @@ pt)}}}{\renewcommand{\pts}{\textbf{(#1 pts)}}}\begin{ejj}\upshape
         \end{enumerate}
     \end{ejercicio}
 
-    Por lo tanto, ya hemos resuelto una pqueña parte del problema que nos ataña,
+    Por lo tanto, ya hemos resuelto una pqueña parte del problema que nos atañe,
     pues hemos demostrado que cualquier función $f\colon A \to B$ se puede escribir
     como composición de una sobreyección y una inyección, es decir, en términos
     del \hyperref[eq:obj]{Diagrama~\ref*{eq:obj}}, tenemos descubierto quiénes
@@ -205,7 +205,7 @@ pt)}}}{\renewcommand{\pts}{\textbf{(#1 pts)}}}\begin{ejj}\upshape
         \begin{tikzcd}
             A && B \\
             \\
-            \textcolor{Cornsilk4}{U} && {f[A]}
+            \textcolor{Cornsilk4}{U} && {f[A]}\mathrlap{.}
             \arrow["f", from=1-1, to=1-3]
             \arrow["s"', from=1-1, to=3-1, draw=Cornsilk4, text=Cornsilk4]
             \arrow["{\hat{f}}"{description}, from=1-1, to=3-3]
@@ -236,8 +236,8 @@ pt)}}}{\renewcommand{\pts}{\textbf{(#1 pts)}}}\begin{ejj}\upshape
                 fill=Chartreuse4!10, line width=2pt] (5,-.5) ellipse (0.8cm and
                 2cm);
 
-                \node at (0,3) {$X=\{0,1,2,3,4\}$}; \node at (5,3)
-                {$Y=\{a,b,c\}$};
+                \node (x) at (0,3) {$X=\{0,1,2,3,4\}$}; 
+                \node (y) at (5,3) {$Y=\{a,b,c\}$};
 
                 \node at (0,1.5) {$0$}; \node at (0,.5) {$1$}; \node at (0,-.5)
                 {$2$}; \node at (0,-1.5) {$3$}; \node at (0,-2.5) {$4$};
@@ -245,11 +245,11 @@ pt)}}}{\renewcommand{\pts}{\textbf{(#1 pts)}}}\begin{ejj}\upshape
                 \node at (5,.5) {$a$}; \node at (5,-.5) {$b$}; \node at (5,-1.5)
                 {$c$};
 
-                \draw[-latex] (.2,1.5) -- (4.8,.5); \draw[-latex] (.2,.5) --
-                (4.8,.5); \draw[-latex] (.2,-.5) -- (4.8,-1.5); \draw[-latex]
-                (.2,-1.5) -- (4.8,-.5); \draw[-latex] (.2,-2.5) -- (4.8,-1.5);
+                \draw[|->] (.2,1.5) -- (4.8,.5); \draw[|->] (.2,.5) --
+                (4.8,.5); \draw[|->] (.2,-.5) -- (4.8,-1.5); \draw[|->]
+                (.2,-1.5) -- (4.8,-.5); \draw[|->] (.2,-2.5) -- (4.8,-1.5);
 
-                \draw[->, thick] (1.7,3) -- (3.8,3)  node[midway, above] {$g$};
+                \draw[->, thick] (x) -- (y) node[midway, above] {$g$};
             \end{tikzpicture}
         \end{center}
         \caption{Ejemplo particular de función}
@@ -265,10 +265,10 @@ pt)}}}{\renewcommand{\pts}{\textbf{(#1 pts)}}}\begin{ejj}\upshape
 
     \begin{definicion}
         Definimos la relación $\sim$ en $A$ como: $ x \sim y \; \text{si y sólo
-        si} \; f(x)=f(y)$
+        si} \; f(x)=f(y)$.
     \end{definicion}
 
-    \begin{ejercicio}{1.5}\label{ej:rela} Por un ejercicio de las taras
+    \begin{ejercicio}{1.5}\label{ej:rela} Por un ejercicio de las tareas
         (\textit{¿cuál?}), la relación $\sim$ es de equivalencia. Demuestra la
         igualdad de conjuntos: $\quot{A}{\sim}=\{ f^{-1}[\{b\}] \mid b \in f[A]
         \}$.
@@ -293,8 +293,8 @@ pt)}}}{\renewcommand{\pts}{\textbf{(#1 pts)}}}\begin{ejj}\upshape
                 \draw[Chartreuse4, fill=Chartreuse4!10, line width=2pt] (10,-.5)
                 ellipse (0.8cm and 2cm);
 
-                \node at (0,3) {$X=\{0,1,2,3,4\}$}; \node at (5,-3)
-                {$\quot{X}{\sim}$}; \node at (10,3) {$Y=\{a,b,c\}$};
+                \node (x) at (0,3) {$X=\{0,1,2,3,4\}$}; \node at (5,-3)
+                {$\quot{X}{\sim}$}; \node (y) at (10,3) {$Y=\{a,b,c\}$};
 
                 \node at (0,1.5) {$0$}; \node at (0,.5) {$1$}; \node at (0,-.5)
                 {$2$}; \node at (0,-1.5) {$3$}; \node at (0,-2.5) {$4$};
@@ -306,14 +306,14 @@ pt)}}}{\renewcommand{\pts}{\textbf{(#1 pts)}}}\begin{ejj}\upshape
                 \node at (10,.5) {$a$}; \node at (10,-.5) {$b$}; \node at
                 (10,-1.5) {$c$};
 
-                \draw[-latex] (.2,1.5) -- (3.4,.5); \draw[-latex] (.2,.5) --
-                (3.4,.5); \draw[-latex] (.2,-1.5) -- (3.55,-.5); \draw[-latex]
-                (.2,-.5) -- (3.4,-1.5); \draw[-latex] (.2,-2.5) -- (3.4,-1.5);
+                \draw[|->] (.2,1.5) -- (3.4,.5); \draw[|->] (.2,.5) --
+                (3.4,.5); \draw[|->] (.2,-1.5) -- (3.55,-.5); \draw[|->]
+                (.2,-.5) -- (3.4,-1.5); \draw[|->] (.2,-2.5) -- (3.4,-1.5);
 
-                \draw[-latex] (6.6,.5) -- (9.8,.5); \draw[-latex] (6.4,-.5) --
-                (9.8,-.5); \draw[-latex] (6.6,-1.5) -- (9.8,-1.5);
+                \draw[|->] (6.6,.5) -- (9.8,.5); \draw[|->] (6.4,-.5) --
+                (9.8,-.5); \draw[|->] (6.6,-1.5) -- (9.8,-1.5);
 
-                \draw[->, thick] (1.7,3) -- (8.8,3)  node[midway, above] {$g$};
+                \draw[->, thick] (x) -- (y) node[midway, above] {$g$};
             \end{tikzpicture}
         \end{center}
         \caption{Descomposición de $g$ en dos procesos (o funciones).}
@@ -358,7 +358,7 @@ pt)}}}{\renewcommand{\pts}{\textbf{(#1 pts)}}}\begin{ejj}\upshape
         \begin{tikzcd}
             A && B \\
             \\
-            \quot{A}{\sim} && {f[A]}
+            \quot{A}{\sim} && {f[A]}\mathrlap{.}
             \arrow["f", from=1-1, to=1-3]
             \arrow["q_f"', from=1-1, to=3-1]
             \arrow["{\hat{f}}"{description}, from=1-1, to=3-3]
@@ -378,25 +378,24 @@ pt)}}}{\renewcommand{\pts}{\textbf{(#1 pts)}}}\begin{ejj}\upshape
     \begin{definicion}
         Definimos $f^* \subseteq \quot{A}{\sim} \times f[A]$ como la relación:
         \[  [x] f^* b \quad \text{si y sólo si} \quad \exists y \in [x] \big( b=f(y)
-        \big) \]
+        \big). \]
     \end{definicion}
 
     Nada (aún) garantiza que $f^*$ sea función, es decir, podría existir cierto
-    $M \in \quot{A}{\sim}$ que se relacione con dos elementos diferentes $b,b'
-    \in f[A]$, es decir $M f^* b$ y $M f^* b'$, lo cual prohibiría que $f^*$ sea
+    $[x] \in \quot{A}{\sim}$ que se relacione con dos elementos diferentes $b,b'
+    \in f[A]$, es decir $[x] f^* b$ y $[x] f^* b'$, lo cual prohibiría que $f^*$ sea
     función.
     
-    Lo anterior no debería ocurrir, notemos que si $M \in \quot{A}{\sim}$
-    entonces $M=[x]$ para cierto $x \in A$. Luego, si $M f^* b$, es decir, $[x]
-    f^* b$; por definición de $f^*$, existe $y \in [x]$ de modo que $b=f(y)$;
+    Lo anterior no debería ocurrir, notemos que si $[x] \in \quot{A}{\sim}$, $[x]f^* b$
+    y $[x]f^* b'$; por definición de $f^*$, existe $y \in [x]$ de modo que $b=f(y)$;
     simimilarmente, $b'=f(y')$ para algún $y'\in[x]$, a partir de aquí ¿Cómo se
     tiene la garantía de que $b=b'$? \dots
 
     \begin{ejercicio}{1.5}\label{ej:fStar} Completa la demostración empezada en
         el párrafo anterior; es decir, prueba que $f^*$ es función de
         $\quot{A}{\sim}$ en $f[A]$ mostrando que:
-        \[ \forall M \in \quot{A}{\sim} \; \forall b,b' \in f[A] \; \Big( \big(
-        M f^* b \land M f^* b' \big) \to b=b' \Big) \]
+        \[ \forall [x] \in \quot{A}{\sim} \; \forall b,b' \in f[A] \; \Big( \big(
+        [x] f^* b \land [x] f^* b' \big) \to b=b' \Big). \]
     \end{ejercicio}
 
     \section*{Juntando todo}
@@ -404,7 +403,7 @@ pt)}}}{\renewcommand{\pts}{\textbf{(#1 pts)}}}\begin{ejj}\upshape
     Es bueno (y necesario) meditar que, lo que demuestra el ejercicio anterior
     en el fondo es que, para cada $x \in A$:
     \begin{equation}\label{eq:fStar}
-        f^*([x])=f(x)
+        f^*([x])=f(x).
     \end{equation}
 
     \textit{Notemos que $[x]$; al ser una clase de equivalencia, podría ``tener
@@ -417,12 +416,12 @@ pt)}}}{\renewcommand{\pts}{\textbf{(#1 pts)}}}\begin{ejj}\upshape
     luego $f^*\colon \quot{A}{\sim} \to f[A]$, y por últimio, $i_{f[A],B}$. Esto es,
     se compelta el \hyperref[eq:obj]{Diagrama~\ref*{eq:casi}} descubriendo
     quiénes son exactamente todos los objetos que no conocíamos al inicio, en
-    el \hyperref[eq:obj]{Diagrama~\ref*{eq:obj}}.
+    el \hyperref[eq:obj]{Diagrama~\ref*{eq:obj}}:
     \begin{equation}\label{eq:ya}
         \begin{tikzcd}
             A && B \\
             \\
-            \quot{A}{\sim} && {f[A]}
+            \quot{A}{\sim} && {f[A]}\mathrlap{.}
             \arrow["f", from=1-1, to=1-3]
             \arrow["q_f"', from=1-1, to=3-1]
             %\arrow["{\hat{f}}"{description}, from=1-1, to=3-3]
@@ -439,7 +438,7 @@ pt)}}}{\renewcommand{\pts}{\textbf{(#1 pts)}}}\begin{ejj}\upshape
         Demuestra que $f^*\colon \quot{A}{\sim} \to f[A]$ es biyectiva.
     \end{ejercicio}
 
-    Y finalmente:
+    Finalmente:
     \begin{ejercicio}{.5}
         Demuestra el Primer Teorema de Isomorfismo para conjuntos; es decir,
         prueba que:
@@ -452,8 +451,8 @@ pt)}}}{\renewcommand{\pts}{\textbf{(#1 pts)}}}\begin{ejj}\upshape
     Tras realizar todo lo que acabamos de hacer, quedan varias dudas que sólo
     los más avispados podrían plantearse. La primera de ellas es la siguiente:
     ¿La notación $(-)^*$ es buena? es decir, ¿para cada $f\colon A \to B$, $f^*$ es la
-    única función biyectiva $b\colon \quot{A}{\sim}$ que cumple $f=i_{f[A],B} \circ b
-    \circ q_f$?, en efecto:
+    única función biyectiva $b\colon \quot{A}{\sim}\to B$ que cumple 
+    $f=i_{f[A],B} \circ b \circ q_f$?, en efecto:
 
     \begin{ejercicio}{+1}
         Prueba que para cualesquiera funciones $i,j:\quot{A}{\sim}\to B$, si se tiene que 
@@ -472,7 +471,7 @@ pt)}}}{\renewcommand{\pts}{\textbf{(#1 pts)}}}\begin{ejj}\upshape
     en $A$; y, tal asignación es biyectiva.
     
     \begin{ejercicio}{+2}
-        Definims los conjuntos:
+        Definimos los conjuntos:
         \begin{align*}
             \mathscr{F} & :=\{ g \mid g \text{ es función } \land \, \dom(g)=A \, \land \, g \text{ es sobreyectiva} \} \\
             \mathscr{R} & :=\{ R \mid R \subseteq A \times A \land \, R \text{ es relación de equivalencia} \}
