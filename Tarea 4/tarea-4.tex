@@ -66,14 +66,6 @@
 pt)}}}{\renewcommand{\pts}{\textbf{(#1 pts)}}}\begin{ejj}\upshape
 \pts}{\end{ejj}}
 
-%Ejercicios
-
-%\newenvironment{ejercicio}[1]{\vspace{.3cm}\noindent
-    %\ifthenelse{\equal{#1}{1} \OR
-    %\equal{#1}{+1}}{\renewcommand{\pts}{\textbf{(#1
-    %pt)}}}{\renewcommand{\pts}{\textbf{(#1 pts)}}}\textbf{Ej. \theEjer}
-    %\pts\stepcounter{Ejer}}{\vspace{.3cm}}
-
 % Para escribir el "tal que" de los conjuntos
 \providecommand\st{\;|\;} \providecommand\tq{\;|\;}
 
@@ -124,10 +116,10 @@ pt)}}}{\renewcommand{\pts}{\textbf{(#1 pts)}}}\begin{ejj}\upshape
     etcétera; pero la formulación que se deemostrará en esta tarea es la
     siguiente:
 
-    \begin{teorema}[Primero de Isomorfismo de Noehter]\label{teo:primero}
-        Cualquier función $f\colon A \to B$ se puede escribir como composición
+    \begin{teorema}\label{teo:primero}[Primero de Isomorfismo de Noehter]
+        Cualquier función $f\colon A \to B$ se puede escribir como composición ``no obvia''
         de: una sobreyección, una biyección y una inyección. Es decir, existen
-        conjuntos $X$ y $Y$, y funciones $s\colon A \to U$ sobreyectiva, $b\colon U \to V$
+        conjuntos $U$ y $V$, y funciones $s\colon A \to U$ sobreyectiva, $b\colon U \to V$
         biyectiva e $i\colon V \to B$ inyectiva, tales que $f = i \circ s \circ b$.
         \begin{equation}\label{eq:obj}
             \begin{tikzcd}
@@ -222,8 +214,12 @@ pt)}}}{\renewcommand{\pts}{\textbf{(#1 pts)}}}\begin{ejj}\upshape
         \end{tikzcd}
     \end{equation}
 
-    Ahora falta lo más dificil, probar que $\hat{f}$ se puede descomponer como
-    composición de una sobreyección, y luego, una biyección; es decir, falta
+    \textit{\textbf{Obsrevación:} La parte del \autoref{teo:primero} que indica que la descomposición
+    debe ser ``no obvia'', en el sentido de evitar una descomposición de $f$ que sea del estilo: aplicar
+    $\hat{f}:A \to f[A]$ (sobreyectiva), luego $\id_{F[A]}$ (biyectiva), y por último $i_{f[A],B}$ (inyectiva).}
+
+    Regresando al diagrama anterior, falta probar que $\hat{f}$ se puede descomponer como
+    composición (no obvia) de una sobreyección, y luego, una biyección; es decir, falta
     descubrir quiénes son $s$, $b$ y $U$ en el
     \hyperref[eq:hat]{Diagrama~\ref*{eq:hat}}.
 
@@ -234,7 +230,7 @@ pt)}}}{\renewcommand{\pts}{\textbf{(#1 pts)}}}\begin{ejj}\upshape
     otra que sí sea biyectiva? Imaginemos el siguiente caso particular:
     \begin{figure}[H]\label{fig:ejemplo}
         \begin{center}
-            \begin{tikzpicture}
+            \begin{tikzpicture}[scale=.8]
                 \draw[DodgerBlue3, fill=DodgerBlue3!10, line width=2pt] (0,-.5)
                 ellipse (0.8cm and 2.8cm); \draw[Chartreuse4,
                 fill=Chartreuse4!10, line width=2pt] (5,-.5) ellipse (0.8cm and
@@ -286,9 +282,7 @@ pt)}}}{\renewcommand{\pts}{\textbf{(#1 pts)}}}\begin{ejj}\upshape
         \item Cada clase surge de agrupar los elementos de $X$ según $g$ actúa
         en ellos. Luego, a la clase $\{0,1\}=g^{-1}[\{a\}]$ se le puede asignar
         el valor $a \in Y$ (pues esta clase se construyó como todos aquellos
-        elementos de $X$ que al aplicarles $g$ daban $a$); a la calse
-        $\{3\}=g^{-1}[\{b\}]$ se le puede asignar $b$ y a la clase
-        $\{2,4\}=g^{-1}[\{c\}]$ se le puede asignar $c$.
+        elementos de $X$ que al aplicarles $g$ daban $a$).
     \end{enumerate}
     \begin{figure}[H]\label{fig:g}
         \begin{center}
@@ -326,18 +320,17 @@ pt)}}}{\renewcommand{\pts}{\textbf{(#1 pts)}}}\begin{ejj}\upshape
     \end{figure}
 
     La imagen anterior describe dos procesos (o funciones) cuya aplicación
-    seguida resulta en hacer exactamente lo mismo que $g$, los estudiaremos con
-    detenimiento a través de los siguientes ejercicios. El primero de ellos se
-    define así:
+    seguida resulta en hacer exactamente lo mismo que $g$; estudiaremos ambas funciones con
+    detenimiento a través de los siguientes ejercicios.
 
     \begin{definicion}
-        Definimos $s_f\colon A \to \quot{A}{\sim}$ por medio de: $s_f(x)=[x]$.
+        Definimos $q_f\colon A \to \quot{A}{\sim}$ por medio de: $q_f(x)=[x]$.
     \end{definicion}
 
     \begin{ejercicio}{1.5}
         En términos de la definición previa:
         \begin{enumerate}
-            \item Demuestra que $s_f$ es sobreyectiva.
+            \item Demuestra que $q_f$ es sobreyectiva.
             \item Prueba que si $f$ es inyectiva, entonces para cada $x \in X$,
             $[x]=\{x\}$.
             \item Concluye que, si $f$ es inyectiva, entonces $q_f$ es
@@ -350,24 +343,24 @@ pt)}}}{\renewcommand{\pts}{\textbf{(#1 pts)}}}\begin{ejj}\upshape
         da un ejemplo particular de:
         \begin{enumerate}
             \item Una función $f\colon \{1,2,3,4,5,6,7,8\} \to \{0,1,2\}$ tal que
-            $s_f$ sea constante.
+            $q_f$ sea constante.
             \item Una función $f\colon \mathbb{N} \to \mathbb{N}$ de modo que
             $\quot{\mathbb{N}}{\sim}$ posea exactamente $5$ elementos.
             \item Una función $f\colon \mathbb{Z} \to \mathbb{Z}$ tal que para cada $z
-            \in \mathbb{Z}$ se cumple $s_f(z) \cap s_f(z+7)$.
+            \in \mathbb{Z}$ se cumple $q_f(z) = q_f(z+7)$ y $q_f(z) \neq q_f(z+1)$.
         \end{enumerate}
     \end{ejercicio}
 
     Con lo hecho hasta el momento, se sugiere que el conjunto $U$ del
     \hyperref[eq:hat]{Diagrama~\ref*{eq:hat}} debe ser el cociente
-    $\quot{A}{\sim}$, y, la función $s$ debe ser $s_f$; resultando en:
+    $\quot{A}{\sim}$, y, la función $s$ debe ser $q_f$; resultando en:
     \begin{equation}\label{eq:casi}
         \begin{tikzcd}
             A && B \\
             \\
             \quot{A}{\sim} && {f[A]}
             \arrow["f", from=1-1, to=1-3]
-            \arrow["s_f"', from=1-1, to=3-1]
+            \arrow["q_f"', from=1-1, to=3-1]
             \arrow["{\hat{f}}"{description}, from=1-1, to=3-3]
             \arrow["b"', from=3-1, to=3-3, draw=Cornsilk4, text=Cornsilk4]
             \arrow["{i_{f[A],B}}"', from=3-3, to=1-3]
@@ -384,7 +377,7 @@ pt)}}}{\renewcommand{\pts}{\textbf{(#1 pts)}}}\begin{ejj}\upshape
     función:
     \begin{definicion}
         Definimos $f^* \subseteq \quot{A}{\sim} \times f[A]$ como la relación:
-        \[  M f^* b \quad \text{si y sólo si} \quad \exists y \in M \big( b=f(y)
+        \[  [x] f^* b \quad \text{si y sólo si} \quad \exists y \in [x] \big( b=f(y)
         \big) \]
     \end{definicion}
 
@@ -420,7 +413,7 @@ pt)}}}{\renewcommand{\pts}{\textbf{(#1 pts)}}}\begin{ejj}\upshape
     demostrar.}
 
     Se concluye esta tarea juntanto todo lo que tenemos, esto es, mostrando que
-    hacer $f\colon A\to B$ es lo mismo que primero hacer $s_f\colon A\to \quot{A}{\sim}$,
+    hacer $f\colon A\to B$ es lo mismo que primero hacer $q_f\colon A\to \quot{A}{\sim}$,
     luego $f^*\colon \quot{A}{\sim} \to f[A]$, y por últimio, $i_{f[A],B}$. Esto es,
     se compelta el \hyperref[eq:obj]{Diagrama~\ref*{eq:casi}} descubriendo
     quiénes son exactamente todos los objetos que no conocíamos al inicioi, en
@@ -431,7 +424,7 @@ pt)}}}{\renewcommand{\pts}{\textbf{(#1 pts)}}}\begin{ejj}\upshape
             \\
             \quot{A}{\sim} && {f[A]}
             \arrow["f", from=1-1, to=1-3]
-            \arrow["s_f"', from=1-1, to=3-1]
+            \arrow["q_f"', from=1-1, to=3-1]
             %\arrow["{\hat{f}}"{description}, from=1-1, to=3-3]
             \arrow["f^*"', from=3-1, to=3-3]
             \arrow["{i_{f[A],B}}"', from=3-3, to=1-3]
@@ -450,7 +443,7 @@ pt)}}}{\renewcommand{\pts}{\textbf{(#1 pts)}}}\begin{ejj}\upshape
     \begin{ejercicio}{.5}
         Demuestra el Primer Teorema de Isomorfismo para conjuntos; es decir,
         prueba que:
-        \[ f=i_{f[A],B} \; \circ \; f^* \; \circ \; s_f \] ($f$ es composición
+        \[ f=i_{f[A],B} \; \circ \; f^* \; \circ \; q_f \] ($f$ es composición
         de una sobreyección, una biyección y una inyección).
     \end{ejercicio}
 
@@ -460,18 +453,31 @@ pt)}}}{\renewcommand{\pts}{\textbf{(#1 pts)}}}\begin{ejj}\upshape
     los más avispados podrían plantearse. La primera de ellas es la siguiente:
     ¿La notación $(-)^*$ es buena? es decir, ¿para cada $f\colon A \to B$, $f^*$ es la
     única función biyectiva $b\colon \quot{A}{\sim}$ que cumple $f=i_{f[A],B} \circ b
-    \circ s_f$?, en efecto:
+    \circ q_f$?, en efecto:
+
+    \begin{ejercicio}{+1}
+        Prueba que para cualesquiera funciones $i,j:\quot{A}{\sim}\to B$, si se tiene que 
+        $ j \; \circ \; q_f = f$ y $ i  \; \circ \; q_f = f$, entonces $i=j$.
+    \end{ejercicio}
+    
+    \begin{ejercicio}{+1}
+        A partir del ejercicio anterior, concluye que si $k\colon \quot{A}{\sim} \to f[A]$ Es
+        biyección y $f = i_{f[A],B} \; \circ \; k \; \circ \; q_f$, entonces $k=f^*$.
+    \end{ejercicio}
+
+    Una reflexión más profunda sobre todo lo que se realizó a lo largo de esta tarea es que, 
+    e conjuntos, dar una sobreyección con dominio $A$ es esencialmente lo mismo a dar una
+    relación de equivalencia sobre $A$. Esto es, dada cualquier función sobreyectiva con dominio 
+    $A$, existe una forma de asignarle una relación de equivalencia
+    en $A$; y, tal asignación es biyectiva.
     
     \begin{ejercicio}{+2}
-        Prueba que, si $j,k\colon \quot{A}{\sim} \to f[A]$ son funciones biyectivas
-        tales que se dan las igualdades:
+        Definims los conjuntos:
         \begin{align*}
-            f & = i_{f[A],B} \; \circ \; j \; \circ \; s_f \\
-            f & = i_{f[A],B} \; \circ \; k \; \circ \; s_f
+            \mathscr{F} & :=\{ g \mid g \text{ es función } \land \, \dom(g)=A \, \land \, g \text{ es sobreyectiva} \} \\
+            \mathscr{R} & :=\{ R \mid R \subseteq A \times A \land \, R \text{ es relación de equivalencia} \}
         \end{align*}
-        entonces $j=k$ (y por tanto ambas deben ser $f^*$).
 
-        \textit{Hint: Recuerde que una función es sobreyectiva si y sólo si tiene\dots;
-        y, es inyectiva si y sólo si tiene\dots}
+        Encuentra una biyección entre $\mathscr{F}$ y $\mathscr{R}$.
     \end{ejercicio}
 \end{document}
