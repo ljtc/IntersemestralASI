@@ -120,7 +120,7 @@ pt)}}}{\renewcommand{\pts}{\textbf{(#1 pts)}}}\begin{ejj}\upshape
         Cualquier función $f\colon A \to B$ se puede escribir como composición ``no obvia''
         de: una sobreyección, una biyección y una inyección. Es decir, existen
         conjuntos $U$ y $V$, y funciones $s\colon A \to U$ sobreyectiva, $b\colon U \to V$
-        biyectiva e $i\colon V \to B$ inyectiva, tales que $f = i \circ s \circ b$,
+        biyectiva e $i\colon V \to B$ inyectiva, tales que $f = i \circ b \circ s$,
         \begin{equation}\label{eq:obj}
             \begin{tikzcd}
             A && B \\
@@ -227,7 +227,7 @@ pt)}}}{\renewcommand{\pts}{\textbf{(#1 pts)}}}\begin{ejj}\upshape
 
     Una vez resuelto el problema de la sobreyectividad, el siguiente obstáculo
     es la inyectividad. ¿Cómo se puede transformar una función no inyectiva en
-    otra que sí sea biyectiva? Imaginemos el siguiente caso particular:
+    otra que sí sea inyectiva? Imaginemos el siguiente caso particular:
     \begin{figure}[H]\label{fig:ejemplo}
         \begin{center}
             \begin{tikzpicture}[scale=.8]
@@ -413,7 +413,7 @@ pt)}}}{\renewcommand{\pts}{\textbf{(#1 pts)}}}\begin{ejj}\upshape
 
     Se concluye esta tarea juntanto todo lo que tenemos, esto es, mostrando que
     hacer $f\colon A\to B$ es lo mismo que primero hacer $q_f\colon A\to \quot{A}{\sim}$,
-    luego $f^*\colon \quot{A}{\sim} \to f[A]$, y por últimio, $i_{f[A],B}$. Esto es,
+    luego $f^*\colon \quot{A}{\sim} \to f[A]$, y por último la función, $i_{f[A],B}:f[A] \to B$. Esto es,
     se compelta el \hyperref[eq:obj]{Diagrama~\ref*{eq:casi}} descubriendo
     quiénes son exactamente todos los objetos que no conocíamos al inicio, en
     el \hyperref[eq:obj]{Diagrama~\ref*{eq:obj}}:
