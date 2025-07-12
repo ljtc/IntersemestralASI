@@ -1,36 +1,33 @@
 \documentclass[letterpaper,DIV=14,headsepline,12pt]{scrartcl}
-%Utilidades en texto
-\usepackage{amsthm}
-\usepackage{thmtools}
-\usepackage{array}
-\usepackage{multicol, paracol}
-%\usepackage{truthtable}
-\usepackage[x11names, table]{xcolor}
-\usepackage{arydshln}
-\setlength{\dashlinedash}{0.5pt} % Longitud de los trazos
-\setlength{\dashlinegap}{1.5pt}  % Espacio entre trazos
-\usepackage[most]{tcolorbox}
-%Stix2 como fuente
-\usepackage[spanish,es-lcroman,mexico,shorthands=off]{babel}
+\usepackage[spanish,mexico,shorthands=off,es-lcroman]{babel}
 \usepackage{stix2}
+\pagenumbering{gobble}
+%\setlength{\parindent}{0cm}
 \usepackage{mathtools}
-%Referencias
-\usepackage[colorlinks=true, allcolors=VioletRed2]{hyperref}
-\newcommand{\customRef}[2]{\hyperref[#1]{#2~\ref*{#1}}}
-%Etiquetas de las enumeraciones
+\usepackage{amsthm}
+\usepackage{tikz-cd}
+\usepackage{comment}
+\usepackage{lipsum}
+\usepackage{ifthen}
+\usepackage{truthtable} %para las tablas de verdad
+\usepackage[table]{xcolor}
+
+\usepackage{multicol}
+\usepackage{paracol}
 \usepackage[shortlabels]{enumitem}
 \setenumerate[1]{label=\MakeLowercase{\roman*}), ref=\roman*}
 \setenumerate[2]{label=\MakeLowercase{\arabic*}), ref=\alph*}
-\usepackage{ifthen}
 
-%Notación de conjuntos
+% Para escribir el "tal que" de los conjuntos
 \providecommand\st{\;|\;}
+\providecommand\tq{\;|\;}
+
+%Para el uso de \Set y \Set*
 \providecommand\given{}
 \newcommand\SetSymbol[1][]{\nonscript\:#1\vert\allowbreak\nonscript\:\mathopen{}}
 \DeclarePairedDelimiterX\Set[1]\{\}{\renewcommand\given{\SetSymbol[\delimsize]}#1}
+\DeclarePairedDelimiterX\Par[1](){#1}
 
-
-%Ejercicios
 \newcounter{Ejer}
 \newcounter{Pts}
 \setcounter{Ejer}{1}
@@ -39,13 +36,19 @@
 \newenvironment{ejercicio}[1]{\noindent
     \ifthenelse{\equal{#1}{1} \OR \equal{#1}{+1}}{\renewcommand{\pts}{\textbf{(#1 pt)}}}{\renewcommand{\pts}{\textbf{(#1 pts)}}}\textbf{Ej. \theEjer} \pts\stepcounter{Ejer}}{\vspace{.3cm}}
 
-%Marcador
-    \newcommand{\marker}[2][Gold2]{
-        \ifmmode
-        \tcbox[on line,boxrule=0pt,colframe=#1!30,colback=#1!30,arc=2mm,left=0pt,right=0pt,top=.7pt,bottom=.7pt]{\ensuremath{#2}}%
-        \else
-        \tcbox[on line,boxrule=0pt,colframe=#1!30,colback=#1!30,arc=2mm,left=0pt,right=0pt,top=.7pt,bottom=.7pt]{#2}%
-        \fi}
+%Comandos que utilizamos
+\newcommand{\id}{\mathrm{id}}
+\newcommand{\op}{{}^{\mathrm{op}}}
+\newcommand{\set}[1]{\{#1\}}
+\renewcommand{\emptyset}{\varnothing}
+\DeclareMathOperator{\ima}{ima}
+\DeclareMathOperator{\dom}{dom}
+\newcommand{\quot}[2]{{\raisebox{.2em}{$#1$}\left/\raisebox{-.2em}{$#2$}\right.}}
+
+%Colors
+\definecolor{azul}{RGB}{0, 60, 113}
+\definecolor{dorado}{RGB}{196, 151, 57}
+\definecolor{morado}{RGB}{101, 43, 145}
 
 %Entorno de Demostración y Solución
 \renewcommand\qedsymbol{$\blacksquare$}
@@ -60,7 +63,10 @@
         }{%
         \popQED\endtrivlist\@endpefalse
     }
-    \newenvironment{solu}[1][]{%
+\makeatother
+
+\makeatletter
+    \newenvironment{solucion}[1][]{%
         \par\pushQED{\hfill \lozenge}%
         \normalfont\topsep6pt \partopsep0pt % espacio antes del entorno
         \trivlist
@@ -71,17 +77,6 @@
         \popQED\endtrivlist\@endpefalse
     }
 \makeatother
-
-%Comandos que utilizamos
-\newcommand{\id}{\mathrm{id}}
-\newcommand{\op}{{}^{\mathrm{op}}}
-\newcommand{\set}[1]{\{#1\}}
-\renewcommand{\emptyset}{\varnothing}
-\DeclareMathOperator{\ima}{ima}
-\DeclareMathOperator{\dom}{dom}
-\newcommand{\quot}[2]{{\raisebox{.2em}{$#1$}\left/\raisebox{-.2em}{$#2$}\right.}}
-
-\pagenumbering{gobble}
 
 \begin{document}
     \pagenumbering{gobble}
@@ -105,7 +100,30 @@
             \item Encuentra dos funciones \textit{no} constantes; $f:\mathbb{N} \to \mathbb{Z}$ y $g:\mathbb{Z}\to \mathbb{N}$, cuya composición (la función $g \circ f:\mathbb{N} \to \mathbb{N}$) sea constante.
         \end{enumerate}
     \end{ejercicio}
+    \begin{solucion}
+        (i) Supongamos que $f:A \to B$ y $g:B \to C$ son funciones constantes. Como $g \circ f$ tiene dominio $A$ y codominio $C$, habremos de verificar que:
+        \[ \forall x,y \in A \big( \big(g \circ f\big)(x) = \big(g \circ f\big)(y) \big) \]
+
+        En efecto, sean $x,y \in A$ cualesquiera, entonces:
+        \begin{align*}
+            \big(g \circ f\big) (x) = g\big(f (x) \big) \tag*{Def. de composición} \\
+            = g\big(f (y) \big) \tag*{$f$ es constante} \\
+            = \big(g \circ f\big) (y) \tag*{Def. de composición} \\
+        \end{align*}
+        por lo que $g \circ f$ es constante.
+
+        (ii) Sea $f:\mathbb{N} \to \mathbb{Z}$ definida como $f(n)=0$ si $n$ es par; y, $f(n)=1$ si $n$ es impar. Y definimos $g:\mathbb{Z} \to \mathbb{N}$ como $g(z)=z(z-1)$.
+
+        Notemos que $f$ no es constante, ya que $f(2)=0$, $f(1)=1$ y $2 \neq 1$; y, $g$ tampoco es constante, ya que $g(2)=2$, $g(3)=6$ y $2 \neq 3$. Sin embargo, para cada $n \in \mathbb{N}$ se tiene que:
+        \begin{enumerate}[a)]
+            \item Si $n$ es par, entonces $f(n)=0$ y $g\big( f(n)\big)=g(0)=0$.
+            \item Si $n$ es impar, entonces $f(n)=0$ y $g\big( f(n)\big)=g(1)=0$.
+        \end{enumerate}
+        
+        Por lo tanto, para cualesquiera $x,y \in \mathbb{N}$, $\big(g \circ f\big) (x)=0=\big(g \circ f\big) (y)$, probando que $g \circ f$ es constante.
+    \end{solucion}
     
+    \newpage
     \begin{ejercicio}{2.5}
         En cada inciso, determina si la correspondiente función es inyectiva, sobreyectiva, o biyectiva. Demuestra la conclusión a la que llegaste (es decir, prueba si la función tiene o no la propiedad que se afrima).
         \begin{enumerate}
@@ -115,6 +133,13 @@
         \end{enumerate}
     \end{ejercicio}
     
+    \begin{solucion}
+        (i) Se afirma que $h$ es sobreyectiva, pero no inyectiva (por tanto, no biyectiva).
+
+        
+    \end{solucion}
+
+    \newpage
     \begin{ejercicio}{2.5}
         Sean $A$ y $B$ conjuntos arbitrarios y $f:A \to B$. Demuestra que las siguientes proposiciones son equivalentes:
         \begin{enumerate}

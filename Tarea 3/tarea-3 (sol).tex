@@ -89,5 +89,33 @@
         \hfill Ayudante: Hugo Víctor García Martínez.
     \end{flushright}
 
-    Prueba de compilación en Arch :D
+    \begin{ejercicio}{2.5}
+        Se dice que una función $h:X \to Y$ es \textbf{constante} si y sólo si para cualesquiera $x,y \in X$ se tiene que $h(x)=h(y)$.
+        \begin{enumerate}
+            \item Demuestra que la composición de funciones constantes es una función constante.
+            \item Encuentra dos funciones \textit{no} constantes; $f:\mathbb{N} \to \mathbb{Z}$ y $g:\mathbb{Z}\to \mathbb{N}$, cuya composición (la función $g \circ f:\mathbb{N} \to \mathbb{N}$) sea constante.
+        \end{enumerate}
+    \end{ejercicio}
+    
+    \begin{ejercicio}{2.5}
+        En cada inciso, determina si la correspondiente función es inyectiva, sobreyectiva, o biyectiva. Demuestra la conclusión a la que llegaste (es decir, prueba si la función tiene o no la propiedad que se afrima).
+        \begin{enumerate}
+            \item $h:\{0,1,2\} \to \{x,y\}$ definida como $h=\{(0,x),(1,x),(2,y)\}$, aquí $x \neq y$.
+            \item $g:\mathbb{R}\to \mathbb{R}$ dada, para cada $x \in \mathbb{R}$, por $g(x)=4x+55$.
+            \item $f:\mathbb{N}\to \mathscr{P}(\mathbb{N})$ dada, para cada $n \in \mathbb{N}$, por $f(n)=\{0,n\}$.
+        \end{enumerate}
+    \end{ejercicio}
+    
+    \begin{ejercicio}{2.5}
+        Sean $A$ y $B$ conjuntos arbitrarios y $f:A \to B$. Demuestra que las siguientes proposiciones son equivalentes:
+        \begin{enumerate}
+            \item $\forall X \subseteq A \; \forall Y \subseteq A \; \big( f[X \setminus Y] \subseteq f[X] \setminus f[Y] \big)$.
+            \item $\forall U \subseteq A \; \forall V \subseteq A \; \big( f[U] \cap f[V] \subseteq f[U \cap V] \big)$.
+        \end{enumerate}
+    \end{ejercicio}
+    
+    \begin{ejercicio}{2.5}
+        Sean $X,Y$ y $A$ conjuntos tales que $A \subseteq X$ y sea $f:X \to Y$ cualquier función. Definamos $i:A \to X $ para cada $a \in A$ como $i(a)=a$. Demuestra que para cualquier subconjunto $B \subseteq Y$ se da la igualdad $(f \circ i)^{-1}[B]=A \cap f^{-1}[B]$.
+    \end{ejercicio}
+    
 \end{document}
