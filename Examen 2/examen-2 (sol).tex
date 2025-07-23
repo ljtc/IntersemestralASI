@@ -79,48 +79,64 @@
 \makeatother
 
 \begin{document}
-    \pagenumbering{gobble}
 
     \begin{center}
-        {\fontsize{30}{60}\rmfamily \textbf{Tarea 3}} \\ \vspace{.2cm}
-        Álgebra Superior 1, 2025-4
-        
+        {\fontsize{30}{60}\rmfamily \textbf{Segundo Examen (Solución)}} \\ \vspace{.2cm}
+            Álgebra Superior 1, 2025-4
     \end{center}
+
     \begin{flushright}
         \footnotesize \hfill Profesor: Luis Jesús Trucio Cuevas.\\
         \hfill Ayudante: Hugo Víctor García Martínez.
     \end{flushright}
-    
-    \noindent\textit{\textbf{Instrucciones.} Resuelve los siguientes ejercicios. Esta tarea es individual y deberá ser entregada presencialmente, durante la clase del \textbf{viernes 4 de julio}.}\vspace{.4cm}
 
     \begin{ejercicio}{2.5}
-        Se dice que una función $h:X \to Y$ es \textbf{constante} si y sólo si para cualesquiera $x,y \in X$ se tiene que $h(x)=h(y)$.
-        \begin{enumerate}
-            \item Demuestra que la composición de funciones constantes es una función constante.
-            \item Encuentra dos funciones \textit{no} constantes; $f:\mathbb{N} \to \mathbb{Z}$ y $g:\mathbb{Z}\to \mathbb{N}$, cuya composición (la función $g \circ f:\mathbb{N} \to \mathbb{N}$) sea constante.
-        \end{enumerate}
+        Demuestra que la relación \(R\subseteq A\times A\) es transitiva y simétrica si y
+        sólo si \(R^{-1}\circ R=R\).
     \end{ejercicio}
-    
-    \begin{ejercicio}{2.5}
-        En cada inciso, determina si la correspondiente función es inyectiva, sobreyectiva, o biyectiva. Demuestra la conclusión a la que llegaste (es decir, prueba si la función tiene o no la propiedad que se afrima).
-        \begin{enumerate}
-            \item $h:\{0,1,2\} \to \{x,y\}$ definida como $h=\{(0,x),(1,x),(2,y)\}$, aquí $x \neq y$.
-            \item $g:\mathbb{R}\to \mathbb{R}$ dada, para cada $x \in \mathbb{R}$, por $g(x)=4x+55$.
-            \item $f:\mathbb{N}\to \mathscr{P}(\mathbb{N})$ dada, para cada $n \in \mathbb{N}$, por $f(n)=\{0,n\}$.
+    \begin{proof}
+        ($\Rightarrow$) Supongamos que $R \subseteq A \times A$ es transitiva y simétrica, veamos$R^{-1}\circ R=R$.
+        \begin{enumerate}[\hspace{.3cm}]
+            \item ($\subseteq$) Sea $(x,y) \in R^{-1}\circ R$, entonces existe $z \in A$ de modo que $(x,z) \in R$ y $(z,y) \in R^{-1}$. Por definición de relación iniversa, $(y,z) \in R$ y por ser $R$ simétrica, $(z,x) \in R$. Luego $(y,z),(z,x) \in R$ y $R$ es transitiva, por lo que $(y,x) \in R$, pero como $R$ es simétrica, $(x,y) \in R$. Esto prueba que $R^{-1}\circ R \subseteq R$.
+            
+            ($\supseteq$) Sea $(a,b) \in R$, como $R$ es simetrica, $(b,a) \in R$ y por ello $(a,b) \in R^{-1}$. Por otro lado, como $(a,b),(b,a) \in R$ y $R$ es transitiva, entonces $(a,a) \in R$. Así, si $c=a$, entonces $(a,c) \in R$ y $(c,b) \in R^{-1}$; lo cual demuestra que $(a,b) \in R^{-1} \circ R$. Por lo tanto $R \subseteq R^{-1} \circ R$, y con ello:
+            \[ R=R^{-1}\circ R \]
         \end{enumerate}
-    \end{ejercicio}
-    
-    \begin{ejercicio}{2.5}
-        Sean $A$ y $B$ conjuntos arbitrarios y $f:A \to B$. Demuestra que las siguientes proposiciones son equivalentes:
-        \begin{enumerate}
-            \item $\forall X \subseteq A \; \forall Y \subseteq A \; \big( f[X \setminus Y] \subseteq f[X] \setminus f[Y] \big)$.
-            \item $\forall U \subseteq A \; \forall V \subseteq A \; \big( f[U] \cap f[V] \subseteq f[U \cap V] \big)$.
+
+        ($\Leftrightarrow$) Supongamos que $R=R^{-1}\circ R$, veamos que $R$ es simiétrica y transitiva.
+        \begin{enumerate}[\hspace{.3cm}]
+            \item (Simetría) Sean $x,y \in A$ y supongamos que $(x,y) \in R$, entonces se sigue de la hipótesis que $(x,y) \in R^{-1}\circ R$ y así, existe $z \in A$ de modo que $(x,z) \in R$ y $(z,y) \in R^{-1}$.
         \end{enumerate}
-    \end{ejercicio}
-    
+    \end{proof}
+
+
+    \newpage
     \begin{ejercicio}{2.5}
-        Sean $X,Y$ y $A$ conjuntos tales que $A \subseteq X$ y sea $f:X \to Y$ cualquier función. Definamos $i:A \to X $ para cada $a \in A$ como $i(a)=a$. Demuestra que para cualquier subconjunto $B \subseteq Y$ se da la igualdad $(f \circ i)^{-1}[B]=A \cap f^{-1}[B]$.
+        Sea \(f\colon A\to B\) una función. Demuestra que 
+        \(A=\bigcup_{b\in B}f^{-1}[\Set{b}]\). 
+    \end{ejercicio}
+
+    \begin{ejercicio}{2.5}
+        Sean \(f\colon A\to B\) una función y \(S\subseteq A\). Demuestra que si
+        \(f\) es inyectiva, entonces \(f^{-1}[f[S]]=S\).
+    \end{ejercicio}
+
+    \begin{ejercicio}{2.5}
+        Sean \(f\colon A\to B\) y \(g,h\colon B\to A\) funciones. Demuestra que
+        si \(g\) es inversa izquierda de \(f\) y \(h\) es inversa derecha de
+        \(f\), entonces \(g=h\).
+    \end{ejercicio}
+
+    \begin{ejercicio}{+1}
+        \textit{Este ejercicio es opcional y sólo se tomará en cuenta si no hay 
+        errores en la solución.}
+            
+        Sean $X$ un conjunto y $g\colon\emptyset \to X$. Pruebe que las siguientes condiciones son equivalentes:
+        \begin{enumerate}
+            \item $g$ es biyectiva.
+            \item $g$ es sobreyectiva.
+            \item $X=\emptyset$.
+        \end{enumerate}
     \end{ejercicio}
     
 \end{document}
-%Para copiar en la tablet (Hugo): ^ `` ''

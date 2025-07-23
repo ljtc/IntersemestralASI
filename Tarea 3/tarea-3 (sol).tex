@@ -66,7 +66,7 @@
 \makeatother
 
 \makeatletter
-    \newenvironment{solu}[1][]{%
+    \newenvironment{solucion}[1][]{%
         \par\pushQED{\hfill \lozenge}%
         \normalfont\topsep6pt \partopsep0pt % espacio antes del entorno
         \trivlist
@@ -96,7 +96,30 @@
             \item Encuentra dos funciones \textit{no} constantes; $f:\mathbb{N} \to \mathbb{Z}$ y $g:\mathbb{Z}\to \mathbb{N}$, cuya composición (la función $g \circ f:\mathbb{N} \to \mathbb{N}$) sea constante.
         \end{enumerate}
     \end{ejercicio}
-    
+
+   \begin{solucion}
+        (i) Supongamos que $f:A \to B$ y $g:B \to C$ son funciones constantes. Como $g \circ f$ tiene dominio $A$ y codominio $C$, habremos de verificar que:
+        \[ \forall x,y \in A \big( \big(g \circ f\big)(x) = \big(g \circ f\big)(y) \big) \]
+
+        En efecto, sean $x,y \in A$ cualesquiera, entonces:
+        \begin{align*}
+            \big(g \circ f\big) (x) = g\big(f (x) \big) \tag*{Def. de composición} \\
+            = g\big(f (y) \big) \tag*{$f$ es constante} \\
+            = \big(g \circ f\big) (y) \tag*{Def. de composición} \\
+        \end{align*}
+        por lo que $g \circ f$ es constante.
+
+        (ii) Sea $f:\mathbb{N} \to \mathbb{Z}$ definida como $f(n)=0$ si $n$ es par; y, $f(n)=1$ si $n$ es impar. Y definimos $g:\mathbb{Z} \to \mathbb{N}$ como $g(z)=z(z-1)$.
+
+        Notemos que $f$ no es constante, ya que $f(2)=0$, $f(1)=1$ y $2 \neq 1$; y, $g$ tampoco es constante, ya que $g(2)=2$, $g(3)=6$ y $2 \neq 3$. Sin embargo, para cada $n \in \mathbb{N}$ se tiene que:
+        \begin{enumerate}[a)]
+            \item Si $n$ es par, entonces $f(n)=0$ y $g\big( f(n)\big)=g(0)=0$.
+            \item Si $n$ es impar, entonces $f(n)=0$ y $g\big( f(n)\big)=g(1)=0$.
+        \end{enumerate}
+        
+        Por lo tanto, para cualesquiera $x,y \in \mathbb{N}$, $\big(g \circ f\big) (x)=0=\big(g \circ f\big) (y)$, probando que $g \circ f$ es constante.
+    \end{solucion}
+
     \begin{ejercicio}{2.5}
         En cada inciso, determina si la correspondiente función es inyectiva, sobreyectiva, o biyectiva. Demuestra la conclusión a la que llegaste (es decir, prueba si la función tiene o no la propiedad que se afrima).
         \begin{enumerate}
@@ -105,7 +128,28 @@
             \item $f:\mathbb{N}\to \mathscr{P}(\mathbb{N})$ dada, para cada $n \in \mathbb{N}$, por $f(n)=\{0,n\}$.
         \end{enumerate}
     \end{ejercicio}
-    
+
+    \begin{solucion}
+        (i) Notese que $x \in \ima(h)$ ya que $x=h(0)$; y, $y \in \ima(h)$ pues $y=h(1)$. Por lo tanto $\{x,y\} \subseteq \ima(h)$, y como $\{x,y\}$ es codominio de $h$, $\ima(h) \subseteq \{x,y\}$. Así que $\ima(h)=\{x,y\}$, esto es, $h$ \textbf{es sobreyectiva}.
+
+        Pero $h$ \textbf{no es inyectiva}, pues $h(0)=h(1)=x$ y $0\neq 1$. Así, $h$ \textbf{tampoco es biyectiva}.
+
+        (ii) Esta funcion es biyectiva, en efecto, si $x,y \in \mathbb{R}$ son tales que $g(x)=g(y)$, entonces $4x+55=4y+55$, de donde $4x=4y$ y con ello $x=y$; esto es, $g$ \textbf{es inyectiva}.
+
+        Por otra parte, si $r \in \mathbb{R}$ es cualquiera, $t:=\frac{r-55}{4}$ es un elemento de $\dom(g)=\mathbb{R}$ que satisface:
+        \[ g(t)=g\Big(\frac{r-55}{4}\Big) = 4 \Big(\frac{r-55}{4}\Big) +55 = (r-55)+55=r \]
+        lo cual prueba, por la arbitrariedad de $r$, que $g$ \textbf{es sobreyectiva}. Así, $g$ \textbf{es biyectiva}.
+
+        (iii) Por último, $f$ no es sorbeyectiva. Notemos que para cada $n \in \mathbb{N}$ se cumple que $0 \in f(n)=\{0,n\}$, esto implica que $f(n)\neq \emptyset$, así que $\forall n \in f(n) \neq \emptyset$, lo cual muestra que $\emptyset$ no está en la imagen de $f$. Pero $\emptyset$ es un eleemento de $\mathscr{P}(\mathbb{N})$, ya que $\emptyset \subseteq \mathbb{N}$, de forma que $\ima(f) \neq \mathscr{P}(\mathbb{N})$, mostrando que $f$ \textbf{no es sobreyectiva}, así, \textbf{tampoco es biyectiva}.
+
+        Ahora, $f$ sí es inyectiva. En efecto, sean $n,m\in \mathbb{N}$ y supongamos que $f(n)=f(m)$, entonces $\{0,n\}=\{0,m\}$\footnote{Como esta igualdad \textit{no es de pares ordenados} no se puede concluir directo que $0=0$ y $n=m$, hay que hacer algo mas.}, como $n \in \{0,m\}$ entonces $n=0$ o $n=m$ (por definición de par) y se tienen dos casos:
+        \begin{enumerate}
+            \item Si $n=0$, $\{0,n\}=\{0,0\}=\{0\}$; pero por hipótesis, $\{0,n\}=\{0,m\}$; asi que $\{0,m\}=\{0\}$. Como $m \in \{0,m\}=\{0\}$, es necesario que $m=0$. En este caso $n=m$ (ambos son $0$).
+            \item Si $n=m$, entonces en este caso $n=m$.
+        \end{enumerate}
+        En cualquier caso $n=m$, mostrando que $\forall n,m \in \mathbb{N} \big( f(n)=f(m) \rightarrow n=m \big)$, es decir $f$ \textbf{es inyectiva}.
+    \end{solucion}
+
     \begin{ejercicio}{2.5}
         Sean $A$ y $B$ conjuntos arbitrarios y $f:A \to B$. Demuestra que las siguientes proposiciones son equivalentes:
         \begin{enumerate}
@@ -113,9 +157,33 @@
             \item $\forall U \subseteq A \; \forall V \subseteq A \; \big( f[U] \cap f[V] \subseteq f[U \cap V] \big)$.
         \end{enumerate}
     \end{ejercicio}
-    
+    \begin{proof}
+        (i) $\to$ (ii) Supongamos que $\forall X \subseteq A \; \forall Y \subseteq A \; \big( f[X \setminus Y] \subseteq f[X] \setminus f[Y] \big)$. Veamos que $\forall U \subseteq A \; \forall V \subseteq A \; \big( f[U] \cap f[V] \subseteq f[U \cap V] \big)$
+       
+        Sean $U,V$ subconjuntos de $A$, veamos que ocurre la contención $f[U] \cap f[V] \subseteq f[U \cap V]$. Efectivamente, sea $l\in f[U] \cap f[V]$ cualquier elemento. Así, existen $u \in U$ y $v \in V$ tales que $l=f(u)$ y $l=f(v)$. Como $\{u\},\{v\} \subseteq A$, por hipótesis se tiene que:
+        \[ f[\{u\} \setminus \{v\}]\subseteq f[\{u\}] \setminus f[\{v\}] \]
+        pero $f[\{u\}]\setminus f[\{v\}] = \{l\} \setminus \{l\} = \emptyset$, por lo que $f[\{u\} \setminus \{v\}]=\emptyset$ y así $\{u\} \setminus \{v\}=\emptyset$, luego $\{u\} \subseteq \{v\}$ y por lo tanto $u=v$. Esto prueba que $u \in V$, así que $u \in U \cap V$ y como $l=f(u)$, entonces $l \in f[U \cap V]$. Por lo que $f[U] \cap f[V] \subseteq f[U \cap V]$.
+
+        (ii) $\rightarrow$ (i) Supongamos que $\forall U \subseteq A \; \forall V \subseteq A \; \big( f[U] \cap f[V] \subseteq f[U \cap V] \big)$, veamos que se satisface $\forall X \subseteq A \; \forall Y \subseteq A \; \big( f[X \setminus Y] \subseteq f[X] \setminus f[Y] \big)$.
+
+        Supongamos que $X,Y \subseteq A$, verifiquemos que $f[X \setminus Y] \subseteq f[X] \setminus f[Y]$. Sea $l \in f[X \setminus Y]$ cualquiera, entonces existe $x \in X \setminus Y$ tal que $l=f(x)$. Esto muestra que $l \in f[X]$ (ya que $x \in X$), resta ver entonces que $l \notin f[Y]$.
+
+        Por contradicción, supongamos que $l \in f[Y]$, entonces existe $y \in Y$ tal que $l=f(y)$, pero, como $\{x\},\{y\} \subseteq A$, aplicando la hipótesis se tiene que:
+        \[ f[\{x\}] \cap f[\{y\}] \subseteq f[\{x\} \cap \{y\}] \]
+        pero $l \in f[\{x\}] \cap f[\{y\}]$, entonces $l \in f[\{x\} \cap \{y\}]$, lo cual implica que $\{x\} \cap \{y\} \neq \emptyset$, por lo que $x=y$. Esto es un absurdo, ya que $x \in X \setminus Y$ y $y \ni Y$. El absurdo surge de suponer que $l \in f[Y]$, por lo tanto $l \notin f[Y]$, y asi $l \in f[X]\setminus f[Y]$, lo cual demuestra $f[X \setminus Y] \subseteq f[X] \setminus f[Y]$.
+    \end{proof}
+
     \begin{ejercicio}{2.5}
         Sean $X,Y$ y $A$ conjuntos tales que $A \subseteq X$ y sea $f:X \to Y$ cualquier función. Definamos $i:A \to X $ para cada $a \in A$ como $i(a)=a$. Demuestra que para cualquier subconjunto $B \subseteq Y$ se da la igualdad $(f \circ i)^{-1}[B]=A \cap f^{-1}[B]$.
     \end{ejercicio}
+    \begin{proof}
+        Sea $B \subseteq Y$ cualquera, veamos que $(f \circ i)^{-1}[B]=A \cap f^{-1}[B]$.
+
+        ($\subseteq$) Sea $x \in (f \circ i)^{-1}[B]$, entonces $\big( f \circ i \big)(x) \in B$. Por definición de composición y de $i$: $\big( f \circ i \big)(x) = f\big( i(x) \big)=f(x)$, así que $f(x) \in B$ y con ello $x \in f^{-1}[B]$. Además, como $\dom(f \circ i)=A$, entonces $(f \circ i)^{-1}[B] \subseteq A$, por lo que $x \in A$. Esto es, $x \in A \cap f^{-1}[B]$, por lo que:
+        \[(f \circ i)^{-1}[B] \subseteq A \cap f^{-1}[B]\]
+
+        ($\supseteq$) Sea $y \in A \cap f^{-1}[B]$ cualquiera. Entonces $y \in A$ y $y \in f^{-1}[B]$, de esto último $f(y) \in B$. Además, dado que $y \in A$, entonces $\big( f \circ i \big)(y) = f\big( i(y) \big)=f(y)$, por lo que $\big( f \circ i \big)(y) \in B$, mostrando que $y \in (f \circ i)^{-1}[B]$.
+        \[A \cap f^{-1}[B] \subseteq (f \circ i)^{-1}[B]\]
+    \end{proof}
     
 \end{document}
