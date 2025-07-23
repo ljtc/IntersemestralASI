@@ -105,7 +105,9 @@
 
         ($\Leftrightarrow$) Supongamos que $R=R^{-1}\circ R$, veamos que $R$ es simiétrica y transitiva.
         \begin{enumerate}[\hspace{.3cm}]
-            \item (Simetría) Sean $x,y \in A$ y supongamos que $(x,y) \in R$, entonces se sigue de la hipótesis que $(x,y) \in R^{-1}\circ R$ y así, existe $z \in A$ de modo que $(x,z) \in R$ y $(z,y) \in R^{-1}$.
+            \item (Simetría) Sean $x,y \in A$ y supongamos que $(x,y) \in R$, entonces se sigue de la hipótesis que $(x,y) \in R^{-1}\circ R$ y así, existe $z \in A$ de modo que $(x,z) \in R$ y $(z,y) \in R^{-1}$. Por definición de relación inversa, $(y,z)\in R$ y $(z,x) \in R^{-1}$, de donde $(y,x) \in R^{-1} \circ R$, lo cual implica por hipótesis que $(y,x) \in R$. Por lo que$R$ es simétrica.
+            
+            \item (Transitividad) Sean $a,b,c \in A$ y supongamos que $(a,b) \in R$ y $(b,c) \in R$. Como $R$ es simétrica (probado en el párrafo de arriba), de lo último se obtiene que $(c,b) \in R$ y con ello $(b,c) \in R^{-1}$. Luego, $(a,b) \in R$ y $(b,c) \in R^{-1}$, así que $(a,c) \in R^{-1} \circ R$, de donde $(a,c) \in R$. Por lo tanto, $R$ es simétrica.
         \end{enumerate}
     \end{proof}
 
