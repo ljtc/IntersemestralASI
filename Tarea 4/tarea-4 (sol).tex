@@ -1,0 +1,358 @@
+\documentclass[letterpaper,DIV=14,headsepline,12pt]{scrartcl}
+\usepackage[spanish,mexico,shorthands=off,es-lcroman]{babel}
+\usepackage{stix2}
+\pagenumbering{gobble}
+%\setlength{\parindent}{0cm}
+\usepackage{mathtools}
+\usepackage{amsthm}
+\usepackage{tikz-cd}
+\usepackage{comment}
+\usepackage{lipsum}
+\usepackage{ifthen}
+\usepackage{truthtable} %para las tablas de verdad
+\usepackage[table]{xcolor}
+
+\usepackage{multicol}
+\usepackage{paracol}
+\usepackage[shortlabels]{enumitem}
+\setenumerate[1]{label=\MakeLowercase{\roman*}), ref=\roman*}
+\setenumerate[2]{label=\MakeLowercase{\arabic*}), ref=\alph*}
+
+% Para escribir el "tal que" de los conjuntos
+\providecommand\st{\;|\;}
+\providecommand\tq{\;|\;}
+
+%Para el uso de \Set y \Set*
+\providecommand\given{}
+\newcommand\SetSymbol[1][]{\nonscript\:#1\vert\allowbreak\nonscript\:\mathopen{}}
+\DeclarePairedDelimiterX\Set[1]\{\}{\renewcommand\given{\SetSymbol[\delimsize]}#1}
+\DeclarePairedDelimiterX\Par[1](){#1}
+
+\newcounter{Ejer}
+\newcounter{Pts}
+\setcounter{Ejer}{1}
+\setcounter{Pts}{1}
+\newcommand{\pts}{}
+\newenvironment{ejercicio}[1]{\noindent
+    \ifthenelse{\equal{#1}{1} \OR \equal{#1}{+1}}{\renewcommand{\pts}{\textbf{(#1 pt)}}}{\renewcommand{\pts}{\textbf{(#1 pts)}}}\textbf{Ej. \theEjer} \pts\stepcounter{Ejer}}{\vspace{.3cm}}
+
+%Comandos que utilizamos
+\newcommand{\id}{\mathrm{id}}
+\newcommand{\op}{{}^{\mathrm{op}}}
+\newcommand{\set}[1]{\{#1\}}
+\renewcommand{\emptyset}{\varnothing}
+\DeclareMathOperator{\ima}{ima}
+\DeclareMathOperator{\dom}{dom}
+\newcommand{\quot}[2]{{\raisebox{.2em}{$#1$}\left/\raisebox{-.2em}{$#2$}\right.}}
+
+%Colors
+\definecolor{azul}{RGB}{0, 60, 113}
+\definecolor{dorado}{RGB}{196, 151, 57}
+\definecolor{morado}{RGB}{101, 43, 145}
+
+%Entorno de Demostración y Solución
+\renewcommand\qedsymbol{$\blacksquare$}
+\makeatletter
+    \renewenvironment{proof}[1][]{%
+        \par\pushQED{\qed}%
+        \normalfont\topsep6pt \partopsep0pt % espacio antes del entorno
+        \trivlist
+        \item[\hskip\labelsep
+                \textbf{\textit{Demostración.}}% Cambiado aquí
+        ]#1
+        }{%
+        \popQED\endtrivlist\@endpefalse
+    }
+\makeatother
+
+\makeatletter
+    \newenvironment{solucion}[1][]{%
+        \par\pushQED{\hfill \lozenge}%
+        \normalfont\topsep6pt \partopsep0pt % espacio antes del entorno
+        \trivlist
+        \item[\hskip\labelsep
+                \textbf{\textit{Solución.}}% Cambiado aquí
+        ]#1
+        }{%
+        \popQED\endtrivlist\@endpefalse
+    }
+\makeatother
+
+\begin{document}
+
+    \begin{center}
+        {\fontsize{30}{60}\rmfamily \textbf{Tarea 4 (Solución)}} \\ \vspace{.2cm} Álgebra
+        Superior 1, 2025-4
+    \end{center}
+    \begin{flushright}
+        \footnotesize \hfill Profesor: Luis Jesús Trucio Cuevas.\\
+        \hfill Ayudante: Hugo Víctor García Martínez.
+    \end{flushright}
+
+    \begin{ejercicio}{1}\label{ej:sobresuimagen} Demuestra que la función
+        $\hat{f}\colon A \to f[A]$ siempre es función sobreyectiva; y concluye que, si
+        $f\colon A \to B$ es inyectiva, entonces $\hat{f}\colon A \to f[A]$ es biyectiva.
+    \end{ejercicio}
+    \begin{proof}
+        Para la primera parte, veamos que $\hat{f}\colon A \to f[A]$ es una sobreyección. Efectivamente, sea $y \in f[A]$ cualquiera, entonces por definición de imagen directa, existe $a \in A $ tal que $y=f(a)=\hat{f}$; así, $a \in \ima(\hat{f})$. Por lo tanto $\ima(\hat{f} \subseteq f[A])$; y, como $f[A]$ es codominio de $\hat{f}$, entonces $\ima(\hat{f}) \subseteq f[A]$. Esto prueba que $\ima(\hat{f})=f[A]$; es decir, $\hat{f}\colon A \to f[A]$ es sobreyectiva.
+
+        Para la segunda parte, notemos que si $f$ es inyectiva y $x,y \in A$ son tales que $\hat{f}(x)=\hat{f}(y)$, entonces $f(x)=f(y)$ (por la definición de $\hat{f}$), y con ello $x=y$. Por lo tanto $\hat{f}$ es inyectiva; así también, biyectiva.
+    \end{proof}
+
+    \begin{ejercicio}{1.5}
+        Demuestra que:
+        \begin{enumerate}
+            \item Si $X \subseteq Y$, entonces $i_{X,Y}\colon X \to Y$ es inyectiva.
+            \item $f=i_{f[A],B} \circ \hat{f}$.
+        \end{enumerate}
+    \end{ejercicio}
+    \begin{proof}
+        (i) Supongamos que $X \subseteq Y$. Veamos que $i_{X,Y}$ es inyectiva; efectivamente, sean $x,y \in \dom(i_{X,Y})=X$ ysupongamos que $i_{X,Y}(x)=i_{X,Y}(y)$; así, $x=y$ (por definición de $i_{X,Y}$). Lo cual prueba que $i_{X,Y}$ es inyectiva.
+
+        (ii) Como el dominio de $\hat{f}$ es $X$; el dominio de la composición $f=i_{f[A],B} \circ \hat{f}$ es $X$; además, el dominio de $f$ es $X$. Por lo tanto, para verificar la igualdad entre las funciones $f$ y $i_{f[A],B} \circ \hat{f}$; basta verificar que:
+        \[ \forall x \in X \; \big( f(x) = \big( i_{f[A],B} \circ \hat{f} \big)(x) \big) \]
+
+        En efecto, si $x \in X$ es cualquiera, entonces:
+        \begin{align*}
+            \big( i_{f[A],B} \circ \hat{f} \big) (x) &= i_{f[A],B} \big( \hat{f} (x) \big) \tag*{(Definición de composición)} \\
+            &= i_{f[A],B} \big( f (x) \big) \tag*{(Definición de $\hat{f}$)} \\
+            &= f(x) \tag*{(Definición de $i_{f[A],B}$)}
+        \end{align*}
+        finalizando la prueba de la igualdad funcional deseada.
+    \end{proof}
+
+    \begin{ejercicio}{1.5}\label{ej:rela} Por un ejercicio de las tareas
+        (\textit{?`cuál?}), la relación $\sim$ es de equivalencia. Demuestra la
+        igualdad de conjuntos: $\quot{A}{\sim}=\{ f^{-1}[\{b\}] \mid b \in f[A]
+        \}$.
+    \end{ejercicio}
+    \begin{proof}
+        La relación $\sim$ es de equivalencia en virtud del \textit{Ejercio 10} (\textit{o un caso particular del Ejrcicio 7}) de la \textit{Tarea 2}. Ahora, demostraremos la igualdad $\quot{A}{\sim}=\{ f^{-1}[\{b\}] \mid b \in f[A] \}$ por doble contención.
+
+        ($\subseteq$) Sea $[x] \in \quot{A}{\sim}$ cualquiera. Sea $b:=f(x) \in f[A]$, se afirma que $[x]=f^{-1}[\{b\}]$; en efecto, note que para cada $y$ se cumple:
+        \begin{align*}
+            y \in [x] & \; \Leftrightarrow \; y \sim x \tag*{(Definición de clase de equivalencia)} \\
+            & \; \Leftrightarrow \; f(y)=f(x) \tag*{(Definición de $\sim$)} \\
+            & \; \Leftrightarrow \; f(y)=b \tag*{(Definición de $b$)} \\
+            & \; \Leftrightarrow \; y \in f^{-1}[\{b\}] \tag*{(Definición de $b$)}
+        \end{align*}
+        lo cual prueba que $\forall y \big( y \in [x] \leftrightarrow y \in f^{-1}[\{b\}] \big)$, esto es, $[x]=f^{-1}[\{b\}]$. Por lo tanto $[x] \in \{ f^{-1}[\{b\}] \mid b \in f[A] \}$, probando $\quot{A}{\sim} \subseteq \{ f^{-1}[\{b\}] \mid b \in f[A] \}$.
+
+        ($\supseteq$) Ahora, sea $f^{-1}[\{b\}] \in \{ f^{-1}[\{b\}] \mid b \in f[A] \}$ cualquier elemento, entonces $b \in f[A]$. Por definición de imagen directa, existe $a \in A$ de modo que $b=f(a)$. Se afirma que $f^{-1}[\{b\}]=[a]$. Efectivamente, para cada $y$:
+        \begin{align*}
+            y \in f^{-1}[\{b\}] & \; \Leftrightarrow \; f(y) \in \{b\} \tag*{(Definición de imagen inversa)} \\
+            & \; \Leftrightarrow \; f(y)=b \tag*{(Conjunto unitario)} \\
+            & \; \Leftrightarrow \; f(y)=f(a) \tag*{(Pues $a=f(b)$)} \\
+            & \; \Leftrightarrow \; y \sim a \tag*{(Definición de $\sim$)} \\
+            & \; \Leftrightarrow \; y \in [a] \tag*{(Definición de clase de equivalencia)}
+        \end{align*}
+        por lo que $f^{-1}[\{b\}] =[a]$, así que $f^{-1}[\{b\}] \in \quot{A}{\sim}$. Esto prueba la contención restante, $\{ f^{-1}[\{b\}] \mid b \in f[A] \} \subseteq \quot{A}{\sim}$.
+    \end{proof}
+
+    \begin{ejercicio}{1.5}
+        En términos de la definición previa:
+        \begin{enumerate}
+            \item Demuestra que $q_f$ es sobreyectiva.
+            \item Prueba que si $f$ es inyectiva, entonces para cada $x \in X$,
+            $[x]=\{x\}$.
+            \item Concluye que, si $f$ es inyectiva, entonces $q_f$ es
+            biyectiva.
+        \end{enumerate}
+    \end{ejercicio}
+    \begin{proof}
+        (i) Sea $[a] \in \quot{A}{\sim}$ cualquiera, entonces $q(a)=[a]$; esto es, para cada elemento $x=[a]$ de $\quot{A}{\sim}$, existe un elemento $y:=a \in A$ de modo que $q(y)=x$; luego $q_f$ es sobreyectiva.
+
+        (ii) Supongamos que $f$ es inyectiva y sea $x \in A$ cualquiera. Para cada $y$ se tiene que:
+        \begin{align*}
+            y \in [x] &\; \Leftrightarrow \; y \sim x \tag*{(Definición de clase de equivalencia)} \\
+            &\; \Leftrightarrow \; f(y) \sim f(x) \tag*{(Definición de $\sim$)} \\
+            &\; \Leftrightarrow \; y=x \tag*{($f$ es función y es inyectiva)} \\
+            &\; \Leftrightarrow \; y \in \{x\} \tag*{(Conjunto unitario)} \\
+        \end{align*}
+        lo cual demuestra que $[x]=\{x\}$.
+
+        (iii) Supongamos (otra vez) que $f$ es inyectiva. Por el inciso previo, para cada $y \in A$ se tiene que:
+        \begin{align*}
+            y \sim x &\; \Leftrightarrow \; y \in [x] \tag*{(Definición de clase de equivalencia)} \\
+            &\; \Leftrightarrow \; y \in \{x\} \tag*{(Inciso previo)} \\
+            &\; \Leftrightarrow \; y=x \tag*{(Conjunto unitario)} \\
+            &\; \Leftrightarrow \; y \mathrel{\id_A} x \tag*{(Conjunto unitario)}
+        \end{align*}
+        lo cual demuestra que $\sim = \id_A$. Así, se obtiene del \textit{Ejericio 10} de la \textit{Tarea 2}, que $q_f$ es biyectiva.
+    \end{proof}
+
+    \begin{ejercicio}{1.5}
+        Haciendo uso de la terminología definida hasta ahora, para cada inciso
+        da un ejemplo particular de:
+        \begin{enumerate}
+            \item Una función $f\colon \{1,2,3,4,5,6,7,8\} \to \{0,1,2\}$ tal que
+            $q_f$ sea constante.
+            \item Una función $f\colon \mathbb{N} \to \mathbb{N}$ de modo que
+            $\quot{\mathbb{N}}{\sim}$ posea exactamente $5$ elementos.
+            \item Una función $f\colon \mathbb{Z} \to \mathbb{Z}$ tal que para cada $z
+            \in \mathbb{Z}$ se cumple $q_f(z) = q_f(z+7)$ y $q_f(z) \neq q_f(z+1)$.
+        \end{enumerate}
+    \end{ejercicio}
+    \begin{solucion}
+        (i) Definamos $f$ para cada $x \in \{1,2,3,4,5,6,7,8\}$ como $f(x)=2$. Por definición de función constante, hay que verificar que:
+        \[ \forall x,y \in \{1,2,3,4,5,6,7,8\} \; \big( q_f(x) = q_f(y) \big) \]
+
+        En efecto, sean $x,y \in \{1,2,3,4,5,6,7,8\}$ cualesquiera, entonces $f(x)=f(y)$ (pues ambos son $2$); con ello $x \in y$, esto es $[x]=[y]$; o equivalentemente $q(x)=q(y)$. Lo anterior prueba que $q_f$ es una función constante.
+
+        (ii) Definamos $f:\mathbb{N} \to \mathbb{N}$ por medio de la regla:
+        \[ f(n) = \left\lbrace \begin{array}{l l}
+            2 & ; n < 1 \\
+            4 & ; 1 \leq n < 2 \\
+            6 & ; 2 \leq n < 3 \\
+            8 & ; 3 \leq n < 4 \\
+            10 & ; 4 \leq n 
+        \end{array} \right. \]
+
+        De esta manera, se tiene lo siguiente para cada $n \in \mathbb{N}$:
+        \begin{enumerate}
+            \item Si $n<1$ entonces $n=0$ y entonces $[n]=[0]$.
+            \item Si $1 \leq n < 2$ entonces $n=1$ y entonces $[n]=[1]$.
+            \item Si $2 \leq n < 3$ entonces $n=2$ y entonces $[n]=[2]$.
+            \item Si $3 \leq n < 4$ entonces $n=3$ y entonces $[n]=[3]$.
+            \item Si $4 \leq n$ entonces $n=2$ y entonces $f(n)=10$. Como $f(4)=10$, entonces $f(n)=f(4)$, y con  ello $[n]=[4]$.
+        \end{enumerate}
+
+        Esto demuestra que $\quot{\mathbb{N}}{\sim}=\{[0],[1],[2],[3],[4]\}$. Lo único que falta para verificar que este conjunto cuenta con exactamente cinco elementos es verificar que sus elementos son distintos dos a dos, es decir que $[0]\neq [1]$, $[0]\neq [2]$, $[0]\neq [3]$, $[0]\neq [4]$; que $[1]\neq [2]$, $[1]\neq [3]$, $[1]\neq [4]$; que $[2]\neq [3]$, $[2]\neq [4]$; y, que $[3]\neq [4]$. Pero esto resulta innmediato de la definición de la relación de equivalencia $\sim$, y de que: $f(0)\neq f(1)$, $f(0)\neq f(2)$, $f(0)\neq f(3)$, $f(0)\neq f(4)$; que $f(1)\neq f(2)$, $f(1)\neq f(3)$, $f(1)\neq f(4)$; que $f(2)\neq f(2)$, $f(2)\neq f(4)$; y que $f(3)\neq f(4)$.
+
+        (iii) Definamos $f:\mathbb{Z} \to \mathbb{Z}$ como:
+        \begin{align*}
+            f(z) &= \left\lbrace \begin{array}{l l}
+            0 & ; \exists k \in \mathbb{Z} (n = 7k) \\
+            1 & ; \exists k \in \mathbb{Z} (n = 7k+1) \\
+            2 & ; \exists k \in \mathbb{Z} (n = 7k+2) \\
+            3 & ; \exists k \in \mathbb{Z} (n = 7k+3) \\
+            4 & ; \exists k \in \mathbb{Z} (n = 7k+4) \\
+            5 & ; \exists k \in \mathbb{Z} (n = 7k+5) \\
+            6 & ; \exists k \in \mathbb{Z} (n = 7k+6)
+        \end{array} \right.
+        \end{align*}
+        
+        de modo que $f(z)=0$ si $z$ es múltiplo de $7$ (es decir, si es de la forma $7k$, con $k$ entero); y, $f(z)=z$ si $z$ no es múltiplo de $7$. Sea $z \in \mathbb{Z}$ cualquiera, veamos que $q_f(z)=q_f(z+7)$; y, que $q_f(z)\neq q_f(z+1)$. Observemos que lo primero es lo mismo a demostrar $[z]=[z+7]$, es decir, $z \sim z+7$; o equivalentemente, $f(z) \neq f(z+7)$; similarmente, lo segundo es equivalente a demostrar que $f(z) \neq f(z+1)$, así que esto sera lo que demostraremos. Sea $m:=f(z)$, entonces existe $k$ entero tal que $z=7k+m$.
+        \begin{enumerate}
+            \item Para lo primero, notemos que se lo antrior se desprende que $z+7=(7k+m)+7=7(k+1)+m$; es decir, existe $l=k+1 \in \mathbb{Z}$ de modo que $z+7=7l+m$, probando que $f(z)=f(z+1)$ (ambos son $m$).
+            
+            \item Ahora, por contradicción, supongamos que $f(z)=f(z+1)$, como ambos son $m$, entonces existe un entero $k'$ de modo que $z+1=7k'+m$. Puesto que $z=7k+m$, entonces $(7k+m)+1=7k'+m$, de donde $7k+1=7k'$, o bien $1=7(k-k')$. Pero esto mostraría que $1$ es múltiplo de $7$, lo cual claramente es absurdo. Por lo tanto, $f(z) \neq f(z+1)$.
+        \end{enumerate}
+
+        Por lo tanto, esta función cumple con el requisito deseado.
+    \end{solucion}
+
+    \begin{ejercicio}{1.5}\label{ej:fStar} Completa la demostración empezada en
+        el párrafo anterior; es decir, prueba que $f^*$ es función de
+        $\quot{A}{\sim}$ en $f[A]$ mostrando que:
+        \[ \forall [x] \in \quot{A}{\sim} \; \forall b,b' \in f[A] \; \Big( \big(
+        [x] f^* b \land [x] f^* b' \big) \to b=b' \Big). \]
+    \end{ejercicio}
+    \begin{proof}
+        Sean $[x] \in \quot{A}{\sim}$, $b,b' \in f[A]$ y supongamos que $[x] f^* b$ y $[x] f^* b'$, habremos de demostrar que $b=b'$.
+
+        Como $[x] f^* b$, existe $y \in [x]$ de forma que $b=f(y)$; similarmente, existe $y' \in [x]$ de manera que $b'=f(y')$. Ahora, como $y \in [x]$ y $y' \in [x]$, entonces $y \sim x$ y $y' \sim x$, respectivamente. De lo anterior, $f(y)=f(x)$ y $f(y')=f(x)$, respectivamente. Por lo tanto $b=f(y)=f(y')=b'$, es decir $b=b'$. Se finaliza así la demostración de que $f^*$ es función.
+    \end{proof}
+
+    \begin{ejercicio}{1}
+        Demuestra que $f^*\colon \quot{A}{\sim} \to f[A]$ es biyectiva.
+    \end{ejercicio}
+    \begin{proof}
+        (Inyectividad) Sean $[x],[y] \in \quot{A}{\sim}$ y supongamos que $f^*(x)=f^*(y)$. Dado que $f^*([x])=f(x)$ y $f^*([y])=f(y)$ (esto es, en esencia, lo que se probó en el ejrecicio anterior), entonces $f(x)=f(y)$; con ello $x \sim y$, o equivalentemente, $[x]=[y]$. Así, $f^*$ es inyectiva.
+
+        (Sobreyectividad) Sea $l \in f[A]$ cualquier elemento, por definición de imagen directa, existe $a \in A$ con $l=f(a)$. Notemos que $f^*([a])=f(a)=l$, es decir, para cada elemento $l$ de $f[A]$, existe $x=[a] \in \quot{A}{\sim}$ de manera que $f^*(x)=l$. Por lo tanto, $f^*$ es sobreyectiva, y así mismo, inyectiva.
+    \end{proof}
+
+    \begin{ejercicio}{.5}
+        Demuestra el Primer Teorema de Isomorfismo para conjuntos; es decir,
+        prueba que:
+        \[ f=i_{f[A],B} \; \circ \; f^* \; \circ \; q_f \] ($f$ es composición
+        de una sobreyección, una biyección y una inyección).
+    \end{ejercicio}
+    \begin{proof}
+        Notemos que $A$ es el dominino dee $f$, pero, como también es el dominio de $q_f$, entonces también lo es de la composición $f^* \; \circ \; q_f$; y con ello, de la composición $i_{f[A],B} \; \circ \; f^* \; \circ \; q_f = i_{f[A],B} \; \circ \; (f^* \; \circ \; q_f)$. Por lo tanto, para verificar la igualdad funcional deseada, habremos de hacer la demostración de que:
+        \[ \forall x \in A \Big( f(x) = \big( i_{f[A],B} \; \circ \; f^* \; \circ \; q_f \big) (x) \Big) \]
+
+        En efecto, si $x \in A$ es cualquier elemento, entonces:
+        \begin{align*}
+            \big( i_{f[A],B} \; \circ \; f^* \; \circ \; q_f \big) (x) & = \Big( i_{f[A],B} \; \circ \; \big( f^* \; \circ \; q_f\big) \Big) (x) \tag*{La composición es asociativa} \\
+            & = \Big( i_{f[A],B} \; \circ \; \big( f^* \; \circ \; q_f\big) \Big) (x) \tag*{(Definición de composición)} \\
+            & = i_{f[A],B} \Big( \big( f^* \; \circ \; q_f\big) (x) \Big) \tag*{(Definición de composición)} \\
+            & = i_{f[A],B} \Big( f^* \big(  q_f (x) \big) \Big) \tag*{(Definición de composición)} \\
+            & = i_{f[A],B} \big( f^* (  [x] ) \big) \tag*{(Definición de $q_f$)} \\
+            & = i_{f[A],B} \big( f(x) \big) \tag*{(Propiedad de $f^*$)} \\
+            & = i_{f[A],B} \big( f(x) \big) \tag*{(Propiedad de $f^*$)} \\
+            & = f(x) \tag*{(Definición de $i_{f[A],B}$)}
+        \end{align*}
+        lo cual finaliza la demostración de este ejercicio (y, del Primer Teorema de Isomorfismo para Conjuntos).
+    \end{proof}
+
+    \begin{center}
+        - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    \end{center}
+
+    \begin{ejercicio}{+1}
+        Prueba que para cualesquiera funciones $i,j:\quot{A}{\sim}\to B$, si se tiene que 
+        $ j \; \circ \; q_f = f$ y $ i  \; \circ \; q_f = f$, entonces $i=j$.
+    \end{ejercicio}
+    \begin{proof}
+        Supongamos que $i,j:\quot{A}{\sim}\to B$ son funciones tales que se dan las igualdades $ j \; \circ \; q_f = f$ y $ i  \; \circ \; q_f = f$. Como $q_f$ es una función sobreyectiva, tiene inveresa derecha (visto en clase), a saber, existe $u:f[A] \to \quot{A}{\sim}$ de manera que $q_f \circ u = \id_{f[A]}$. Por lo tanto, de $ j \; \circ \; q_f = f$ se obtiene que:
+        \begin{align*}
+            j & = j \; \circ \; \id_{f[A]} \tag*{(La identidad es neutro de la composición)} \\
+            & = j \; \circ \; ( q_f \; \circ \; u) \tag*{($u$ es inversa derecha de $q_f$)} \\
+            & = (j \; \circ \; q_f) \; \circ \; u \tag*{(La composición es asociativa)} \\
+            & = f \; \circ \; u \tag*{(Pues $j \; \circ \; q_f = f$)} \\
+            & = (i \; \circ \; q_f) \; \circ \; u \tag*{(Pues $i \; \circ \; q_f = f$)} \\
+            & = i \; \circ \; ( q_f \; \circ \; u) \tag*{(La composición es asociativa)} \\
+            & = i \; \circ \; \id_{f[A]} \tag*{($u$ es inversa derecha de $q_f$)} \\
+            & = i \tag*{(La identidad es neutro de la composición)} 
+        \end{align*}
+        finalizando la demostración.
+    \end{proof}
+
+    \begin{ejercicio}{+1}
+        A partir del ejercicio anterior, concluye que si $k\colon \quot{A}{\sim} \to f[A]$ es
+        biyección y $f = i_{f[A],B} \; \circ \; k \; \circ \; q_f$, entonces $k=f^*$.
+    \end{ejercicio}
+    \begin{proof}
+        Supongamos que $k\colon \quot{A}{\sim} \to f[A]$ es biyección y que $f = i_{f[A],B} \; \circ \; k \; \circ \; q_f$. Por el Primer Teorema de Isomorfismo, se tiene que $f = i_{f[A],B} \; \circ \; f^* \; \circ \; q_f$; así, a consecuencia del ejercicio anterior, se tiene que $i_{f[A],B} \; \circ \; f^* = i_{f[A],B} \; \circ \; k$.
+
+        Ahora, $i_{f[A],B}$ es inyectiva (algo demostrado en esta tarea); por lo que tiene inveras izquerda (visto en clase); a saber, existe $v:B \to f[A]$ de modo que $v \; \circ \; i_{f[A],B} = \id_{f[A]}$; de donde:
+        \begin{align*}
+            f^* & = \id_{f[A]} \; \circ \; f^* \tag*{(La identidad es neutro de la composición)} \\
+            & = (v \; \circ \; i_{f[A],B}) \; \circ \; f^* \tag*{($v$ es inversa izquierda de $i_{f[A],B}$)} \\
+            & = v \; \circ \; ( i_{f[A],B} \; \circ \; f^* ) \tag*{(La composición es asociativa)} \\
+            & = v \; \circ \; ( i_{f[A],B} \; \circ \; k ) \tag*{(Pues $f = i_{f[A],B} \; \circ \; f^* \; \circ \; q_f$)} \\
+            & = (v \; \circ \; i_{f[A],B}) \; \circ \; k \tag*{(La composición es asociativa)} \\
+            & = \id_{f[A]} \; \circ \; k \tag*{($v$ es inversa izquierda de $i_{f[A],B}$)} \\
+            & = k \tag*{(La identidad es neutro de la composición)}
+        \end{align*}
+        probando lo deseado.
+    \end{proof}
+    
+    \begin{ejercicio}{+2}
+        Definimos los conjuntos:
+        \begin{align*}
+            \mathscr{F} & :=\{ g \mid g \text{ es función } \land \, \dom(g)=A \, \land \, g \text{ es sobreyectiva} \} \\
+            \mathscr{R} & :=\{ R \mid R \subseteq A \times A \land \, R \text{ es relación de equivalencia} \}
+        \end{align*}
+
+        Encuentra una biyección entre $\mathscr{F}$ y $\mathscr{R}$.
+    \end{ejercicio}
+    \begin{proof}
+        Definimos $\Psi: \mathscr{F} \to \mathscr{R}$ por medio de $\Psi(g)=\sim_g$; donde, $\sim_g$ es la relación dada por: $x \sim_g y \quad \text{si y sólo si } \quad g(x)=g(y)$. Sabemos (por lo realizado en esta tarea) que $\sim_g$ es de equivalencia; así que $\Psi$ está bien definida, veamos que es una biyección.
+
+        (Inyectividad) Sean $f,g \in \mathscr{F}$ y supongamos que $\Psi(g) = \Psi(f)$; esto es, $\sim_g = \sim_h$; esto significa que, para cualesquiera $x,y \in A$ se tiene que (por definición de las relaciones de equivalencia):
+        \[ g(x) = g(y) \; \Leftrightarrow \; x \sim_g y \; \Leftrightarrow \; x \sim_f y \; \Leftrightarrow \; f(x) = f(y)\]
+        y como $f$ y $g$ tienen el mismo dominio, $A$, esto demuestra que $f=g$. Por ende, $\Psi$ es inyectiva.
+
+        (Sobreyectividad) Sea $R \in \mathscr{R}$; esto es, $R \subseteq A \times A$ es una relación de equivalencia. Consideremos $g:A \to \quot{A}{R}$ como la función dada por $g(x)=[x]$. Se afirma que $\Psi(g)=R$. Efectivamente, sean $x,y \in A $ cualesquiera, entonces:
+        \begin{align*}
+            x R y & \; \Leftrightarrow \; [x] = [y] \tag*{(Comportamiento de las clases de equivalencia)} \\
+            & \; \Leftrightarrow \; g(x) = g(y) \tag*{(Comportamiento de las clases de equivalencia)} \\
+            & \; \Leftrightarrow \; x \sim_g y \tag*{(Definición de $\sim_g$)}
+        \end{align*}
+
+        Como $R \subseteq A \times A$ y $\sim_g \subseteq A \times A$, lo anterior prueba que $R=\sim_g$; o bien, por definición de $\Psi$, se ha mostrado que $R=\Phi(g)$. Esto es, para cada elemento $R$ de $\mathscr{R}$, existe un elemento $g$ de $\mathscr{F}$ de manera tal que $\Psi(g)=R$; es decir, $\Phi$ es sobreyectiva; y, por lo tanto biyectiva.
+    \end{proof}
+\end{document}
