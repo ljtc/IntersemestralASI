@@ -103,31 +103,55 @@
             \[ R=R^{-1}\circ R \]
         \end{enumerate}
 
-        ($\Leftrightarrow$) Supongamos que $R=R^{-1}\circ R$, veamos que $R$ es simiétrica y transitiva.
+        ($\Leftarrow$) Supongamos que $R=R^{-1}\circ R$, veamos que $R$ es simiétrica y transitiva.
         \begin{enumerate}[\hspace{.3cm}]
             \item (Simetría) Sean $x,y \in A$ y supongamos que $(x,y) \in R$, entonces se sigue de la hipótesis que $(x,y) \in R^{-1}\circ R$ y así, existe $z \in A$ de modo que $(x,z) \in R$ y $(z,y) \in R^{-1}$. Por definición de relación inversa, $(y,z)\in R$ y $(z,x) \in R^{-1}$, de donde $(y,x) \in R^{-1} \circ R$, lo cual implica por hipótesis que $(y,x) \in R$. Por lo que$R$ es simétrica.
             
             \item (Transitividad) Sean $a,b,c \in A$ y supongamos que $(a,b) \in R$ y $(b,c) \in R$. Como $R$ es simétrica (probado en el párrafo de arriba), de lo último se obtiene que $(c,b) \in R$ y con ello $(b,c) \in R^{-1}$. Luego, $(a,b) \in R$ y $(b,c) \in R^{-1}$, así que $(a,c) \in R^{-1} \circ R$, de donde $(a,c) \in R$. Por lo tanto, $R$ es simétrica.
         \end{enumerate}
+        Lo cual finaliza la prueba de la equivalencia.
     \end{proof}
 
-
-    \newpage
     \begin{ejercicio}{2.5}
         Sea \(f\colon A\to B\) una función. Demuestra que 
         \(A=\bigcup_{b\in B}f^{-1}[\Set{b}]\). 
     \end{ejercicio}
+    \begin{proof}
+        Veamos la igualdad por doble contención.
+
+        ($\subseteq$) Sea $a \in A$ cualquier elemento, entonces $b:=f(a)$ es un elemento de $B$. Dado que $f(a) \in {b}$, entonces por definición de imagene inversa, $a \in f^{-1}[\{b\}]$. Por lo tanto, existe $b \in B$ tal que $a \in f^{-1}[\{b\}]$, o, equivalentemente $a \in \bigcup_{b\in B}f^{-1}[\Set{b}]$. Probando así la contención $A \subseteq \bigcup_{b\in B}f^{-1}[\Set{b}]$.
+
+        ($\supseteq$) Sea $y \in \bigcup_{b\in B}f^{-1}[\Set{b}]$ cualquier elemento, entonces existe $b \in B$ de modo que $a \in f^{-1}[\{b\}]$. Dado que $f^{-1}[\{b\}]=\{x \in X \mid f(x) \in \{b\} \}$, entonces en particular $y \in A$. Probando la contención $\bigcup_{b\in B}f^{-1}[\Set{b}] \subseteq A$.
+    \end{proof}
 
     \begin{ejercicio}{2.5}
         Sean \(f\colon A\to B\) una función y \(S\subseteq A\). Demuestra que si
         \(f\) es inyectiva, entonces \(f^{-1}[f[S]]=S\).
     \end{ejercicio}
+    \begin{proof}
+        Supongamos que $f$ es inyectiva, en clase vimos que $S \subseteq f^{-1}[f[S]]$ siempre se cumple, por lo que verificar la igualdad deseada se reduce a demostrar que $f^{-1}[f[S]] \subseteq S$.
+
+        Efectivamente, sea $x \in f^{-1}[f[S]]$ cualquier elemento, entonces $f(x) \in f[S]$ por definición de imagen inversa. Ahora, por definición de imagen directa, existe $s \in S$ tal que $f(x)=f(x)$; pero, al ser $f$ inyectiva, se tiene que $x=s$. A consecuencia de lo anterior $x \in S$, mostrando que $f^{-1}[f[S]] \subseteq S$.
+    \end{proof}
 
     \begin{ejercicio}{2.5}
         Sean \(f\colon A\to B\) y \(g,h\colon B\to A\) funciones. Demuestra que
         si \(g\) es inversa izquierda de \(f\) y \(h\) es inversa derecha de
         \(f\), entonces \(g=h\).
     \end{ejercicio}
+    \begin{proof}
+        Supongamos que \(g\) es inversa izquierda de \(f\) y \(h\) es inversa derecha de \(f\); esto quiere decir que:
+        \[ g \circ f = \id_A \quad \text{ y } \quad f \circ h = \id_B \]
+        obteniéndose de lo anterior:
+        \begin{align*}
+            g   & = g \circ \id_B \tag*{(La identidad es neutro de la composición)} \\
+                & = g \circ \big( f \circ h \big) \tag*{(Hipótesis)} \\
+                & = \big( g \circ f \big) \circ h \tag*{(La composición es asociativa)} \\
+                & = \id_A \circ h \tag*{(Hipótesis)} \\
+                & = h \tag*{(La identidad es neutro de la composición)}
+        \end{align*}
+        que es justo lo que se buscaba demostrar.
+    \end{proof}
 
     \begin{ejercicio}{+1}
         \textit{Este ejercicio es opcional y sólo se tomará en cuenta si no hay 
@@ -140,5 +164,18 @@
             \item $X=\emptyset$.
         \end{enumerate}
     \end{ejercicio}
-    
+    \begin{proof}
+        Verificaremos la equivalencia por triple implicación.
+
+        (i) $\Rightarrow$ (ii) Supongamos que $g$ es biyectiva, entonces por definición, particularmente es sobreyectiva.
+
+        (ii) $\Rightarrow$(iii) Por contradicción, Supongamos que $g$ es sobreyectiva y que $X \neq \emptyset$. Entonces existe un elemento $x\in X$. Como $g$ es sobreyectiva, entonces existe $a \in \dom(g)=\emptyset$ de modo que $f(a)=x$; sin embargo, esto es un absurdo pues $a \in \emptyset$ siempre es falso. Por lo tanto, se da la implicación deseada.
+
+        (iii) Supongamos que $X=\emptyset$, hay que mostrar que $g:\emptyset \to \emptyset$ es sobreyectiva y biyectiva; es decir:
+        \[ \forall x,y \in \emptyset \big( f(x)=f(y) \to x=y \big) \quad \text{y} \quad \forall x \in \emptyset \; \exists a \in \emptyset \big( b=f(a) \big) \]
+        estas sob abreviaturas de lenguaje, recordemos que son equivalentes a:
+        \[ \forall x,y \Big( \big( x \in \emptyset \land y \in \emptyset \big) \to \big( f(x)=f(y) \to x=y \big) \Big) \quad \text{y} \quad \forall x \Big( \big( x \in \emptyset \big) \to \exists a \in \emptyset \big( b=f(a) \big) \Big) \]
+
+        Notemos que la proposición ``$\big( x \in \emptyset \land y \in \emptyset \big) \to \big( f(x)=f(y) \to x=y \big)$'' y la proposición ``$x \in\emptyset \to \exists a \in \emptyset \big( b=f(a) \big)$'' son verdaderas, pues ambas son implicaciones cuyos antecedentes son falsos. Asi que ``$\forall x,y \big( \big( x \in \emptyset \land y \in \emptyset \big) \to \big( f(x)=f(y) \to x=y \big) \big)$'' y ``$\forall x \big( \big( x \in \emptyset \big) \to \exists a \in \emptyset \big( b=f(a) \big) \big) $'' son verdaderas; es decir, $g:\emptyset \to \emptyset$ es inyectiva y sobreyectiva; por tanto, biyectiva.
+    \end{proof}
 \end{document}
