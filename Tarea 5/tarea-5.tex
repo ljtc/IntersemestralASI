@@ -47,6 +47,12 @@
 \DeclareMathOperator{\ima}{ima}
 \DeclareMathOperator{\dom}{dom}
 
+\newcommand{\drawGrid}[2]{%
+        \begin{tikzpicture}
+            \draw[step=1cm, gray] (0,0) grid (#1,#2);
+        \end{tikzpicture}
+        }
+
 \begin{document}
 
     \begin{center}
@@ -60,22 +66,63 @@
 
     \noindent\textit{\textbf{Instrucciones.} Resuelve los siguientes ejercicios. Esta tarea es individual y deberá ser entregada presencialmente, durante la clase del \textbf{viernes 8 de agosto}.}\vspace{.4cm}
 
-    \begin{ejercicio}{3}
+    \begin{ejercicio}{2}
         Utilizando inducción, demuestra que:
         \begin{enumerate}
             \item Para todo $n \in \mathbb{N}$, se cumple que: $\displaystyle \sum_{k=0}^{n} k^2 = \frac{n(n+1)(2n+1)}{6}$.
-            \item Para todo $n \in \mathbb{N}$, se cumple que: $\displaystyle \sum_{k=0}^{n} (2k+1) = (n+1)^2$.
+            %\item Para todo $n \in \mathbb{N}$, se cumple que: $\displaystyle \sum_{k=0}^{n} (2k+1) = (n+1)^2$.
             \item Para todo $n \in \mathbb{N}$, se cumple que: $\displaystyle \sum_{k=0}^{n} \frac{1}{k(k+1)} = \frac{n}{n+1}$.
         \end{enumerate}
     \end{ejercicio}
 
-    \begin{ejercicio}{2}
-        Sea $m \in \mathbb{N}$ fijo. Demuestra que para todo $n \in \mathbb{N}$, se cumple que:
-        \[ n \leq m \; \text{si y sólo si} \; \exists h \; ( m=n+h ) \]
+    \begin{ejercicio}{3}
+        Sea $f:\mathbb{R} \to \mathbb{R}$ una función que cumple que para todo real $x$, $f(x)=f(x+2)$. Demuestra que para todo natural $n \in \mathbb{N}$, se tiene que para todo real $x$, $f(x)=f(x-2n)$.
     \end{ejercicio}
 
-    \begin{ejercicio}{3}
-        
+    \begin{ejercicio}{1}
+        ?`Cuantos rectángulos (incluyendo cuadrados) distintos, que téngan sus véretices en una cuadrícula de $n$ por $m$ existen?.
+        \begin{center}
+            \begin{tikzpicture}
+                \node[gray] at (-.2, -.2) (a) {$0$};
+                \draw[step=1cm, gray] (0,0) grid (8,5);
+                \foreach \y in {1,...,5} {
+                    \node[gray] at (\y, -.3) (a) {$\y$};
+                }
+                \node[gray] at (6, -.3) (a) {$\dots$};
+                \node[gray] at (7, -.3) (a) {$n-1$};
+                \node[gray] at (8, -.3) (a) {$n$};
+                
+                \foreach \y in {1,2,3} {
+                    \node[gray] at (-.3, \y) (a) {$\y$};
+                }
+                \node[gray] at (-.3, 4) (a) {$\vdots$};
+                \node[gray] at (-.3, 5) (a) {$m$};
+            \end{tikzpicture}
+        \end{center}
     \end{ejercicio}
+
+    \begin{ejercicio}
+        ?`Cuantos triángulos, equiláteros, orientados hacia arriba, distintos, que téngan sus véretices en la siguiente figura existen?.
+        \begin{center}
+            \begin{tikzpicture}[scale=0.5]
+                \def\l{2}
+                
+                \foreach \i in {0,...,15} {
+                \foreach \j in {0,...,\i} {
+                    % Coordenadas base para cada triángulo
+                    \coordinate (A) at ({(\j - \i/2)*\l}, {-\i*sqrt(3)/2*\l});
+                    \coordinate (B) at ({((\j+1) - \i/2)*\l}, {-\i*sqrt(3)/2*\l});
+                    \coordinate (C) at ({(\j+0.5 - \i/2)*\l}, {(-\i*sqrt(3)/2 + sqrt(3)/2)*\l});
+
+                    % Dibujar triángulo
+                    \draw[gray] (A) -- (B) -- (C) -- cycle;
+                } }
+            \end{tikzpicture}
+        \end{center}
+    \end{ejercicio}
+
+    \newpage
+
+    
 
 \end{document}
