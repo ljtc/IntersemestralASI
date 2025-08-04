@@ -67,16 +67,22 @@
     \noindent\textit{\textbf{Instrucciones.} Resuelve los siguientes ejercicios. Esta tarea es individual y deberá ser entregada presencialmente, durante la clase del \textbf{viernes 8 de agosto}.}\vspace{.4cm}
 
     \begin{ejercicio}{2}
-        Utilizando inducción, demuestra que:
-        \begin{enumerate}
-            \item Para todo $n \in \mathbb{N}$, se cumple que: $\displaystyle \sum_{k=0}^{n} k^2 = \frac{n(n+1)(2n+1)}{6}$.
-            %\item Para todo $n \in \mathbb{N}$, se cumple que: $\displaystyle \sum_{k=0}^{n} (2k+1) = (n+1)^2$.
-            \item Para todo $n \in \mathbb{N}$, se cumple que: $\displaystyle \sum_{k=0}^{n} \frac{1}{k(k+1)} = \frac{n}{n+1}$.
-        \end{enumerate}
+        Utilizando inducción, demuestra que para todo natural $n \in \mathbb{N}$, se cumple que:
+        \[ \sum_{k=0}^{n} k^2 = \frac{n(n+1)(2n+1)}{6} \quad \text{y} \quad \sum_{k=0}^{n} \frac{1}{(k+1)(k+2)} = \frac{n+1}{n+2} \]
     \end{ejercicio}
 
-    \begin{ejercicio}{3}
-        Sea $f:\mathbb{R} \to \mathbb{R}$ una función que cumple que para todo real $x$, $f(x)=f(x+2)$. Demuestra que para todo natural $n \in \mathbb{N}$, se tiene que para todo real $x$, $f(x)=f(x-2n)$.
+    \begin{ejercicio}{2}
+        Sea $f:\mathbb{R} \to \mathbb{R}$ una función que cumple que para todo real $y$, $f(y)=f(y+2)$. Demuestra que para todo natural $n \in \mathbb{N}$, se tiene que para todo real $x$, $f(x)=f(x-2n)$.
+    \end{ejercicio}
+
+    \begin{ejercicio}{1}
+        De dos ejemplos de funciones de $\mathbb{N}$ en $\mathbb{N}$; una que sea sobreyectiva, pero no inyectiva; y otra, que sea inyectiva, pero no sobreyectiva. Demuestra todas tus afirmaciones.
+    \end{ejercicio}
+
+    \begin{ejercicio}{2}
+        Un natural $m$ es compuesto si existen naturales $a$ y $b$ tales que $1 < a < m$, $1 < b < m$ y $m = ab$, de lo contraro, decimos que $m$ es primo. Demuestra que todo natural $n \geq 2$ es producto de números primos.
+
+        \hfill \textit{Hint. Utilice inducción "fuerte".}
     \end{ejercicio}
 
     \begin{ejercicio}{1}
@@ -99,30 +105,10 @@
                 \node[gray] at (-.3, 5) (a) {$m$};
             \end{tikzpicture}
         \end{center}
+    \end{ejercicio}    
+
+    \begin{ejercicio}{2}
+        Pruebe, sin utilizar el Teorema del Binomio que, para todo $n \in \mathbb{N}$, que $\displaystyle \sum_{k=0}^{n} \binom{n}{k} = 2^n $.
     \end{ejercicio}
-
-    \begin{ejercicio}
-        ?`Cuantos triángulos, equiláteros, orientados hacia arriba, distintos, que téngan sus véretices en la siguiente figura existen?.
-        \begin{center}
-            \begin{tikzpicture}[scale=0.5]
-                \def\l{2}
-                
-                \foreach \i in {0,...,15} {
-                \foreach \j in {0,...,\i} {
-                    % Coordenadas base para cada triángulo
-                    \coordinate (A) at ({(\j - \i/2)*\l}, {-\i*sqrt(3)/2*\l});
-                    \coordinate (B) at ({((\j+1) - \i/2)*\l}, {-\i*sqrt(3)/2*\l});
-                    \coordinate (C) at ({(\j+0.5 - \i/2)*\l}, {(-\i*sqrt(3)/2 + sqrt(3)/2)*\l});
-
-                    % Dibujar triángulo
-                    \draw[gray] (A) -- (B) -- (C) -- cycle;
-                } }
-            \end{tikzpicture}
-        \end{center}
-    \end{ejercicio}
-
-    \newpage
-
-    
 
 \end{document}
