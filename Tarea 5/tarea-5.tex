@@ -11,6 +11,7 @@
 \usepackage{lipsum}
 \usepackage{ifthen}
 \usepackage{truthtable} %para las tablas de verdad
+\usepackage[x11names, table]{xcolor}
 
 \usepackage{multicol}
 \usepackage{paracol}
@@ -76,19 +77,24 @@
     \end{ejercicio}
 
     \begin{ejercicio}{1}
-        De dos ejemplos de funciones de $\mathbb{N}$ en $\mathbb{N}$; una que sea sobreyectiva, pero no inyectiva; y otra, que sea inyectiva, pero no sobreyectiva. Demuestra todas tus afirmaciones.
+        Da dos ejemplos de funciones de $\mathbb{N}$ en $\mathbb{N}$; una que sea sobreyectiva, pero no inyectiva; y otra, que sea inyectiva, pero no sobreyectiva. Demuestra todas tus afirmaciones.
     \end{ejercicio}
 
     \begin{ejercicio}{2}
-        Un natural $m$ es compuesto si existen naturales $a$ y $b$ tales que $1 < a < m$, $1 < b < m$ y $m = ab$, de lo contraro, decimos que $m$ es primo. Demuestra que todo natural $n \geq 2$ es producto de números primos.
+        Un natural $m\geq 2$ se dice \textit{compuesto} si existen naturales $a$ y $b$ tales que $1 < a < m$, $1 < b < m$ y $m = ab$; de lo contraro, decimos que $m$ es \textit{primo}. Demuestra que todo natural $n \geq 2$ es producto de números primos.
 
         \hfill \textit{Hint. Utilice inducción "fuerte".}
     \end{ejercicio}
 
     \begin{ejercicio}{1}
-        ?`Cuantos rectángulos (incluyendo cuadrados) distintos, que téngan sus véretices en una cuadrícula de $n$ por $m$ existen?.
+        ?`Cuantos rectángulos (incluyendo cuadrados) distintos, que téngan sus véretices en una cuadrícula de $n$ por $m$, existen?.
         \begin{center}
             \begin{tikzpicture}
+                \draw[RoyalBlue1, fill=RoyalBlue1!30] (0,0) rectangle (2,1);
+                \draw[RoyalBlue1, fill=RoyalBlue1!30] (1,2) rectangle (3,5);
+                \draw[RoyalBlue1, fill=RoyalBlue1!30] (4,2) rectangle (7,4);
+                \draw[RoyalBlue1, fill=RoyalBlue1!30] (7,0) rectangle (8,1);
+
                 \node[gray] at (-.2, -.2) (a) {$0$};
                 \draw[step=1cm, gray] (0,0) grid (8,5);
                 \foreach \y in {1,...,5} {
