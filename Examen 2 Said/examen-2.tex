@@ -1,0 +1,95 @@
+\documentclass[letterpaper,DIV=16,headsepline,11pt]{scrartcl}
+\usepackage[spanish,mexico]{babel}
+\pagenumbering{gobble}
+%\setlength{\parindent}{0cm}
+
+\usepackage{mathtools}
+\usepackage{amsthm}
+\usepackage{ifthen}
+\usepackage{unicode-math}
+%\setmainfont{STIX Two Text}
+\setmainfont{Noto Serif}
+\setmathfont{STIX Two Math}
+
+\usepackage{tasks}
+%Para repetir un bloque sin tener que repetir el código
+%Falta mejorar, es una caja de LaTeX, por lo que no se puede romper
+\ExplSyntaxOn
+\box_new:N \l_repetir_caja
+\NewDocumentEnvironment{Repeat}{m +b}{
+  \box_clear:N \l_repetir_caja
+  \vbox_set:Nn \l_repetir_caja {#2}
+  \prg_replicate:nn {#1} {\box_use:N \l_repetir_caja }
+}{}
+\ExplSyntaxOff
+
+% Para escribir el "tal que" de los conjuntos
+\providecommand\st{\;|\;}
+%Para el uso de \Set y \Set*
+\providecommand\given{}
+\newcommand\SetSymbol[1][]{\nonscript\:#1\vert\allowbreak\nonscript\:\mathopen{}}
+\DeclarePairedDelimiterX\Set[1]\{\}{\renewcommand\given{\SetSymbol[\delimsize]}#1}
+\DeclarePairedDelimiterX\Par[1](){#1}
+
+\newcounter{Ejer}
+\newcounter{Pts}
+\setcounter{Ejer}{1}
+\setcounter{Pts}{1}
+\newcommand{\pts}{}
+\newenvironment{ejercicio}[1]{\noindent
+    \ifthenelse{\equal{#1}{1} \OR \equal{#1}{+1}}{\renewcommand{\pts}{\textbf{(#1
+    pt)}}}{\renewcommand{\pts}{\textbf{(#1 pts)}}}\textbf{Ej. \theEjer}
+    \pts\stepcounter{Ejer}}{\vspace{.3cm}}
+
+%Comandos que utilizamos
+\newcommand{\id}{\mathrm{id}}
+\newcommand{\set}[1]{\{#1\}}
+\renewcommand{\emptyset}{\varnothing}
+\DeclareMathOperator{\ima}{ima} \DeclareMathOperator{\dom}{dom}
+
+\begin{document}
+
+%\begin{Repeat}{2}
+  \begin{center}
+    {\huge \textbf{Segundo Examen Parcial}} \\
+    Álgebra Superior 1, 2025-4
+  \end{center}
+
+  \noindent\textit{\textbf{Instrucciones.} Resuelve los siguientes ejercicios, se pueden utilizar libremente resultados vistos en clase, siempre y cuando, se indiquDemuestrae claramente dónde y cuáles se utilizan.}\vspace{.4cm}
+
+  \begin{ejercicio}{1}
+    Sea $R \subseteq  A \times A$ una relación no vacía. Prueba que si $\id_A \subseteq (A \times A) \setminus R$, entonces $R$ no puede ser transitiva y simétrica simultáneamente.
+  \end{ejercicio}
+
+  \begin{ejercicio}{3}
+    Sea \(f\colon A\to B\) una función. Demuestra que 
+    \(\displaystyle \bigcap_{b\in B}f^{-1}[B \setminus \Set{b}] = \emptyset\).
+  \end{ejercicio}
+
+  \begin{ejercicio}{3}
+    Sean \(f\colon A\to B\) y \(S\subseteq B\). Prueba que si
+    \(f\) es sobreyectiva, entonces \(f[f^{-1}[S]]=S\).
+  \end{ejercicio}
+
+  \begin{ejercicio}{3}
+    Sean \(f\colon A\to B\) y \(g_1,g_2,h\colon B\to A\) funciones. Demuestra que
+    si \(g_1\) y \(g_2\) son inversas izquierdas de \(f\) y \(h\) es inversa derecha de
+    \(f\), entonces \(g_1=g_2\).
+  \end{ejercicio}
+
+  \begin{ejercicio}{+1}
+    \textit{Este ejercicio es opcional y sólo se tomará en cuenta si no hay 
+    errores en la solución.}
+      
+    Sean $X$ un conjunto y $g\colon\emptyset \to X$. Pruebe que las siguientes condiciones son equivalentes:
+    \begin{tasks}[label=\roman*),label-width=3ex](3)
+      \task $g$ es biyectiva.                     
+      \task $g$ es sobreyectiva.
+      \task $X=\emptyset$.
+    \end{tasks}
+  \end{ejercicio}
+
+%\vspace{0.8cm}
+%\end{Repeat}
+
+\end{document}
