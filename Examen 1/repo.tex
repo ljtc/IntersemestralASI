@@ -1,0 +1,92 @@
+\documentclass[letterpaper,DIV=16,headsepline,11pt]{scrartcl}
+\usepackage[spanish,mexico]{babel}
+\pagenumbering{gobble}
+%\setlength{\parindent}{0cm}
+
+\usepackage{mathtools}
+\usepackage{amsthm}
+\usepackage{ifthen}
+\usepackage{unicode-math}
+\setmainfont{STIX Two Text}
+\setmathfont{STIX Two Math}
+
+\usepackage{multicol}
+\usepackage{paracol}
+\usepackage[shortlabels]{enumitem}
+\setenumerate[1]{label=\MakeLowercase{\roman*}), ref=\roman*}
+\setenumerate[2]{label=\MakeLowercase{\arabic*}), ref=\alph*}
+
+\ExplSyntaxOn
+\box_new:N \l_repetir_caja
+\NewDocumentEnvironment{Repeat}{m +b}{
+  \box_clear:N \l_repetir_caja
+  \vbox_set:Nn \l_repetir_caja {#2}
+  \prg_replicate:nn {#1} {\box_use:N \l_repetir_caja }
+}{}
+\ExplSyntaxOff
+
+%Para el uso de \Set y \Set*
+\providecommand\given{}
+\newcommand\SetSymbol[1][]{\nonscript\:#1\vert\allowbreak\nonscript\:\mathopen{}}
+\DeclarePairedDelimiterX\Set[1]\{\}{\renewcommand\given{\SetSymbol[\delimsize]}#1}
+\DeclarePairedDelimiterX\Par[1](){#1}
+%Ejercicios \newcommand{\pts}[1]{%
+  %\ifthenelse{\equal{#1}{1}}{\hfill \textbf{(#1 pt)}}{\hfill\textbf{(#1 pts)}}
+%}
+
+\newcounter{Ejer}
+\newcounter{Pts}
+\setcounter{Ejer}{1}
+\setcounter{Pts}{1}
+\newcommand{\pts}{}
+\newenvironment{ejercicio}[1]{\noindent
+    \ifthenelse{\equal{#1}{1} \OR \equal{#1}{+1}}{\renewcommand{\pts}{\textbf{(#1
+    pt)}}}{\renewcommand{\pts}{\textbf{(#1 pts)}}}\textbf{Ej. \theEjer}
+    \pts\stepcounter{Ejer}}{\vspace{.3cm}}
+
+%Comandos que utilizamos
+\newcommand{\id}{\mathrm{id}} \newcommand{\op}{{}^{\mathrm{op}}}
+\newcommand{\set}[1]{\{#1\}}
+\renewcommand{\emptyset}{\varnothing}
+\DeclareMathOperator{\ima}{ima} \DeclareMathOperator{\dom}{dom}
+
+\begin{document}
+
+\begin{Repeat}{2}
+\begin{center}
+  {\huge\rmfamily \textbf{Reposición del Primer Examen Parcial}} \\
+  \vspace{.2cm} Álgebra Superior 1, 2025-4
+\end{center}
+\begin{flushright}
+  \footnotesize \hfill Profesor: Luis Jesús Trucio Cuevas.\\
+  \hfill Ayudante: Hugo Víctor García Martínez.
+\end{flushright}
+
+\noindent\textit{\textbf{Instrucciones.} Resuelve los siguientes ejercicios,
+se pueden utilizar libremente resultados vistos en clase, siempre y cuando,
+se indique claramente dónde y cuáles se utilizan.}\vspace{.4cm}
+
+\begin{ejercicio}{2.5}
+  Sean \(A\) un conjunto y \(\Set{B_i\given i\in I}\), con \(I\ne\emptyset\), una
+  familia de conjuntos. Demuestra que 
+  \(A\subseteq\bigcap_{i \in I} B_i\) si y sólo si 
+  \(\forall i \in I\; (A\subseteq B_i)\).
+\end{ejercicio}
+
+\begin{ejercicio}{2.5}
+  Sean \(A\) y \(B\) conjuntos. Demuestra que \(A\setminus B=A\setminus(A\cap B)\).
+\end{ejercicio}
+
+\begin{ejercicio}{2.5}
+  Sean \(A\) y \(B\) dos conjuntos. Demuestra que \(A\times B=\bigcup_{b \in B} A\times \Set{b}\).
+\end{ejercicio}
+
+\begin{ejercicio}{2.5}
+  Sean \(A\) y \(B\) conjuntos. Demuestra que 
+  \(\mathscr{P}(A\cup B)=\mathscr{P}(A)\cap\mathscr{P}(B)\) implica \(A=B\).
+\end{ejercicio}
+
+\vspace{2cm}
+\end{Repeat}
+
+\end{document}
