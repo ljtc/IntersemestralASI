@@ -1,4 +1,4 @@
-\documentclass[letterpaper,DIV=14,headsepline,12pt]{scrartcl}
+\documentclass[letterpaper,DIV=16,headsepline,10pt]{scrartcl}
 \usepackage[spanish,mexico,shorthands=off,es-lcroman]{babel}
 \usepackage{stix2}
 \pagenumbering{gobble}
@@ -31,13 +31,24 @@
   %\ifthenelse{\equal{#1}{1}}{\hfill \textbf{(#1 pt)}}{\hfill\textbf{(#1 pts)}}
 %}
 
+%Para repetir un bloque sin tener que repetir el código
+%Falta mejorar, es una caja de LaTeX, por lo que no se puede romper
+\ExplSyntaxOn
+\box_new:N \l_repetir_caja
+\NewDocumentEnvironment{Repeat}{m +b}{
+  \box_clear:N \l_repetir_caja
+  \vbox_set:Nn \l_repetir_caja {#2}
+  \prg_replicate:nn {#1} {\box_use:N \l_repetir_caja }
+}{}
+\ExplSyntaxOff
+
 \newcounter{Ejer}
 \newcounter{Pts}
 \setcounter{Ejer}{1}
 \setcounter{Pts}{1}
 \newcommand{\pts}{}
 \newenvironment{ejercicio}[1]{\noindent
-    \ifthenelse{\equal{#1}{1}}{\renewcommand{\pts}{\textbf{(#1 pt)}}}{\renewcommand{\pts}{\textbf{(#1 pts)}}}\textbf{Ej. \theEjer} \pts\stepcounter{Ejer}}{\vspace{.3cm}}
+    \ifthenelse{\equal{#1}{1}}{\renewcommand{\pts}{\textbf{(#1 pt)}}}{\renewcommand{\pts}{\textbf{(#1 pts)}}}\textbf{Ej. \theEjer} \pts\stepcounter{Ejer}}{\vspace{.1cm}}
 
 %Comandos que utilizamos
 \newcommand{\id}{\mathrm{id}}
@@ -49,27 +60,36 @@
 
 \begin{document}
 
+\begin{Repeat}{2}
     \begin{center}
         {\fontsize{30}{60}\rmfamily \textbf{Tercer Examen Parcial}} \\ \vspace{.2cm}
         Álgebra Superior 1, 2025-4
     \end{center}
-    \begin{flushright}
-        \footnotesize \hfill Profesor: Luis Jesús Trucio Cuevas.\\
-        \hfill Ayudante: Hugo Víctor García Martínez.
-    \end{flushright}
 
     \noindent\textit{\textbf{Instrucciones.} Resuelve los siguientes ejercicios, se pueden utilizar libremente resultados vistos en clase, siempre y cuando, se indique claramente dónde y cuáles se utilizan.}\vspace{.4cm}
 
-    \begin{ejercicio}{2}
-        no se me ocurre nada aaaaaa
+    \begin{ejercicio}{2.5}
+        Pruebe que para cualquier natural $n$ se cumple $\displaystyle \sum_{k=0}^{n} k^2 = \frac{n(n+1)(2n+1)}{6} $.
     \end{ejercicio}
 
-    \begin{ejercicio}{2}
+    \begin{ejercicio}{2.5}
+        Sean $A$ un conjunto infinito y $B$ un conjunto finito tal que $A \cap B = \emptyset$, demuestra que $A \setminus B$ es infinito.
+    \end{ejercicio}
+
+    \begin{ejercicio}{2.5}
+        Sean $x,y \in \mathbb{R}$ y supongamos que los números $a_{900},a_{899}, \dots ,a_1,a_0$ son los coeficientes (en orden) del polinomio $(x+y)^{900}$; es decir $ (x+y)^{900} = a_{900} x^{900} + a_{889} x^{889}y + \cdots + a_1 xy^{889} + a_0 y^{900}. $ ?`Cuál de los siguientes números es mayor, $a_{100}$ o $a_{798}$? Demuestra todas tus afirmaciones.
+    \end{ejercicio}
+
+    \begin{ejercicio}{2.5}
         
     \end{ejercicio}
 
-    \begin{ejercicio}{3}
-        
-    \end{ejercicio}
+    \begin{ejercicio}{+1}
+        \textit{Este ejercicio es opcional y sólo se tomará en cuenta si no hay errores en la solución.}
 
+        Prueba que el buen orden de los naturales (todo subconjunto no vacío de $\mathbb{N}$ tiene un mínimo) implica el 
+    \end{ejercicio}
+    \vspace{.5cm}
+
+\end{Repeat}
 \end{document}
