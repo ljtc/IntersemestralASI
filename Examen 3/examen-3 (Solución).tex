@@ -48,7 +48,7 @@
 \setcounter{Pts}{1}
 \newcommand{\pts}{}
 \newenvironment{ejercicio}[1]{\noindent
-    \ifthenelse{\equal{#1}{1}}{\renewcommand{\pts}{\textbf{(#1 pt)}}}{\renewcommand{\pts}{\textbf{(#1 pts)}}}\textbf{Ej. \theEjer} \pts\stepcounter{Ejer}}{\vspace{.1cm}}
+    \ifthenelse{\equal{#1}{1}}{\renewcommand{\pts}{\textbf{(#1 pt)}}}{\renewcommand{\pts}{\textbf{(#1 pts)}}}\textbf{Ej. \theEjer} \pts\stepcounter{Ejer}}{\vspace{.3cm}}
 
 %Comandos que utilizamos
 \newcommand{\id}{\mathrm{id}}
@@ -87,32 +87,91 @@
 \makeatother
 
 \begin{document}
-
-\begin{Repeat}{2}
     \begin{center}
         {\fontsize{30}{40}\rmfamily \textbf{Tercer Examen Parcial}} \\ \vspace{.2cm}
         Álgebra Superior 1, 2025-4
     \end{center}
-
-    %\noindent\textit{\textbf{Instrucciones.} Resuelve los siguientes ejercicios, se pueden utilizar libremente resultados vistos en clase, siempre y cuando, se indique claramente dónde y cuáles se utilizan.}\vspace{.4cm}
+    \begin{flushright}
+        \footnotesize \hfill Profesor: Luis Jesús Trucio Cuevas.\\
+        \hfill Ayudante: Hugo Víctor García Martínez.
+    \end{flushright} 
 
     \begin{ejercicio}{4}
         Pruebe que para cualquier natural $n$ se cumple $\displaystyle \sum_{k=0}^{n} k^2 = \frac{n(n+1)(2n+1)}{6} $.
     \end{ejercicio}
+    \begin{proof}
+        Sea $\varphi(n)$ la propiedad:
+        \[ \sum_{k=0}^{n} k^2 = \frac{n(n+1)(2n+1)}{6} \]
+        Veamos por inducción que $\forall n \in \mathbb{N} \big( \varphi(n) \big)$.
+        \begin{enumerate}[\hspace{1cm}]
+            \item \underline{Base.} Se cumple $\varphi(0)$; efectivamente:
+            \begin{align*}
+                \sum_{k=0}^{0} k^2 &= 0^2 \\
+                & = 0 \\
+                & = \frac{0 \cdot (0+1) \cdot (2\cdot 0 + 1)}{6} 
+            \end{align*}
+            \item \underline{Paso inductivo.} Sea $n \in \mathbb{N}$ y supongamos que $\varphi(n)$ (H.I.), esto es:
+            \[ \sum_{k=0}^{n} k^2 = \frac{n(n+1)(2n+1)}{6} \]
+            Veamos que $\varphi(n+1)$, es decir:
+            \[ \sum_{k=0}^{n+1} k^2 = \frac{(n+1)(n+2)(2(n+1)+1)}{6} \]
+            En efecto:
+            \begin{align*}
+                \sum_{k=0}^{n+1} k^2 &= \sum_{k=0}^{n} k^2 + (n+1)^2 \\
+                &= \frac{n(n+1)(2n+1)}{6} + (n+1)^2 \tag{por H.I.} \\
+                &= \frac{n(n+1)(2n+1) + 6(n+1)^2}{6} \\
+                &= \frac{(n+1)(n(2n+1) + 6(n+1))}{6} \\
+                &= \frac{(n+1)(2n^2 + n + 6n + 6)}{6} \\
+                &= \frac{(n+1)(2n^2 + 7n + 6)}{6} \\
+                &= \frac{(n+1)(n+2)(2n+3)}{6} \\
+                &= \frac{(n+1)(n+2)(2(n+1)+1)}{6}
+            \end{align*}
+            Por lo tanto, se cumple $\varphi(n+1)$; finalizando el paso inductivo.
+        \end{enumerate}
+        Debido al primer principio de inducción, se concluye que $\forall n \in \mathbb{N} \big( \varphi(n) \big)$.
+    \end{proof}
 
     \begin{ejercicio}{3}
         Sean $A$  y $B$ conjuntos, con $B \subseteq A$. Prueba que, si $B$ es finito y $A$ infinito, entonces $A \setminus B$ es infinito.
     \end{ejercicio}
+    \begin{proof}
+        Por contradicción, supongamos que $A$ es infinito, $B \subseteq A$ finito y que $A \setminus B$ es finito. Dado que $B \subseteq A$, entonces $A=(A \setminus B) \cup B$, de donde, $A$ es unión de dos conjuntos finitos (y ajenos), con ello, $A$ es finito. Esto contradice la hipótesis de que $A$ es infinito; por lo tanto ocurre la negación de ``$A$ es infinito, $B \subseteq A$ finito y $A \setminus B$ es finito''; equivalentemente, ``si $B$ es finito y $A$ infinito, entonces $A \setminus B$ es infinito''.
+    \end{proof}
 
-    \begin{ejercicio}{4}
-        Sean $x,y \in \mathbb{R}$ y $a_{900},a_{899}, \dots ,a_1,a_0$ son los coeficientes (en orden) del polinomio $(x+y)^{900}$; es decir $ (x+y)^{900} = a_{900} x^{900} + a_{889} x^{889}y + \cdots + a_1 xy^{889} + a_0 y^{900}. $ ?`Cuál de los siguientes números es mayor, $a_{100}$ o $a_{798}$? Demuestra todas tus afirmaciones.
+    \begin{ejercicio}{3}
+        Sean $x,y \in \mathbb{R}$ y $a_{900},a_{899}, \dots ,a_1,a_0$ son los coeficientes (en orden) del polinomio $(x+y)^{900}$; es decir $ (x+y)^{900} = a_{900} x^{900} + a_{899} x^{899}y + \cdots + a_1 xy^{899} + a_0 y^{900}. $ ?`Cuál de los siguientes números es mayor, $a_{100}$ o $a_{798}$? Demuestra todas tus afirmaciones.
     \end{ejercicio}
+    \begin{solucion}
+        Se afirma que $a_{100}<a_{798}$. Por el Teorema del Binomio de Newton, se tiene que:
+        \[ a_{100} = \binom{900}{100} \quad \text{y} \quad a_{798} = \binom{900}{798} \]
+        Y por propiedades de los coeficientes binomiales: $\quad a_{798} = \binom{900}{798} = \binom{900}{900-798} = \binom{900}{102}$. Ahora, notemos que:
+        \begin{align*}
+            \frac{a_{100}}{a_{798}} &= \frac{\binom{900}{100}}{\binom{900}{102}} \\
+            &= \frac{900!}{100!(900-100)!} \cdot \frac{102!(900-102)!}{900!} \\
+            &= \frac{102!}{100!} \cdot \frac{(900-102)!}{(900-100)!} \\
+            &= \frac{102 \cdot 101}{(900-100)(900-102)} \\
+            &= \frac{102 \cdot 101}{800 \cdot 798} \\
+            &< 1
+        \end{align*}
+        Por lo tanto, $a_{100} < a_{798}$.
+    \end{solucion}
 
     \begin{ejercicio}{+1}
-        \textit{Este ejercicio es opcional y sólo se tomará en cuenta si no hay errores en la solución.}
         Sea $A \subseteq \mathbb{N}$ y supongamos que $\forall x \big( x \in A \to x+1 \in A \big)$. Prueba que si $m \in \mathbb{N} \cap A$, entonces $\{ n \in \mathbb{N} \mid n \geq m \} \subseteq A$.
     \end{ejercicio}
-    \vspace{.5cm}
+    \begin{proof}
+        Sea $\varphi(n)$ la propiedad: $n \in A$. Observemos que:
+        \begin{align*}
+            \{ n \in \mathbb{N} \mid n \geq m \} \subseteq A & \Leftrightarrow \forall n \in \mathbb{N} \big( n \geq m \to n \in A \big) \\
+            & \Leftrightarrow \forall n \in \mathbb{N} \big( n \geq m \to n \in A \big) \\
+            & \Leftrightarrow \forall n \geq m \big( n \in A \big)
+        \end{align*}
+        
+        Por tanto, para demostrar lo que nos ataña, basta probar por inducción (a partir de un punto) que $\forall n \geq m \big( \varphi(n) \big)$.
+        \begin{enumerate}[\hspace{1cm}]
+            \item \underline{Base.} Se cumple $\varphi(m)$; efectivamente, esto es simplemente porque ``$m \geq m$'' es verdadera y ``$m \in A$'' también (pues por hipótesis general, $m \in \mathbb{N} \cap A$).
+            \item \underline{Paso inductivo.} Sea $n \geq m$ y supongamos que $\varphi(n)$ (H.I.), esto es, $n \in A$. Veamos que $\varphi(n+1)$, es decir, que $n+1 \in A$. Esto es inmediato de la hipótesis general, recordemos que $\forall x \big( x \in A \to x+1 \in A \big)$. Lo cual prueba el paso inductivo.
+        \end{enumerate}
+        Debido al primer principio de inducción, se concluye que $\forall n \geq m \big( \varphi(n) \big)$, es decir, se cumple la contención $\{ n \in \mathbb{N} \mid n \geq m \} \subseteq A$.
+    \end{proof}
 
-\end{Repeat}
 \end{document}
