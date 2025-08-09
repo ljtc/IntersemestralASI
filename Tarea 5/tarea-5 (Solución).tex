@@ -1,0 +1,264 @@
+\documentclass[letterpaper,DIV=14,headsepline,12pt]{scrartcl}
+\usepackage[spanish,mexico,shorthands=off,es-lcroman]{babel}
+\usepackage{stix2}
+\pagenumbering{gobble}
+%\setlength{\parindent}{0cm}
+
+\usepackage{mathtools}
+\usepackage{amsthm}
+\usepackage{tikz-cd}
+\usepackage{comment}
+\usepackage{lipsum}
+\usepackage{ifthen}
+\usepackage{truthtable} %para las tablas de verdad
+\usepackage[x11names, table]{xcolor}
+
+\usepackage{multicol}
+\usepackage{paracol}
+\usepackage[shortlabels]{enumitem}
+\setenumerate[1]{label=\MakeLowercase{\roman*}), ref=\roman*}
+\setenumerate[2]{label=\MakeLowercase{\arabic*}), ref=\alph*}
+
+% Para escribir el "tal que" de los conjuntos
+\providecommand\st{\;|\;}
+
+%Para el uso de \Set y \Set*
+\providecommand\given{}
+\newcommand\SetSymbol[1][]{\nonscript\:#1\vert\allowbreak\nonscript\:\mathopen{}}
+\DeclarePairedDelimiterX\Set[1]\{\}{\renewcommand\given{\SetSymbol[\delimsize]}#1}
+\DeclarePairedDelimiterX\Par[1](){#1}
+%Ejercicios
+%\newcommand{\pts}[1]{%
+  %\ifthenelse{\equal{#1}{1}}{\hfill \textbf{(#1 pt)}}{\hfill\textbf{(#1 pts)}}
+%}
+
+\newcounter{Ejer}
+\newcounter{Pts}
+\setcounter{Ejer}{1}
+\setcounter{Pts}{1}
+\newcommand{\pts}{}
+\newenvironment{ejercicio}[1]{\noindent
+    \ifthenelse{\equal{#1}{1}}{\renewcommand{\pts}{\textbf{(#1 pt)}}}{\renewcommand{\pts}{\textbf{(#1 pts)}}}\textbf{Ej. \theEjer} \pts\stepcounter{Ejer}}{\vspace{.3cm}}
+
+%Comandos que utilizamos
+\newcommand{\id}{\mathrm{id}}
+\newcommand{\op}{{}^{\mathrm{op}}}
+\newcommand{\set}[1]{\{#1\}}
+\renewcommand{\emptyset}{\varnothing}
+\DeclareMathOperator{\ima}{ima}
+\DeclareMathOperator{\dom}{dom}
+
+\newcommand{\drawGrid}[2]{%
+        \begin{tikzpicture}
+            \draw[step=1cm, gray] (0,0) grid (#1,#2);
+        \end{tikzpicture}
+        }
+
+%Entorno de Demostración y Solución
+\renewcommand\qedsymbol{$\blacksquare$}
+\makeatletter
+    \renewenvironment{proof}[1][]{%
+        \par\pushQED{\qed}%
+        \normalfont\topsep6pt \partopsep0pt % espacio antes del entorno
+        \trivlist
+        \item[\hskip\labelsep
+                \textbf{\textit{Demostración.}}% Cambiado aquí
+        ]#1
+        }{%
+        \popQED\endtrivlist\@endpefalse
+    }
+\makeatother
+
+\makeatletter
+    \newenvironment{solucion}[1][]{%
+        \par\pushQED{\hfill \lozenge}%
+        \normalfont\topsep6pt \partopsep0pt % espacio antes del entorno
+        \trivlist
+        \item[\hskip\labelsep
+                \textbf{\textit{Solución.}}% Cambiado aquí
+        ]#1
+        }{%
+        \popQED\endtrivlist\@endpefalse
+    }
+\makeatother
+
+\begin{document}
+
+    \begin{center}
+        {\fontsize{30}{60}\rmfamily \textbf{Tarea 5 (Solución)}} \\ \vspace{.2cm}
+        Álgebra Superior 1, 2025-4
+    \end{center}
+    \begin{flushright}
+        \footnotesize \hfill Profesor: Luis Jesús Trucio Cuevas.\\
+        \hfill Ayudante: Hugo Víctor García Martínez.
+    \end{flushright}
+
+    \noindent\textit{\textbf{Instrucciones.} Resuelve los siguientes ejercicios. Esta tarea es individual y deberá ser entregada presencialmente, durante la clase del \textbf{viernes 8 de agosto}.}\vspace{.4cm}
+
+    \begin{ejercicio}{2}
+        Utilizando inducción, demuestra que para todo natural $n \in \mathbb{N}$, se cumple que:
+        \[ \sum_{k=0}^{n} k^2 = \frac{n(n+1)(2n+1)}{6} \quad \text{y} \quad \sum_{k=0}^{n} \frac{1}{(k+1)(k+2)} = \frac{n+1}{n+2} \]
+    \end{ejercicio}
+    \begin{proof}
+        Sea $\varphi(n)$ la propiedad:
+        \[ \sum_{k=0}^{n} k^2 = \frac{n(n+1)(2n+1)}{6} \quad \land \quad \sum_{k=0}^{n} \frac{1}{(k+1)(k+2)} = \frac{n+1}{n+2} \]
+        Veamos por inducción que $\forall n \in \mathbb{N} \big( \varphi(n) \big)$.
+        \begin{enumerate}[\hspace{1cm}]
+            \item \underline{Base.} Se cumple $\varphi(0)$; efectivamente:
+            \begin{align*}
+                \sum_{k=0}^{0} k^2 &= 0^2 & \sum_{k=0}^{0} \frac{1}{(k+1)(k+2)} & = \frac{1}{(0+1)(0+2)} \\
+                & = 0 & & = \frac{1}{2} \\
+                & = \frac{0 \cdot (0+1) \cdot (2\cdot 0 + 1)}{6} & & = \frac{0+1}{0+2}
+            \end{align*}
+            \item \underline{Paso inductivo.} Sea $n \in \mathbb{N}$ y supongamos que $\varphi(n)$ (H.I.), esto es:
+            \[ \sum_{k=0}^{n} k^2 = \frac{n(n+1)(2n+1)}{6} \quad \land \quad \sum_{k=0}^{n} \frac{1}{(k+1)(k+2)} = \frac{n+1}{n+2} \]
+            Veamos que $\varphi(n+1)$, es decir:
+            \[ \sum_{k=0}^{n+1} k^2 = \frac{(n+1)(n+2)(2(n+1)+1)}{6} \quad \land \quad \sum_{k=0}^{n+1} \frac{1}{(k+1)(k+2)} = \frac{(n+1)+1}{(n+1)+2} \]
+            Por un lado, tenemos que:
+            \begin{align*}
+                \sum_{k=0}^{n+1} k^2 &= \sum_{k=0}^{n} k^2 + (n+1)^2 \\
+                &= \frac{n(n+1)(2n+1)}{6} + (n+1)^2 \tag{por H.I.} \\
+                &= \frac{n(n+1)(2n+1) + 6(n+1)^2}{6} \\
+                &= \frac{(n+1)(n(2n+1) + 6(n+1))}{6} \\
+                &= \frac{(n+1)(2n^2 + n + 6n + 6)}{6} \\
+                &= \frac{(n+1)(2n^2 + 7n + 6)}{6} \\
+                &= \frac{(n+1)(n+2)(2n+3)}{6} \\
+                &= \frac{(n+1)(n+2)(2(n+1)+1)}{6}
+            \end{align*}
+            Por otro lado, tenemos que:
+            \begin{align*}
+                \sum_{k=0}^{n+1} \frac{1}{(k+1)(k+2)} &= \sum_{k=0}^{n} \frac{1}{(k+1)(k+2)} + \frac{1}{((n+1)+1)((n+1)+2)} \\
+                &= \frac{n+1}{n+2} + \frac{1}{(n+2)(n+3)} \tag{por H.I.} \\
+                &= \frac{(n+1)(n+3) + 1}{(n+2)(n+3)} \\
+                &= \frac{n^2 + 4n + 4}{(n+2)(n+3)} \\
+                &= \frac{(n+2)^2}{(n+2)(n+3)} \\
+                &= \frac{n+2}{n+3} \\
+                &= \frac{(n+1)+1}{(n+1)+2}
+            \end{align*}
+            Por lo tanto, se cumple $\varphi(n+1)$; finalizando el paso inductivo.
+        \end{enumerate}
+        Debido al primer principio de inducción, se concluye que $\forall n \in \mathbb{N} \big( \varphi(n) \big)$.
+    \end{proof}
+
+    \begin{ejercicio}{2}
+        Sea $f:\mathbb{R} \to \mathbb{R}$ una función que cumple que para todo real $y$, $f(y)=f(y+2)$. Demuestra que para todo natural $n \in \mathbb{N}$, se tiene que para todo real $x$, $f(x)=f(x-2n)$.
+    \end{ejercicio}
+    \begin{proof}
+        Verificaremos por (primera) inducción que $\forall n \in \mathbb{N} \big( \varphi(n) \big)$ es cierta; donde $\varphi(n)$ es la propiedad: $\forall x \in \mathbb{R} \big( f(x) = f(x - 2n) \big)$.
+        \begin{enumerate}[\hspace{1cm}]
+            \item \underline{Base.} Se cumple $\varphi(0)$; pues, si $x \in \mathbb{R}$ es cualquiera, se tiene seguido de la hipótesis que que: $f(x) = f(x - 0) = f(x - 2\cdot 0)$.
+            
+            \item \underline{Paso inductivo.} Sea $n \in \mathbb{N}$ y supongamos $\varphi(n)$ (H.I.), es decir: $\forall y \in \mathbb{R} \big( f(y) = f(y - 2n) \big)$. Veamos que $\varphi(n+1)$, esto es: $\forall x \in \mathbb{R} \big( f(x) = f(x - 2(n+1)) \big)$. En efecto, sea $x \in \mathbb{R}$, así:
+            \begin{align*}
+                f\big( x - 2(n+1) \big) & = f\big( x - 2n - 2 \big) \tag*{cuentas} \\
+                & = f\big( (x - 2n - 2) + 2 \big) \tag*{Hipótesis (general)} \\
+                & = f\big( x -2n \big) \tag*{cuentas} \\
+                & = f\big( x \big) \tag*{H.I.}
+            \end{align*}
+            Por lo tanto, se cumple $\varphi(n+1)$; finalizando el paso inductivo.
+        \end{enumerate}
+        Debido al primer principio de inducción, se concluye que $\forall n \in \mathbb{N} \big( \varphi(n) \big)$.
+    \end{proof}
+
+    \begin{ejercicio}{1}
+        Da dos ejemplos de funciones de $\mathbb{N}$ en $\mathbb{N}$; una que sea sobreyectiva, pero no inyectiva; y otra, que sea inyectiva, pero no sobreyectiva. Demuestra todas tus afirmaciones.
+    \end{ejercicio}
+    \begin{solucion}
+        Sea $f:\mathbb{N} \to \mathbb{N}$ dada por $f(n) = n + 1$; veamos que $f$ es inyectiva, pero no sobreyectiva.
+        \begin{itemize}
+            \item \underline{$f$ es inyectiva.} Sean $m,m \in \mathbb{N}$ tales que $f(m) = f(n)$; veamos que $m=n$. En efecto, $f(m) = f(n)$ implica que $m+1=n+1$, de donde, $m=n$.
+            \item \underline{$f$ no es sobreyectiva.} El cero no es sucesor de ningún número natural (visto en clase)\footnote{Para convencerse de esto, si $x$ es cualquier conjunto (no únicamente un número natural), se define $s(x)$ (esto es $x+1$, cuando $x$ es natural) como $x \cup \{x\}$. Luego, $x \in s(x)$ y así $s(x)\neq \emptyset = 0$.}.
+        \end{itemize}
+        Ahora, sea $g:\mathbb{N} \to \mathbb{N}$ dada por:
+        \[ g(n) = \begin{cases}
+            n-1 & n \geq 1 \\ 
+            0 & n = 0
+        \end{cases} \]
+        Veamos que $g$ es sobreyectiva, pero no inyectiva.
+        \begin{itemize}
+            \item \underline{$g$ es sobreyectiva.} Si $n \in \mathbb{N}$ es cualquiera, entonces $n+1 \geq 1$ y en consecuencia, $g(n+1) = (n+1) - 1 = n$. lo cual demuestra la sobreyectividad de $g$.
+            \item \underline{$f$ no es inyectiva.} Nótese que $0 \neq 1$; sin embargo, $g(0) = 0$ y $g(1)=1-0$, por lo que $g(0) = g(1)$.
+        \end{itemize}
+        Por lo que $f$ y $g$ son un ejemplo de las funciones solicitadas.
+    \end{solucion}
+
+    \begin{ejercicio}{2}
+        Un natural $m\geq 2$ se dice \textit{compuesto} si existen naturales $a$ y $b$ tales que $1 < a < m$, $1 < b < m$ y $m = ab$; de lo contraro, decimos que $m$ es \textit{primo}. Demuestra que todo natural $n \geq 2$ es producto de números primos.
+
+        \hfill \textit{Hint. Utilice inducción "fuerte".}
+    \end{ejercicio}
+    \begin{proof}
+        Sea $\varphi(n)$ la propiedad: ``$n$ es primo o producto de números primos''. Veremos por inducción fuerte (en $\mathbb{N} \setminus \{0,1\}$) que $\forall n \geq 2 \big( \varphi(n) \big)$. Sea $n \geq 2$ y supongamos que:
+        \begin{align*}
+            \forall k \geq 2 \big( k< n \to \big( \varphi(k) \big) \big) \tag*{H.I.}
+        \end{align*}
+        Veamos que\footnote{Recordemos que en la inducción fuerte NO se debe realizar la base, no es necesario. A continuación en la prueba parece que se hace una base; pero esto no es así, es una división de casos.} $\varphi(n)$. Efectivamente, tenemos dos casos:
+        \begin{enumerate}[\hspace{1cm} i)]
+            \item Si $n$ es primo, entonces $\varphi(n)$ se cumple. Esto es porque, al ser $n$ primo, es particularmente un producto de números primos (de uno, {él mismo}).
+            \item Si $n$ es compuesto, entonces existen $a,b \in \mathbb{N}$ tales que $1 < a < n$, $1 < b < n$ y $n = ab$. Por lo tanto, $a \geq 2$ y $b \geq 2$ son números menores que $n$ y por H.I., $\varphi(a)$ y $\varphi(b)$ son verdaderas. En consecuencia, $a$ y $b$ son producto de números primos; y esto implica, que $n$ también es producto de números primos.
+        \end{enumerate}
+        En cualquier caso, $\varphi(n)$ es cierta, finalizando el paso inductivo. Con ello, y gracias al segundo principio de inducción, se concluye que $\forall n \geq 2 \big( \varphi(n) \big)$.
+    \end{proof}
+
+    \begin{ejercicio}{1}
+        ?`Cuantos rectángulos (incluyendo cuadrados) distintos, que téngan sus véretices en una cuadrícula de $n$ por $m$, existen?. \vspace{.5cm}
+        \begin{center}
+            \begin{tikzpicture}
+                \draw[RoyalBlue1, fill=RoyalBlue1!30] (0,0) rectangle (2,1);
+                \draw[RoyalBlue1, fill=RoyalBlue1!30] (1,2) rectangle (3,5);
+                \draw[RoyalBlue1, fill=RoyalBlue1!30] (4,2) rectangle (7,4);
+                \draw[RoyalBlue1, fill=RoyalBlue1!30] (7,0) rectangle (8,1);
+
+                \node[gray] at (-.2, -.2) (a) {$0$};
+                \draw[step=1cm, gray] (0,0) grid (8,5);
+                \foreach \y in {1,...,5} {
+                    \node[gray] at (\y, -.3) (a) {$\y$};
+                }
+                \node[gray] at (6, -.3) (a) {$\dots$};
+                \node[gray] at (7, -.3) (a) {$n-1$};
+                \node[gray] at (8, -.3) (a) {$n$};
+                
+                \foreach \y in {1,2,3} {
+                    \node[gray] at (-.3, \y) (a) {$\y$};
+                }
+                \node[gray] at (-.3, 4) (a) {$\vdots$};
+                \node[gray] at (-.3, 5) (a) {$m$};
+
+                \draw[Magenta3, line width=1.5pt] (4,0) -- (4,5);
+                \draw[Magenta3, line width=1.5pt] (7,0) -- (7,5);
+                
+                \draw[Magenta3, line width=1.5pt] (0,2) -- (8,2);
+                \draw[Magenta3, line width=1.5pt] (0,4) -- (8,4);
+
+                \draw[fill=Magenta3, Magenta3] (4,0) circle (2.5pt);
+                \draw[fill=Magenta3, Magenta3] (7,0) circle (2.5pt);
+                \draw[fill=Magenta3, Magenta3] (0,2) circle (2.5pt);
+                \draw[fill=Magenta3, Magenta3] (0,4) circle (2.5pt);
+            \end{tikzpicture}
+        \end{center}
+    \end{ejercicio}
+    \begin{solucion}
+        Cada rectángulo con vértices en la cuadrícula (y lados sobre las líneas de la cuadrícula) está completamente determinado por dos parámetris disntntos, su base , su altura (y las respectivas posiciones de éstas). De esta manera, para describir un rectángulo deeste tipo, es necesario y suficiente elegir dos líneas horizontales y dos líneas verticales de la cuadrícula; equivalentemente, elegir dos números distintos entre $0,1,\ldots,n$ y $0,1,\ldots,m$ (\textit{ver figura en la página anterior}).
+        Por lo tanto, el número de rectángulos distintos que se pueden formar es:
+        \begin{align*}
+            \binom{n+1}{2} \cdot \binom{m+1}{2} & = \frac{(n+1)!}{2! \big((n+1)-2\big)!} \cdot \frac{(m+1)!}{2! \big((n+1)-2\big)!} \\
+            & = \frac{n \cdot (n+1)}{2} \cdot \frac{m \cdot (m+1)}{2} \\
+            & = \frac{n \cdot (n+1) \cdot m \cdot (m+1)}{4}
+        \end{align*}
+        \textit{?`Por qué aparece un producto de sumas gaussianas aquí?}.
+    \end{solucion}
+
+    \begin{ejercicio}{2}
+        Pruebe que para todo $n \in \mathbb{N}$ se cumple $\displaystyle \sum_{k=0}^{n} \binom{n}{k} = 2^n $.
+    \end{ejercicio}
+    \begin{proof}
+        Esto es un corolario directo del teorema del binomio de Newton, nótese que si $n \in \mathbb{N}$, entonces:
+        \begin{align*}
+            2^n & = (1+1)^n \tag*{cuentas} \\
+            & = \sum_{k=0}^{n} \binom{n}{k} 1^{n-k} 1^k \tag{Teorema del binomio de Newton} \\
+            & = \sum_{k=0}^{n} \binom{n}{k} \tag*{"cuentas"}
+        \end{align*}
+        finalizando la demostración.
+    \end{proof}
+
+\end{document}
