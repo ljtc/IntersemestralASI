@@ -58,6 +58,34 @@
 \DeclareMathOperator{\ima}{ima}
 \DeclareMathOperator{\dom}{dom}
 
+%Entorno de Demostración y Solución
+\renewcommand\qedsymbol{$\blacksquare$}
+\makeatletter
+    \renewenvironment{proof}[1][]{%
+        \par\pushQED{\qed}%
+        \normalfont\topsep6pt \partopsep0pt % espacio antes del entorno
+        \trivlist
+        \item[\hskip\labelsep
+                \textbf{\textit{Demostración.}}% Cambiado aquí
+        ]#1
+        }{%
+        \popQED\endtrivlist\@endpefalse
+    }
+\makeatother
+
+\makeatletter
+    \newenvironment{solucion}[1][]{%
+        \par\pushQED{\hfill \lozenge}%
+        \normalfont\topsep6pt \partopsep0pt % espacio antes del entorno
+        \trivlist
+        \item[\hskip\labelsep
+                \textbf{\textit{Solución.}}% Cambiado aquí
+        ]#1
+        }{%
+        \popQED\endtrivlist\@endpefalse
+    }
+\makeatother
+
 \begin{document}
 
 \begin{Repeat}{2}
